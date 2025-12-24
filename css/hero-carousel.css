@@ -1,0 +1,483 @@
+/* ============================================
+   HERO CAROUSEL - Dynamic Watch Display
+   ============================================ */
+
+.hero-carousel {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+    background: #000;
+}
+
+/* Carousel Slides */
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Slide Background Patterns */
+.slide-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Chronograph Pattern - Geometric Grid with Timing Circles */
+.pattern-chronograph {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    overflow: hidden;
+}
+
+.pattern-chronograph::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    transform: translate(-50%, -50%);
+    background:
+        radial-gradient(circle at center, transparent 40%, rgba(255, 215, 0, 0.1) 41%, transparent 42%),
+        radial-gradient(circle at center, transparent 60%, rgba(255, 215, 0, 0.08) 61%, transparent 62%),
+        radial-gradient(circle at center, transparent 80%, rgba(255, 215, 0, 0.05) 81%, transparent 82%);
+    animation: rotateChronograph 20s linear infinite;
+}
+
+.pattern-chronograph::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: slideGrid 30s linear infinite;
+}
+
+@keyframes rotateChronograph {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes slideGrid {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 50px 50px;
+    }
+}
+
+/* Automatic Pattern - Flowing Gears */
+.pattern-automatic {
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    overflow: hidden;
+}
+
+.pattern-automatic::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(100, 200, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatGear1 15s ease-in-out infinite;
+}
+
+.pattern-automatic::after {
+    content: '';
+    position: absolute;
+    top: 30%;
+    right: 15%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(150, 220, 255, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatGear2 12s ease-in-out infinite;
+}
+
+@keyframes floatGear1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(50px, -30px) rotate(180deg);
+    }
+}
+
+@keyframes floatGear2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-40px, 40px) rotate(-180deg);
+    }
+}
+
+/* Sport Pattern - Dynamic Diagonal Stripes */
+.pattern-sport {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+    overflow: hidden;
+}
+
+.pattern-sport::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(45deg,
+            transparent,
+            transparent 40px,
+            rgba(255, 255, 255, 0.03) 40px,
+            rgba(255, 255, 255, 0.03) 80px);
+    animation: slideStripes 20s linear infinite;
+}
+
+.pattern-sport::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes slideStripes {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(80px, 80px);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.3;
+    }
+}
+
+/* Luxury Pattern - Elegant Radial Gradients */
+.pattern-luxury {
+    background: linear-gradient(135deg, #2d1b00 0%, #4a2c00 50%, #1a1a1a 100%);
+    overflow: hidden;
+}
+
+.pattern-luxury::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1000px;
+    height: 1000px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle,
+            rgba(255, 215, 0, 0.15) 0%,
+            rgba(255, 215, 0, 0.08) 30%,
+            transparent 70%);
+    animation: shimmer 8s ease-in-out infinite;
+}
+
+.pattern-luxury::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at top left,
+            rgba(255, 215, 0, 0.05) 0%,
+            transparent 50%),
+        radial-gradient(ellipse at bottom right,
+            rgba(184, 134, 11, 0.05) 0%,
+            transparent 50%);
+}
+
+@keyframes shimmer {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.15;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.25;
+    }
+}
+
+/* Slide Content */
+.slide-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    max-width: 1200px;
+    padding: 0 var(--space-xl);
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-category {
+    display: inline-block;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    margin-bottom: var(--space-md);
+    padding: 0.5rem 1.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    background: rgba(255, 215, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.slide-content h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    margin-bottom: var(--space-lg);
+    line-height: 1.2;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.slide-content p {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    margin-bottom: var(--space-2xl);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.slide-cta {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Watch Image Display */
+.slide-watch-image {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 400px;
+    z-index: 1;
+    animation: floatWatch 6s ease-in-out infinite;
+}
+
+.slide-watch-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes floatWatch {
+
+    0%,
+    100% {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    50% {
+        transform: translateY(-50%) translateX(-20px);
+    }
+}
+
+/* Navigation Dots */
+.carousel-nav {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 15px;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.2);
+}
+
+.carousel-dot.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    width: 40px;
+    border-radius: 10px;
+}
+
+/* Arrow Navigation */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.carousel-arrow:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: var(--primary-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow.prev {
+    left: 30px;
+}
+
+.carousel-arrow.next {
+    right: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .slide-watch-image {
+        width: 300px;
+        height: 300px;
+        right: 5%;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-carousel {
+        min-height: 500px;
+    }
+
+    .slide-watch-image {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 250px;
+        height: 250px;
+        margin: 0 auto var(--space-xl);
+    }
+
+    .slide-content {
+        padding: 0 var(--space-md);
+    }
+
+    .slide-content h1 {
+        font-size: 2rem;
+    }
+
+    .slide-content p {
+        font-size: 1rem;
+    }
+
+    .carousel-arrow {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carousel-arrow.prev {
+        left: 15px;
+    }
+
+    .carousel-arrow.next {
+        right: 15px;
+    }
+
+    .carousel-nav {
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slide-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .slide-cta .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}

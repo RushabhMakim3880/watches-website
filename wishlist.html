@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Your wishlist of luxury watches at CHRONOLUX. Save your favorite timepieces and shop later.">
+    <title>My Wishlist - CHRONOLUX</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">CHRONOLUX</a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="men.html">Men</a>
+                <a href="women.html">Women</a>
+                <a href="new-arrivals.html">New Arrivals</a>
+                <a href="best-sellers.html">Best Sellers</a>
+                <a href="brands.html">Brands</a>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+            <div class="nav-icons">
+                <div class="nav-icon" id="searchIcon" aria-label="Search"><i class="fas fa-search"></i></div>
+                <div class="nav-icon" id="wishlistIcon" aria-label="Wishlist"><i class="far fa-heart"></i><span
+                        class="badge" id="wishlistCount">0</span></div>
+                <div class="nav-icon" id="cartIcon" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i><span
+                        class="badge" id="cartCount">0</span></div>
+                <div class="nav-icon" id="accountIcon" aria-label="Account"><i class="far fa-user"></i></div>
+                <div class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>My Wishlist</h1>
+            <p>Your saved luxury timepieces</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a><span>/</span>
+                <span>Wishlist</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <!-- Wishlist Actions -->
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xl);">
+                <div>
+                    <h2 style="margin-bottom: var(--space-xs);">Your Wishlist</h2>
+                    <p style="color: var(--dark-grey);" id="wishlistItemCount">0 items</p>
+                </div>
+                <div style="display: flex; gap: var(--space-md);">
+                    <button class="btn btn-secondary" id="shareWishlistBtn">
+                        <i class="fas fa-share-alt"></i> Share Wishlist
+                    </button>
+                    <button class="btn btn-secondary" id="clearWishlistBtn">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyWishlist" class="hidden" style="text-align: center; padding: var(--space-3xl) 0;">
+                <i class="far fa-heart"
+                    style="font-size: 5rem; color: var(--medium-grey); margin-bottom: var(--space-xl);"></i>
+                <h3 style="margin-bottom: var(--space-md);">Your wishlist is empty</h3>
+                <p style="color: var(--dark-grey); margin-bottom: var(--space-xl);">Start adding your favorite watches
+                    to your wishlist</p>
+                <a href="index.html" class="btn btn-primary">Browse Watches</a>
+            </div>
+
+            <!-- Wishlist Grid -->
+            <div class="products-grid" id="wishlistGrid"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CHRONOLUX</h4>
+                    <p
+                        style="color: var(--medium-grey); font-size: var(--text-sm); line-height: 1.8; margin-top: var(--space-md);">
+                        Premium timepiece collection dedicated to precision, elegance, and timeless design.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="men.html">Men's Watches</a></li>
+                        <li><a href="women.html">Women's Watches</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                        <li><a href="best-sellers.html">Best Sellers</a></li>
+                        <li><a href="brands.html">Brands</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Support</h4>
+                    <ul>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p style="color: var(--medium-grey); font-size: var(--text-sm); margin-top: var(--space-md);">
+                        Subscribe for exclusive offers.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="Your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CHRONOLUX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/modal-system.js"></script>
+    <script src="data/products.js"></script>
+    <script>let cart = JSON.parse(localStorage.getItem('cart')) || []; let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];</script>
+    <script src="script.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script>
+        // Wishlist Page Logic
+        document.addEventListener('DOMContentLoaded', function () {
+            renderWishlist();
+
+            // Share wishlist button
+            document.getElementById('shareWishlistBtn').addEventListener('click', shareWishlist);
+
+            // Clear wishlist button
+            document.getElementById('clearWishlistBtn').addEventListener('click', clearWishlist);
+        });
+
+        function renderWishlist() {
+            const wishlistGrid = document.getElementById('wishlistGrid');
+            const emptyWishlist = document.getElementById('emptyWishlist');
+            const wishlistItemCount = document.getElementById('wishlistItemCount');
+
+            if (!wishlist || wishlist.length === 0) {
+                wishlistGrid.classList.add('hidden');
+                emptyWishlist.classList.remove('hidden');
+                wishlistItemCount.textContent = '0 items';
+                return;
+            }
+
+            emptyWishlist.classList.add('hidden');
+            wishlistGrid.classList.remove('hidden');
+            wishlistItemCount.textContent = `${wishlist.length} ${wishlist.length === 1 ? 'item' : 'items'}`;
+
+            // Get wishlist products
+            const wishlistProducts = products.filter(p => wishlist.includes(p.id));
+
+            const wishlistHtml = wishlistProducts.map(product => `
+                <div class="product-card" data-product-id="${product.id}">
+                    <div class="product-image-container">
+                        <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
+                        ${product.discount ? `<div class="product-badge">-${product.discount}%</div>` : ''}
+                        <div class="wishlist-icon active" onclick="removeFromWishlist(${product.id})" title="Remove from wishlist">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">${product.brand}</div>
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-rating">
+                            <span class="stars">${generateStars(product.rating)}</span>
+                            <span class="rating-count">(${product.reviews})</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$${product.price.toLocaleString()}</span>
+                            ${product.originalPrice ? `<span class="original-price">$${product.originalPrice.toLocaleString()}</span>` : ''}
+                        </div>
+                        <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-md);">
+                            <button class="btn btn-primary" style="flex: 1; padding: 0.75rem;" onclick="moveToCart(${product.id})">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
+                            <button class="btn btn-secondary" style="padding: 0.75rem;" onclick="window.location.href='product-detail.html?id=${product.id}'" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            wishlistGrid.innerHTML = wishlistHtml;
+        }
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            let stars = '';
+
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+
+            const emptyStars = 5 - Math.ceil(rating);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+
+            return stars;
+        }
+
+        function removeFromWishlist(productId) {
+            toggleWishlist(productId);
+            renderWishlist();
+            if (typeof accessibility !== 'undefined') {
+                accessibility.announceToScreenReader('Item removed from wishlist');
+            }
+        }
+
+        function moveToCart(productId) {
+            addToCart(productId);
+            removeFromWishlist(productId);
+            showNotification('Item moved to cart!');
+        }
+
+        function shareWishlist() {
+            const wishlistIds = wishlist.join(',');
+            const shareUrl = `${window.location.origin}/wishlist.html?items=${wishlistIds}`;
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    showNotification('Wishlist link copied to clipboard!');
+                }).catch(() => {
+                    promptShareUrl(shareUrl);
+                });
+            } else {
+                promptShareUrl(shareUrl);
+            }
+        }
+
+        function promptShareUrl(url) {
+            if (typeof modalSystem !== 'undefined') {
+                modalSystem.show({
+                    id: 'share-wishlist-modal',
+                    title: 'Share Your Wishlist',
+                    content: `
+                        <div style="padding: var(--space-md);">
+                            <p style="margin-bottom: var(--space-md);">Copy this link to share your wishlist:</p>
+                            <input type="text" value="${url}" readonly 
+                                style="width: 100%; padding: var(--space-sm); border: 1px solid var(--medium-grey); border-radius: 4px; font-family: monospace;"
+                                onclick="this.select()">
+                        </div>
+                    `,
+                    size: 'medium'
+                });
+            } else {
+                alert('Share URL: ' + url);
+            }
+        }
+
+        function clearWishlist() {
+            if (confirm('Are you sure you want to clear your entire wishlist?')) {
+                wishlist = [];
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                updateWishlistCount();
+                renderWishlist();
+                showNotification('Wishlist cleared');
+            }
+        }
+    </script>
+</body>
+
+</html>

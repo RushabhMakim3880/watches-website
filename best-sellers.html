@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Best Sellers - Most popular luxury watches at CHRONOLUX. Customer favorites.">
+    <title>Best Sellers - CHRONOLUX</title>
+
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">CHRONOLUX</a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="men.html">Men</a>
+                <a href="women.html">Women</a>
+                <a href="new-arrivals.html">New Arrivals</a>
+                <a href="best-sellers.html" class="active">Best Sellers</a>
+                <a href="brands.html">Brands</a>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+
+            <div class="nav-icons">
+                <div class="nav-icon" id="searchIcon"><i class="fas fa-search"></i></div>
+                <div class="nav-icon" id="wishlistIcon">
+                    <i class="far fa-heart"></i>
+                    <span class="badge" id="wishlistCount">0</span>
+                </div>
+                <div class="nav-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </div>
+                <div class="nav-icon" id="accountIcon"><i class="far fa-user"></i></div>
+                <div class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Best Sellers</h1>
+            <p>Our most popular timepieces loved by customers worldwide</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Best Sellers</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Customer Favorites</h2>
+                <p>The watches everyone is talking about</p>
+            </div>
+
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="priceFilter">Price Range</label>
+                    <select id="priceFilter" onchange="applyFilters()">
+                        <option value="all">All Prices</option>
+                        <option value="0-1000">Under $1,000</option>
+                        <option value="1000-2000">$1,000 - $2,000</option>
+                        <option value="2000-3000">$2,000 - $3,000</option>
+                        <option value="3000+">$3,000+</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="categoryFilter">Category</label>
+                    <select id="categoryFilter" onchange="applyFilters()">
+                        <option value="all">All Categories</option>
+                        <option value="automatic">Automatic</option>
+                        <option value="chronograph">Chronograph</option>
+                        <option value="luxury-leather">Luxury Leather</option>
+                        <option value="sport">Sport</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sortFilter">Sort By</label>
+                    <select id="sortFilter" onchange="applyFilters()">
+                        <option value="rating">Highest Rated</option>
+                        <option value="reviews">Most Reviews</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CHRONOLUX</h4>
+                    <p
+                        style="color: var(--medium-grey); font-size: var(--text-sm); line-height: 1.8; margin-top: var(--space-md);">
+                        Premium timepiece collection dedicated to precision, elegance, and timeless design.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="men.html">Men's Watches</a></li>
+                        <li><a href="women.html">Women's Watches</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                        <li><a href="best-sellers.html">Best Sellers</a></li>
+                        <li><a href="brands.html">Brands</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Customer Support</h4>
+                    <ul>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p style="color: var(--medium-grey); font-size: var(--text-sm); margin-top: var(--space-md);">
+                        Subscribe for exclusive offers.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="Your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CHRONOLUX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/modal-system.js"></script>
+    <script src="data/products.js"></script>
+    <script>
+        // Show all products as best sellers
+        let filteredProducts = [...products];
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+        // Render products when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            if (filteredProducts.length > 0) {
+                renderProducts(filteredProducts);
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+```

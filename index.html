@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="CHRONOLUX - Premium luxury watches for professionals and enthusiasts. Discover our collection of automatic, chronograph, and luxury timepieces.">
+  <meta name="keywords" content="luxury watches, automatic watches, chronograph, premium timepieces, watch collection">
+  <title>CHRONOLUX - Precision. Elegance. Time Redefined.</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/mega-menu.css">
+  <link rel="stylesheet" href="css/premium-animations.css">
+  <link rel="stylesheet" href="css/unique-hero.css">
+
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- ============================================
+       HEADER & NAVIGATION
+       ============================================ -->
+  <header class="header" id="header">
+    <div class="container">
+      <!-- Logo -->
+      <a href="index.html" class="logo">CHRONOLUX</a>
+
+      <!-- Navigation Menu -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="active">Home</a>
+
+        <!-- Men's Menu with Mega Menu -->
+        <a href="men.html">Men</a>
+        <div class="mega-menu">
+          <div class="mega-menu-content">
+            <div class="mega-menu-column">
+              <h4>By Category</h4>
+              <a href="men.html?category=automatic" class="mega-menu-item">Automatic Watches</a>
+              <a href="men.html?category=chronograph" class="mega-menu-item">Chronograph</a>
+              <a href="men.html?category=sport" class="mega-menu-item">Sport & Diver</a>
+              <a href="men.html?category=luxury-leather" class="mega-menu-item">Luxury Leather</a>
+            </div>
+            <div class="mega-menu-column">
+              <h4>By Price</h4>
+              <a href="men.html?price=0-1000" class="mega-menu-item">Under $1,000</a>
+              <a href="men.html?price=1000-2000" class="mega-menu-item">$1,000 - $2,000</a>
+              <a href="men.html?price=2000-3000" class="mega-menu-item">$2,000 - $3,000</a>
+              <a href="men.html?price=3000+" class="mega-menu-item">Luxury ($3,000+)</a>
+            </div>
+            <div class="mega-menu-column">
+              <h4>By Brand</h4>
+              <a href="men.html?brand=chronolux" class="mega-menu-item">CHRONOLUX</a>
+              <a href="men.html?brand=omega" class="mega-menu-item">OMEGA</a>
+              <a href="men.html?brand=tissot" class="mega-menu-item">TISSOT</a>
+              <a href="men.html?brand=tagheuer" class="mega-menu-item">TAG HEUER</a>
+            </div>
+            <div class="mega-menu-featured">
+              <img src="images/menu/men-category.jpg" alt="Men's Watches" class="mega-menu-featured-image">
+              <div class="mega-menu-featured-content">
+                <h5 class="mega-menu-featured-title">Men's Collection</h5>
+                <p class="mega-menu-featured-desc">Discover our premium selection of men's timepieces</p>
+                <a href="men.html" class="mega-menu-featured-link">Shop Now →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Women's Menu with Mega Menu -->
+        <a href="women.html">Women</a>
+        <div class="mega-menu">
+          <div class="mega-menu-content">
+            <div class="mega-menu-column">
+              <h4>By Style</h4>
+              <a href="women.html?category=luxury-leather" class="mega-menu-item">Luxury Leather</a>
+              <a href="women.html?category=automatic" class="mega-menu-item">Automatic</a>
+              <a href="women.html?category=smart" class="mega-menu-item">Smart Watches</a>
+              <a href="women.html?category=classic" class="mega-menu-item">Classic Elegance</a>
+            </div>
+            <div class="mega-menu-column">
+              <h4>By Dial Color</h4>
+              <a href="women.html?dial=white" class="mega-menu-item">White Dial</a>
+              <a href="women.html?dial=blue" class="mega-menu-item">Blue Dial</a>
+              <a href="women.html?dial=gold" class="mega-menu-item">Gold Dial</a>
+              <a href="women.html?dial=black" class="mega-menu-item">Black Dial</a>
+            </div>
+            <div class="mega-menu-column">
+              <h4>By Occasion</h4>
+              <a href="women.html?occasion=formal" class="mega-menu-item">Formal Events</a>
+              <a href="women.html?occasion=casual" class="mega-menu-item">Casual Wear</a>
+              <a href="women.html?occasion=sport" class="mega-menu-item">Active Lifestyle</a>
+              <a href="women.html?occasion=business" class="mega-menu-item">Business</a>
+            </div>
+            <div class="mega-menu-featured">
+              <img src="images/menu/women-category.jpg" alt="Women's Watches" class="mega-menu-featured-image">
+              <div class="mega-menu-featured-content">
+                <h5 class="mega-menu-featured-title">Women's Collection</h5>
+                <p class="mega-menu-featured-desc">Elegant timepieces for the modern woman</p>
+                <a href="women.html" class="mega-menu-featured-link">Shop Now →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="new-arrivals.html">New Arrivals</a>
+        <a href="best-sellers.html">Best Sellers</a>
+        <a href="brands.html">Brands</a>
+        <a href="blog.html">Blog</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <!-- Navigation Icons -->
+      <div class="nav-icons">
+        <div class="nav-icon" id="searchIcon">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="nav-icon" id="wishlistIcon">
+          <i class="far fa-heart"></i>
+          <span class="badge" id="wishlistCount">0</span>
+        </div>
+        <div class="nav-icon" id="cartIcon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="badge" id="cartCount">0</span>
+        </div>
+        <div class="nav-icon" id="accountIcon">
+          <i class="far fa-user"></i>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="mobile-menu-toggle" id="mobileMenuToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================
+       UNIQUE HERO BANNER - Modern Split-Screen
+       ============================================ -->
+  <section class="unique-hero" id="home">
+
+    <!-- Animated Background Particles -->
+    <div class="hero-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <div class="unique-hero-container">
+
+      <!-- Left Content Section -->
+      <div class="hero-left">
+        <div class="hero-badge">Premium Timepieces</div>
+        <h1 class="hero-title">Time Redefined</h1>
+        <p class="hero-subtitle">
+          <span class="typing-text">Precision Crafted Timepieces</span>
+        </p>
+
+        <!-- Hero Features -->
+        <div class="hero-features">
+          <div class="hero-feature">
+            <div class="feature-number" data-target="500">0+</div>
+            <div class="feature-label">Watch Models</div>
+          </div>
+          <div class="hero-feature">
+            <div class="feature-number" data-target="50">0+</div>
+            <div class="feature-label">Luxury Brands</div>
+          </div>
+          <div class="hero-feature">
+            <div class="feature-number" data-target="10000">0+</div>
+            <div class="feature-label">Happy Customers</div>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="hero-cta-group">
+          <button class="hero-btn hero-btn-primary" onclick="scrollToSection('products')">
+            Explore Collection
+          </button>
+          <button class="hero-btn hero-btn-secondary" onclick="window.location.href='new-arrivals.html'">
+            New Arrivals
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Visual Section -->
+      <div class="hero-right">
+        <div class="watch-showcase">
+
+          <!-- Watch Card 1 -->
+          <div class="watch-card watch-card-1">
+            <img src="images/products/watch-1.jpg" alt="Chronograph Master Elite" class="watch-image">
+            <div class="watch-info">
+              <div class="watch-name">Chronograph Master</div>
+              <div class="watch-price">$1,299</div>
+            </div>
+          </div>
+
+          <!-- Watch Card 2 -->
+          <div class="watch-card watch-card-2">
+            <img src="images/products/watch-5.jpg" alt="Moonphase Prestige" class="watch-image">
+            <div class="watch-info">
+              <div class="watch-name">Moonphase Prestige</div>
+              <div class="watch-price">$3,299</div>
+            </div>
+          </div>
+
+          <!-- Watch Card 3 -->
+          <div class="watch-card watch-card-3">
+            <img src="images/products/watch-3.jpg" alt="Sport Diver Pro" class="watch-image">
+            <div class="watch-info">
+              <div class="watch-name">Sport Diver Pro</div>
+              <div class="watch-price">$899</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+
+  </section>
+
+  <!-- ============================================
+       FEATURED COLLECTIONS
+       ============================================ -->
+  <section class="section" id="collections">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured Collections</h2>
+        <p>Explore our curated selection of premium timepieces</p>
+      </div>
+
+      <div class="collections-grid">
+        <!-- Collection Card 1 -->
+        <div class="collection-card" onclick="filterProducts('automatic')">
+          <img src="images/collections/automatic.jpg" alt="Automatic Watches" loading="lazy">
+          <div class="collection-overlay">
+            <h3>Automatic Watches</h3>
+            <p>Self-winding mechanical masterpieces</p>
+          </div>
+        </div>
+
+        <!-- Collection Card 2 -->
+        <div class="collection-card" onclick="filterProducts('chronograph')">
+          <img src="images/collections/chronograph.jpg" alt="Chronograph Collection" loading="lazy">
+          <div class="collection-overlay">
+            <h3>Chronograph</h3>
+            <p>Precision timing instruments</p>
+          </div>
+        </div>
+
+        <!-- Collection Card 3 -->
+        <div class="collection-card" onclick="filterProducts('luxury-leather')">
+          <img src="images/collections/luxury-leather.jpg" alt="Luxury Leather Watches" loading="lazy">
+          <div class="collection-overlay">
+            <h3>Luxury Leather</h3>
+            <p>Timeless elegance with premium straps</p>
+          </div>
+        </div>
+
+        <!-- Collection Card 4 -->
+        <div class="collection-card" onclick="filterProducts('smart')">
+          <img src="images/collections/smart.jpg" alt="Smart Watches" loading="lazy">
+          <div class="collection-overlay">
+            <h3>Smart & Sport</h3>
+            <p>Technology meets sophistication</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PRODUCTS SECTION WITH FILTERS
+       ============================================ -->
+  <section class="section products-section" id="products">
+    <div class="container">
+      <div class="section-header">
+        <h2>Premium Timepieces</h2>
+        <p>Handpicked selection of our finest watches</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-container">
+        <div class="filter-group">
+          <label for="priceFilter">Price Range</label>
+          <select id="priceFilter" onchange="applyFilters()">
+            <option value="all">All Prices</option>
+            <option value="0-1000">Under $1,000</option>
+            <option value="1000-2000">$1,000 - $2,000</option>
+            <option value="2000-3000">$2,000 - $3,000</option>
+            <option value="3000+">$3,000+</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="categoryFilter">Category</label>
+          <select id="categoryFilter" onchange="applyFilters()">
+            <option value="all">All Categories</option>
+            <option value="automatic">Automatic</option>
+            <option value="chronograph">Chronograph</option>
+            <option value="luxury-leather">Luxury Leather</option>
+            <option value="sport">Sport</option>
+            <option value="smart">Smart</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="strapFilter">Strap Type</label>
+          <select id="strapFilter" onchange="applyFilters()">
+            <option value="all">All Straps</option>
+            <option value="leather">Leather</option>
+            <option value="metal">Metal</option>
+            <option value="rubber">Rubber</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="dialFilter">Dial Color</label>
+          <select id="dialFilter" onchange="applyFilters()">
+            <option value="all">All Colors</option>
+            <option value="black">Black</option>
+            <option value="white">White</option>
+            <option value="blue">Blue</option>
+            <option value="gold">Gold</option>
+            <option value="brown">Brown</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="movementFilter">Movement</label>
+          <select id="movementFilter" onchange="applyFilters()">
+            <option value="all">All Movements</option>
+            <option value="automatic">Automatic</option>
+            <option value="quartz">Quartz</option>
+            <option value="smart">Smart</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Products will be dynamically inserted here by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       TRENDING SECTION (DARK)
+       ============================================ -->
+  <section class="section trending-section">
+    <div class="container">
+      <div class="trending-content">
+        <div>
+          <img src="images/trending/featured-watch.jpg" alt="Trending Watch" class="trending-image" loading="lazy">
+        </div>
+        <div class="trending-text">
+          <span class="label">Trending Now</span>
+          <h2>Moonphase Prestige Collection</h2>
+          <p>Experience the pinnacle of horological artistry with our exclusive Moonphase Prestige. Featuring a stunning
+            moonphase complication, exhibition caseback, and Swiss automatic movement, this masterpiece represents the
+            perfect fusion of tradition and innovation.</p>
+          <button class="btn btn-primary" onclick="scrollToProduct(5)">View Details</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       BRANDS SECTION
+       ============================================ -->
+  <section class="section brands-section" id="brands">
+    <div class="container">
+      <div class="section-header">
+        <h2>Trusted Brands</h2>
+        <p>Partnering with the world's most prestigious watchmakers</p>
+      </div>
+
+      <div class="brands-showcase-grid">
+        <!-- CHRONOLUX -->
+        <div class="brand-showcase-card">
+          <div class="brand-showcase-logo-wrapper">
+            <img src="images/brands/chronolux.svg" alt="CHRONOLUX" class="brand-showcase-logo">
+          </div>
+          <h4 class="brand-showcase-name">CHRONOLUX</h4>
+          <p class="brand-showcase-tagline">Precision. Elegance. Time Redefined.</p>
+          <div class="brand-showcase-stats">
+            <div class="brand-showcase-stat">
+              <span class="stat-value">12+</span>
+              <span class="stat-label">Models</span>
+            </div>
+            <div class="brand-showcase-stat">
+              <span class="stat-value">4.8★</span>
+              <span class="stat-label">Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- OMEGA -->
+        <div class="brand-showcase-card">
+          <div class="brand-showcase-logo-wrapper">
+            <img src="images/brands/omega.svg" alt="OMEGA" class="brand-showcase-logo">
+          </div>
+          <h4 class="brand-showcase-name">OMEGA</h4>
+          <p class="brand-showcase-tagline">Swiss Precision Since 1848</p>
+          <div class="brand-showcase-stats">
+            <div class="brand-showcase-stat">
+              <span class="stat-value">8+</span>
+              <span class="stat-label">Models</span>
+            </div>
+            <div class="brand-showcase-stat">
+              <span class="stat-value">4.9★</span>
+              <span class="stat-label">Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TISSOT -->
+        <div class="brand-showcase-card">
+          <div class="brand-showcase-logo-wrapper">
+            <img src="images/brands/tissot.svg" alt="TISSOT" class="brand-showcase-logo">
+          </div>
+          <h4 class="brand-showcase-name">TISSOT</h4>
+          <p class="brand-showcase-tagline">Innovators by Tradition</p>
+          <div class="brand-showcase-stats">
+            <div class="brand-showcase-stat">
+              <span class="stat-value">10+</span>
+              <span class="stat-label">Models</span>
+            </div>
+            <div class="brand-showcase-stat">
+              <span class="stat-value">4.7★</span>
+              <span class="stat-label">Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RADO -->
+        <div class="brand-showcase-card">
+          <div class="brand-showcase-logo-wrapper">
+            <img src="images/brands/rado.svg" alt="RADO" class="brand-showcase-logo">
+          </div>
+          <h4 class="brand-showcase-name">RADO</h4>
+          <p class="brand-showcase-tagline">Master of Materials</p>
+          <div class="brand-showcase-stats">
+            <div class="brand-showcase-stat">
+              <span class="stat-value">6+</span>
+              <span class="stat-label">Models</span>
+            </div>
+            <div class="brand-showcase-stat">
+              <span class="stat-value">4.6★</span>
+              <span class="stat-label">Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LONGINES -->
+        <div class="brand-showcase-card">
+          <div class="brand-showcase-logo-wrapper">
+            <img src="images/brands/longines.svg" alt="LONGINES" class="brand-showcase-logo">
+          </div>
+          <h4 class="brand-showcase-name">LONGINES</h4>
+          <p class="brand-showcase-tagline">Elegance is an Attitude</p>
+          <div class="brand-showcase-stats">
+            <div class="brand-showcase-stat">
+              <span class="stat-value">9+</span>
+              <span class="stat-label">Models</span>
+            </div>
+            <div class="brand-showcase-stat">
+              <span class="stat-value">4.8★</span>
+              <span class="stat-label">Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAG HEUER -->
+        <div class="brand-showcase-card">
+          <div class="brand-showcase-logo-wrapper">
+            <img src="images/brands/tagheuer.svg" alt="TAG HEUER" class="brand-showcase-logo">
+          </div>
+          <h4 class="brand-showcase-name">TAG HEUER</h4>
+          <p class="brand-showcase-tagline">Swiss Avant-Garde</p>
+          <div class="brand-showcase-stats">
+            <div class="brand-showcase-stat">
+              <span class="stat-value">7+</span>
+              <span class="stat-label">Models</span>
+            </div>
+            <div class="brand-showcase-stat">
+              <span class="stat-value">4.9★</span>
+              <span class="stat-label">Rating</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--space-2xl);">
+        <a href="brands.html" class="btn btn-primary">View All Brands</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       BLOG / STORIES SECTION
+       ============================================ -->
+  <section class="section" id="blog">
+    <div class="container">
+      <div class="section-header">
+        <h2>Watch Stories</h2>
+        <p>Insights, guides, and the latest from the world of horology</p>
+      </div>
+
+      <div class="blog-grid">
+        <!-- Blog Card 1 -->
+        <article class="blog-card">
+          <img src="images/blog/blog-1.jpg" alt="Watch Maintenance Guide" class="blog-image" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-category">Care Guide</div>
+            <h3 class="blog-title">The Art of Watch Maintenance</h3>
+            <p class="blog-excerpt">Learn essential tips to keep your luxury timepiece running perfectly for
+              generations.</p>
+            <a href="blog-watch-maintenance.html" class="blog-read-more">
+              Read More <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Blog Card 2 -->
+        <article class="blog-card">
+          <img src="images/blog/blog-2.jpg" alt="New Collection 2024" class="blog-image" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-category">New Arrivals</div>
+            <h3 class="blog-title">New Collection Launch 2024</h3>
+            <p class="blog-excerpt">Discover our latest collection featuring innovative designs and cutting-edge
+              technology.</p>
+            <a href="blog-new-collection-2024.html" class="blog-read-more">
+              Read More <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Blog Card 3 -->
+        <article class="blog-card">
+          <img src="images/blog/blog-3.jpg" alt="Watch Styling Guide" class="blog-image" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-category">Style Guide</div>
+            <h3 class="blog-title">Styling Your Watch</h3>
+            <p class="blog-excerpt">Expert advice on matching your timepiece with different occasions and outfits.</p>
+            <a href="blog-styling-your-watch.html" class="blog-read-more">
+              Read More <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <!-- About Section -->
+        <div class="footer-section">
+          <h4>About CHRONOLUX</h4>
+          <p
+            style="color: var(--medium-grey); font-size: var(--text-sm); line-height: 1.8; margin-top: var(--space-md);">
+            Premium timepiece collection dedicated to precision, elegance, and timeless design. Crafting excellence
+            since 2024.
+          </p>
+          <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Customer Support -->
+        <div class="footer-section">
+          <h4>Customer Support</h4>
+          <ul>
+            <li><a href="contact-us.html">Contact Us</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="shipping.html">Shipping Information</a></li>
+            <li><a href="returns.html">Returns & Exchanges</a></li>
+            <li><a href="warranty.html">Warranty</a></li>
+            <li><a href="track-order.html">Track Your Order</a></li>
+          </ul>
+        </div>
+
+        <!-- Policies -->
+        <div class="footer-section">
+          <h4>Policies</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+            <li><a href="cookie-policy.html">Cookie Policy</a></li>
+            <li><a href="authenticity-guarantee.html">Authenticity Guarantee</a></li>
+            <li><a href="secure-payment.html">Secure Payment</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-section">
+          <h4>Stay Connected</h4>
+          <p style="color: var(--medium-grey); font-size: var(--text-sm); margin-top: var(--space-md);">
+            Subscribe to receive exclusive offers and updates.
+          </p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" class="newsletter-input" placeholder="Your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+
+          <div class="payment-icons">
+            <i class="fab fa-cc-visa payment-icon" style="font-size: 2rem;"></i>
+            <i class="fab fa-cc-mastercard payment-icon" style="font-size: 2rem;"></i>
+            <i class="fab fa-cc-amex payment-icon" style="font-size: 2rem;"></i>
+            <i class="fab fa-cc-paypal payment-icon" style="font-size: 2rem;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 CHRONOLUX. All rights reserved. Precision. Elegance. Time Redefined.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script src="js/modal-system.js"></script>
+  <script src="data/products.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/premium-effects.js"></script>
+  <script src="js/unique-hero.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

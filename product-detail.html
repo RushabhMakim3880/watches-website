@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore detailed specifications and features of luxury watches at CHRONOLUX.">
+    <title>Product Details - CHRONOLUX</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">CHRONOLUX</a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="men.html">Men</a>
+                <a href="women.html">Women</a>
+                <a href="new-arrivals.html">New Arrivals</a>
+                <a href="best-sellers.html">Best Sellers</a>
+                <a href="brands.html">Brands</a>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+            <div class="nav-icons">
+                <div class="nav-icon" id="searchIcon"><i class="fas fa-search"></i></div>
+                <div class="nav-icon" id="wishlistIcon"><i class="far fa-heart"></i><span class="badge"
+                        id="wishlistCount">0</span></div>
+                <div class="nav-icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span class="badge"
+                        id="cartCount">0</span></div>
+                <div class="nav-icon" id="accountIcon"><i class="far fa-user"></i></div>
+                <div class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: calc(var(--header-height) + var(--space-2xl));">
+        <div class="container">
+            <div class="breadcrumb" style="margin-bottom: var(--space-xl);">
+                <a href="index.html">Home</a><span>/</span>
+                <a href="#" id="categoryLink">Products</a><span>/</span>
+                <span id="productName">Product</span>
+            </div>
+
+            <div
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3xl); margin-bottom: var(--space-3xl);">
+                <!-- Product Image -->
+                <div>
+                    <img id="productImage" src="" alt="Product"
+                        style="width: 100%; border-radius: var(--radius-lg); box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+                </div>
+
+                <!-- Product Details -->
+                <div>
+                    <div id="productBrand"
+                        style="color: var(--primary-color); font-weight: 600; margin-bottom: var(--space-sm);"></div>
+                    <h1 id="productTitle" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></h1>
+                    <div
+                        style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-xl);">
+                        <div class="rating" id="productRating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span style="color: var(--dark-grey);">(128 reviews)</span>
+                    </div>
+
+                    <div id="productPrice"
+                        style="font-size: 2rem; font-weight: 700; color: var(--primary-color); margin-bottom: var(--space-xl);">
+                    </div>
+
+                    <div id="productDescription"
+                        style="color: var(--dark-grey); line-height: 1.8; margin-bottom: var(--space-2xl);"></div>
+
+                    <!-- Specifications -->
+                    <div
+                        style="background: var(--light-grey); padding: var(--space-xl); border-radius: var(--radius-md); margin-bottom: var(--space-2xl);">
+                        <h3 style="margin-bottom: var(--space-md);">Specifications</h3>
+                        <div id="productSpecs" style="display: grid; gap: var(--space-sm);"></div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="display: flex; gap: var(--space-md); margin-bottom: var(--space-xl);">
+                        <button class="btn btn-primary" id="addToCartBtn" style="flex: 1;">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="btn btn-secondary" id="addToWishlistBtn" style="flex: 1;">
+                            <i class="far fa-heart"></i> Add to Wishlist
+                        </button>
+                    </div>
+
+                    <!-- Features -->
+                    <div id="productFeatures" style="display: grid; gap: var(--space-sm);"></div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div>
+                <h2 style="margin-bottom: var(--space-xl);">You May Also Like</h2>
+                <div class="product-grid" id="relatedProducts"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CHRONOLUX</h4>
+                    <p
+                        style="color: var(--medium-grey); font-size: var(--text-sm); line-height: 1.8; margin-top: var(--space-md);">
+                        Premium timepiece collection dedicated to precision, elegance, and timeless design.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="men.html">Men's Watches</a></li>
+                        <li><a href="women.html">Women's Watches</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                        <li><a href="best-sellers.html">Best Sellers</a></li>
+                        <li><a href="brands.html">Brands</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Support</h4>
+                    <ul>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p style="color: var(--medium-grey); font-size: var(--text-sm); margin-top: var(--space-md);">
+                        Subscribe for exclusive offers.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="Your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CHRONOLUX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/modal-system.js"></script>
+    <script src="data/products.js"></script>
+    <script src="script.js"></script>
+    <script src="js/product-detail.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order - CHRONOLUX</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">CHRONOLUX</a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a><a href="men.html">Men</a><a href="women.html">Women</a><a
+                    href="new-arrivals.html">New Arrivals</a><a href="best-sellers.html">Best Sellers</a><a
+                    href="brands.html">Brands</a><a href="blog.html">Blog</a><a href="index.html#contact">Contact</a>
+            </nav>
+            <div class="nav-icons">
+                <div class="nav-icon" id="searchIcon"><i class="fas fa-search"></i></div>
+                <div class="nav-icon" id="wishlistIcon"><i class="far fa-heart"></i><span class="badge"
+                        id="wishlistCount">0</span></div>
+                <div class="nav-icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span class="badge"
+                        id="cartCount">0</span></div>
+                <div class="nav-icon" id="accountIcon"><i class="far fa-user"></i></div>
+                <div class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+    <section class="page-hero">
+        <div class="container">
+            <h1>Track Your Order</h1>
+            <p>Monitor your shipment in real-time</p>
+            <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Track Order</span></div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container" style="max-width: 700px;">
+            <div
+                style="background: var(--light-grey); padding: var(--space-2xl); border-radius: var(--radius-lg); margin-bottom: var(--space-2xl);">
+                <h2 style="margin-bottom: var(--space-lg); text-align: center;">Enter Your Tracking Information</h2>
+                <form style="display: flex; flex-direction: column; gap: var(--space-lg);">
+                    <div>
+                        <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">Order Number
+                            *</label>
+                        <input type="text" required placeholder="e.g., CHR-123456"
+                            style="width: 100%; padding: var(--space-md); border: 1px solid var(--medium-grey); border-radius: var(--radius-sm); font-size: 1rem;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">Email Address
+                            *</label>
+                        <input type="email" required placeholder="email@example.com"
+                            style="width: 100%; padding: var(--space-md); border: 1px solid var(--medium-grey); border-radius: var(--radius-sm); font-size: 1rem;">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: var(--space-md);">Track
+                        Order</button>
+                </form>
+            </div>
+
+            <div style="margin-bottom: var(--space-2xl);">
+                <h3 style="margin-bottom: var(--space-md);">Where to Find Your Order Number</h3>
+                <p style="color: var(--dark-grey); line-height: 1.8; margin-bottom: var(--space-md);">Your order number
+                    can be found in:</p>
+                <ul style="padding-left: var(--space-xl); color: var(--dark-grey); line-height: 1.8;">
+                    <li style="margin-bottom: var(--space-sm);">Order confirmation email</li>
+                    <li style="margin-bottom: var(--space-sm);">Shipping notification email</li>
+                    <li style="margin-bottom: var(--space-sm);">Your account order history</li>
+                </ul>
+            </div>
+
+            <div style="background: var(--light-grey); padding: var(--space-xl); border-radius: var(--radius-md);">
+                <h3 style="margin-bottom: var(--space-md);">Need Help?</h3>
+                <p style="color: var(--dark-grey); margin-bottom: var(--space-md);">If you're having trouble tracking
+                    your order, our customer service team is here to assist.</p>
+                <a href="contact-us.html" class="btn btn-primary">Contact Support</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CHRONOLUX</h4>
+                    <p
+                        style="color: var(--medium-grey); font-size: var(--text-sm); line-height: 1.8; margin-top: var(--space-md);">
+                        Premium timepiece collection dedicated to precision, elegance, and timeless design.</p>
+                    <div class="social-icons"><a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a><a
+                            href="#" class="social-icon"><i class="fab fa-instagram"></i></a><a href="#"
+                            class="social-icon"><i class="fab fa-twitter"></i></a><a href="#" class="social-icon"><i
+                                class="fab fa-youtube"></i></a></div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="men.html">Men's Watches</a></li>
+                        <li><a href="women.html">Women's Watches</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                        <li><a href="best-sellers.html">Best Sellers</a></li>
+                        <li><a href="brands.html">Brands</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Support</h4>
+                    <ul>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p style="color: var(--medium-grey); font-size: var(--text-sm); margin-top: var(--space-md);">
+                        Subscribe for exclusive offers.</p>
+                    <form class="newsletter-form" id="newsletterForm"><input type="email" class="newsletter-input"
+                            placeholder="Your email" required><button type="submit"
+                            class="btn btn-primary">Subscribe</button></form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CHRONOLUX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/modal-system.js"></script>
+    <script src="data/products.js"></script>
+    <script>let cart = JSON.parse(localStorage.getItem('cart')) || []; let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];</script>
+    <script src="script.js"></script>
+</body>
+
+</html>

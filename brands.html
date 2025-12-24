@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Brands - Explore luxury watch brands at CHRONOLUX. Partnering with world's finest watchmakers.">
+    <title>Brands - CHRONOLUX</title>
+
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .brand-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-2xl);
+        }
+
+        .brand-card {
+            background-color: var(--primary-white);
+            border: 1px solid var(--medium-grey);
+            border-radius: 8px;
+            padding: var(--space-xl);
+            text-align: center;
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-red);
+        }
+
+        .brand-card-logo {
+            width: 150px;
+            height: 80px;
+            object-fit: contain;
+            margin: 0 auto var(--space-lg);
+            filter: grayscale(100%);
+            transition: filter var(--transition-base);
+        }
+
+        .brand-card:hover .brand-card-logo {
+            filter: grayscale(0%);
+        }
+
+        .brand-card h3 {
+            font-size: var(--text-2xl);
+            margin-bottom: var(--space-sm);
+        }
+
+        .brand-card p {
+            color: var(--dark-grey);
+            margin-bottom: var(--space-md);
+        }
+
+        .brand-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: var(--space-lg) 0;
+            padding: var(--space-md) 0;
+            border-top: 1px solid var(--medium-grey);
+            border-bottom: 1px solid var(--medium-grey);
+        }
+
+        .brand-stat {
+            text-align: center;
+        }
+
+        .brand-stat-value {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-bold);
+            color: var(--accent-red);
+        }
+
+        .brand-stat-label {
+            font-size: var(--text-sm);
+            color: var(--dark-grey);
+            margin-top: var(--space-xs);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">CHRONOLUX</a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="men.html">Men</a>
+                <a href="women.html">Women</a>
+                <a href="new-arrivals.html">New Arrivals</a>
+                <a href="best-sellers.html">Best Sellers</a>
+                <a href="brands.html" class="active">Brands</a>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+
+            <div class="nav-icons">
+                <div class="nav-icon" id="searchIcon"><i class="fas fa-search"></i></div>
+                <div class="nav-icon" id="wishlistIcon">
+                    <i class="far fa-heart"></i>
+                    <span class="badge" id="wishlistCount">0</span>
+                </div>
+                <div class="nav-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </div>
+                <div class="nav-icon" id="accountIcon"><i class="far fa-user"></i></div>
+                <div class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Our Brands</h1>
+            <p>Partnering with the world's finest watchmakers</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Brands</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trusted Partners</h2>
+                <p>Explore our curated selection of premium watch brands</p>
+            </div>
+
+            <div class="brand-showcase">
+                <!-- CHRONOLUX -->
+                <div class="brand-card" onclick="window.location.href='index.html#products'">
+                    <img src="images/brands/chronolux.svg" alt="CHRONOLUX" class="brand-card-logo">
+                    <h3>CHRONOLUX</h3>
+                    <p>Our signature collection combining Swiss precision with modern design</p>
+                    <div class="brand-stats">
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">12</div>
+                            <div class="brand-stat-label">Models</div>
+                        </div>
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">4.8</div>
+                            <div class="brand-stat-label">Rating</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">View Collection</button>
+                </div>
+
+                <!-- OMEGA -->
+                <div class="brand-card" onclick="window.location.href='index.html#products'">
+                    <img src="images/brands/omega.svg" alt="OMEGA" class="brand-card-logo">
+                    <h3>OMEGA</h3>
+                    <p>Legendary Swiss watchmaker known for precision and innovation</p>
+                    <div class="brand-stats">
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">8</div>
+                            <div class="brand-stat-label">Models</div>
+                        </div>
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">4.9</div>
+                            <div class="brand-stat-label">Rating</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">View Collection</button>
+                </div>
+
+                <!-- TISSOT -->
+                <div class="brand-card" onclick="window.location.href='index.html#products'">
+                    <img src="images/brands/tissot.svg" alt="TISSOT" class="brand-card-logo">
+                    <h3>TISSOT</h3>
+                    <p>Swiss tradition since 1853, offering exceptional value and quality</p>
+                    <div class="brand-stats">
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">10</div>
+                            <div class="brand-stat-label">Models</div>
+                        </div>
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">4.7</div>
+                            <div class="brand-stat-label">Rating</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">View Collection</button>
+                </div>
+
+                <!-- RADO -->
+                <div class="brand-card" onclick="window.location.href='index.html#products'">
+                    <img src="images/brands/rado.svg" alt="RADO" class="brand-card-logo">
+                    <h3>RADO</h3>
+                    <p>Master of materials, pioneering high-tech ceramic watches</p>
+                    <div class="brand-stats">
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">6</div>
+                            <div class="brand-stat-label">Models</div>
+                        </div>
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">4.6</div>
+                            <div class="brand-stat-label">Rating</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">View Collection</button>
+                </div>
+
+                <!-- LONGINES -->
+                <div class="brand-card" onclick="window.location.href='index.html#products'">
+                    <img src="images/brands/longines.svg" alt="LONGINES" class="brand-card-logo">
+                    <h3>LONGINES</h3>
+                    <p>Elegance is an attitude - Swiss watchmaking since 1832</p>
+                    <div class="brand-stats">
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">9</div>
+                            <div class="brand-stat-label">Models</div>
+                        </div>
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">4.8</div>
+                            <div class="brand-stat-label">Rating</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">View Collection</button>
+                </div>
+
+                <!-- TAG HEUER -->
+                <div class="brand-card" onclick="window.location.href='index.html#products'">
+                    <img src="images/brands/tagheuer.svg" alt="TAG HEUER" class="brand-card-logo">
+                    <h3>TAG HEUER</h3>
+                    <p>Swiss avant-garde since 1860, motorsport heritage</p>
+                    <div class="brand-stats">
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">7</div>
+                            <div class="brand-stat-label">Models</div>
+                        </div>
+                        <div class="brand-stat">
+                            <div class="brand-stat-value">4.9</div>
+                            <div class="brand-stat-label">Rating</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">View Collection</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CHRONOLUX</h4>
+                    <p
+                        style="color: var(--medium-grey); font-size: var(--text-sm); line-height: 1.8; margin-top: var(--space-md);">
+                        Premium timepiece collection dedicated to precision, elegance, and timeless design.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="men.html">Men's Watches</a></li>
+                        <li><a href="women.html">Women's Watches</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                        <li><a href="best-sellers.html">Best Sellers</a></li>
+                        <li><a href="brands.html">Brands</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Customer Support</h4>
+                    <ul>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p style="color: var(--medium-grey); font-size: var(--text-sm); margin-top: var(--space-md);">
+                        Subscribe for exclusive offers.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="Your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CHRONOLUX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/modal-system.js"></script>
+    <script src="data/products.js"></script>
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <!-- Background Gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5f5f5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8e8e8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="800" height="800" fill="url(#bg)"/>
+  
+  <!-- Watch Icon -->
+  <g transform="translate(400, 320)">
+    <!-- Watch Circle -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#cccccc" stroke-width="3"/>
+    
+    <!-- Hour Markers -->
+    <line x1="0" y1="-70" x2="0" y2="-60" stroke="#cccccc" stroke-width="3"/>
+    <line x1="0" y1="60" x2="0" y2="70" stroke="#cccccc" stroke-width="3"/>
+    <line x1="70" y1="0" x2="60" y2="0" stroke="#cccccc" stroke-width="3"/>
+    <line x1="-70" y1="0" x2="-60" y2="0" stroke="#cccccc" stroke-width="3"/>
+    
+    <!-- Watch Hands -->
+    <line x1="0" y1="0" x2="-25" y2="-40" stroke="#999999" stroke-width="4" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="25" y2="-40" stroke="#999999" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Center Dot -->
+    <circle cx="0" cy="0" r="6" fill="#999999"/>
+    
+    <!-- Watch Strap -->
+    <rect x="-15" y="80" width="30" height="60" rx="5" fill="#cccccc"/>
+    <rect x="-15" y="-140" width="30" height="60" rx="5" fill="#cccccc"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="400" y="520" font-family="Arial, sans-serif" font-size="24" fill="#999999" text-anchor="middle">Image Not Available</text>
+  <text x="400" y="555" font-family="Arial, sans-serif" font-size="18" fill="#bbbbbb" text-anchor="middle">CHRONOLUX</text>
+</svg>

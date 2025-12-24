@@ -1,0 +1,946 @@
+// ============================================
+// CHRONOLUX - Interactive Functionality
+// ============================================
+
+// ============================================
+// LOCALSTORAGE VALIDATION & INITIALIZATION
+// ============================================
+function safeParseJSON(key, defaultValue = []) {
+    try {
+        const item = localStorage.getItem(key);
+        if (!item) return defaultValue;
+        const parsed = JSON.parse(item);
+        return Array.isArray(parsed) ? parsed : defaultValue;
+    } catch (error) {
+        console.warn(`Error parsing localStorage key "${key}":`, error);
+        localStorage.removeItem(key); // Remove corrupted data
+        return defaultValue;
+    }
+}
+
+function safeSetLocalStorage(key, value) {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
+    } catch (error) {
+        console.error(`Error setting localStorage key "${key}":`, error);
+        return false;
+    }
+}
+
+// State Management with validation
+let cart = safeParseJSON('cart', []);
+let wishlist = safeParseJSON('wishlist', []);
+let filteredProducts = [...products];
+
+// ============================================
+// HEADER SCROLL EFFECT
+// ============================================
+window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// ============================================
+// MOBILE MENU TOGGLE
+// ============================================
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const navMenu = document.getElementById('navMenu');
+
+mobileMenuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    const icon = mobileMenuToggle.querySelector('i');
+    if (navMenu.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+    } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    }
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        const icon = mobileMenuToggle.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    });
+});
+
+// ============================================
+// SMOOTH SCROLLING
+// ============================================
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+function scrollToProduct(productId) {
+    scrollToSection('products');
+    setTimeout(() => {
+        const productCard = document.querySelector(`[data-product-id="${productId}"]`);
+        if (productCard) {
+            productCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            productCard.style.animation = 'pulse 1s ease-in-out';
+        }
+    }, 500);
+}
+
+// ============================================
+// RENDER PRODUCTS
+// ============================================
+function renderProducts(productsToRender = products) {
+    const productsGrid = document.getElementById('productsGrid');
+
+    if (productsToRender.length === 0) {
+        productsGrid.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0;">
+        <h3>No products found</h3>
+        <p style="margin-top: 1rem; color: var(--dark-grey);">Try adjusting your filters</p>
+      </div>
+    `;
+        return;
+    }
+
+    productsGrid.innerHTML = productsToRender.map(product => {
+        const isInWishlist = wishlist.includes(product.id);
+        const stars = generateStars(product.rating);
+
+        return `
+      <div class="product-card" data-product-id="${product.id}">
+        <div class="product-image-container" onclick="window.location.href='product-detail.html?id=${product.id}'" style="cursor: pointer;">
+          <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
+          ${product.discount ? `<div class="product-badge">-${product.discount}%</div>` : ''}
+          <div class="wishlist-icon ${isInWishlist ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(${product.id})">
+            <i class="${isInWishlist ? 'fas' : 'far'} fa-heart"></i>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">${product.brand}</div>
+          <h3 class="product-name" onclick="window.location.href='product-detail.html?id=${product.id}'" style="cursor: pointer;">${product.name}</h3>
+          <div class="product-rating">
+            <span class="stars">${stars}</span>
+            <span class="rating-count">(${product.reviews})</span>
+          </div>
+          <div class="product-price">
+            <span class="current-price">$${product.price.toLocaleString()}</span>
+            ${product.originalPrice ? `<span class="original-price">$${product.originalPrice.toLocaleString()}</span>` : ''}
+          </div>
+          <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-md);">
+            <button class="add-to-cart" onclick="addToCart(${product.id})" style="flex: 1;">
+              <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+            <button class="btn btn-primary" onclick="buyNow(${product.id})" style="flex: 1; padding: var(--space-sm) var(--space-md); font-size: var(--text-sm);">
+              <i class="fas fa-bolt"></i> Buy Now
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    }).join('');
+}
+
+// ============================================
+// GENERATE STAR RATING
+// ============================================
+function generateStars(rating) {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+    let stars = '';
+
+    for (let i = 0; i < fullStars; i++) {
+        stars += '<i class="fas fa-star"></i>';
+    }
+
+    if (hasHalfStar) {
+        stars += '<i class="fas fa-star-half-alt"></i>';
+    }
+
+    const emptyStars = 5 - Math.ceil(rating);
+    for (let i = 0; i < emptyStars; i++) {
+        stars += '<i class="far fa-star"></i>';
+    }
+
+    return stars;
+}
+
+// ============================================
+// FILTER PRODUCTS
+// ============================================
+function applyFilters() {
+    const priceFilter = document.getElementById('priceFilter')?.value || 'all';
+    const categoryFilter = document.getElementById('categoryFilter')?.value || 'all';
+    const strapFilter = document.getElementById('strapFilter')?.value || 'all';
+    const dialFilter = document.getElementById('dialFilter')?.value || 'all';
+    const movementFilter = document.getElementById('movementFilter')?.value || 'all';
+    const sortFilter = document.getElementById('sortFilter')?.value || 'featured';
+
+    filteredProducts = products.filter(product => {
+        // Gender filter (if set on men's or women's pages)
+        if (window.genderFilter) {
+            if (product.gender !== window.genderFilter && product.gender !== 'unisex') {
+                return false;
+            }
+        }
+
+        // Price filter
+        if (priceFilter !== 'all') {
+            if (priceFilter === '0-1000' && product.price >= 1000) return false;
+            if (priceFilter === '1000-2000' && (product.price < 1000 || product.price >= 2000)) return false;
+            if (priceFilter === '2000-3000' && (product.price < 2000 || product.price >= 3000)) return false;
+            if (priceFilter === '3000+' && product.price < 3000) return false;
+        }
+
+        // Category filter
+        if (categoryFilter !== 'all' && product.category !== categoryFilter) return false;
+
+        // Strap filter
+        if (strapFilter !== 'all' && product.strapType !== strapFilter) return false;
+
+        // Dial filter
+        if (dialFilter !== 'all' && product.dialColor !== dialFilter) return false;
+
+        // Movement filter
+        if (movementFilter !== 'all' && product.movement !== movementFilter) return false;
+
+        return true;
+    });
+
+    // Apply sorting
+    if (sortFilter === 'price-low') {
+        filteredProducts.sort((a, b) => a.price - b.price);
+    } else if (sortFilter === 'price-high') {
+        filteredProducts.sort((a, b) => b.price - a.price);
+    } else if (sortFilter === 'newest') {
+        filteredProducts.sort((a, b) => b.id - a.id);
+    } else if (sortFilter === 'rating') {
+        filteredProducts.sort((a, b) => b.rating - a.rating);
+    }
+
+    renderProducts(filteredProducts);
+
+    // Update product count if element exists
+    const productCount = document.getElementById('productCount');
+    if (productCount) {
+        productCount.textContent = `${filteredProducts.length} products`;
+    }
+}
+
+// Quick filter by category (from collection cards)
+function filterProducts(category) {
+    const categoryFilter = document.getElementById('categoryFilter');
+    if (categoryFilter) {
+        categoryFilter.value = category;
+        applyFilters();
+        scrollToSection('products');
+    }
+}
+
+// ============================================
+// WISHLIST FUNCTIONALITY
+// ============================================
+function toggleWishlist(productId) {
+    const index = wishlist.indexOf(productId);
+
+    if (index > -1) {
+        wishlist.splice(index, 1);
+    } else {
+        wishlist.push(productId);
+    }
+
+    // Save to localStorage
+    safeSetLocalStorage('wishlist', wishlist);
+
+    updateWishlistCount();
+    renderProducts(filteredProducts);
+}
+
+function updateWishlistCount() {
+    const wishlistCount = document.getElementById('wishlistCount');
+    wishlistCount.textContent = wishlist.length;
+
+    if (wishlist.length > 0) {
+        wishlistCount.style.display = 'flex';
+    } else {
+        wishlistCount.style.display = 'none';
+    }
+}
+
+// Show wishlist modal
+const wishlistIcon = document.getElementById('wishlistIcon');
+wishlistIcon.addEventListener('click', () => {
+    showWishlistModal();
+});
+
+function showWishlistModal() {
+    const wishlistContent = generateWishlistHTML();
+
+    modalSystem.show({
+        id: 'wishlist-modal',
+        title: `My Wishlist (${wishlist.length} items)`,
+        content: wishlistContent,
+        size: 'large',
+        closeOnBackdrop: true
+    });
+}
+
+function generateWishlistHTML() {
+    if (wishlist.length === 0) {
+        return `
+            <div class="cart-empty">
+                <div class="cart-empty-icon">
+                    <i class="far fa-heart"></i>
+                </div>
+                <h3>Your wishlist is empty</h3>
+                <p style="color: var(--dark-grey); margin-top: var(--space-sm);">Save your favorite watches here!</p>
+                <button class="btn btn-primary" onclick="modalSystem.close(); scrollToSection('products');" style="margin-top: var(--space-lg);">Browse Watches</button>
+            </div>
+        `;
+    }
+
+    const wishlistProducts = products.filter(p => wishlist.includes(p.id));
+
+    const itemsHTML = wishlistProducts.map(product => `
+        <div class="wishlist-item">
+            <img src="${product.image}" alt="${product.name}" class="wishlist-item-image">
+            <div class="wishlist-item-info">
+                <div class="wishlist-item-name">${product.name}</div>
+                <div class="wishlist-item-price">$${product.price.toLocaleString()}</div>
+                <div class="wishlist-item-actions">
+                    <button class="btn btn-primary" onclick="addToCartFromWishlist(${product.id})">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-secondary" onclick="removeFromWishlist(${product.id})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    return `
+        <div class="wishlist-grid">
+            ${itemsHTML}
+        </div>
+    `;
+}
+
+function addToCartFromWishlist(productId) {
+    addToCart(productId);
+    modalSystem.updateContent(generateWishlistHTML());
+}
+
+function removeFromWishlist(productId) {
+    const index = wishlist.indexOf(productId);
+    if (index > -1) {
+        wishlist.splice(index, 1);
+        safeSetLocalStorage('wishlist', wishlist);
+        updateWishlistCount();
+        modalSystem.updateContent(generateWishlistHTML());
+        showNotification('Removed from wishlist');
+    }
+}
+
+// ============================================
+// CART FUNCTIONALITY
+// ============================================
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+
+    if (product) {
+        const existingItem = cart.find(item => item.id === productId);
+
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+
+        // Save to localStorage
+        safeSetLocalStorage('cart', cart);
+
+        updateCartCount();
+        showNotification(`${product.name} added to cart!`);
+    }
+}
+
+function updateCartCount() {
+    const cartCount = document.getElementById('cartCount');
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.textContent = totalItems;
+
+    if (totalItems > 0) {
+        cartCount.style.display = 'flex';
+    } else {
+        cartCount.style.display = 'none';
+    }
+}
+
+// Show cart modal
+const cartIcon = document.getElementById('cartIcon');
+cartIcon.addEventListener('click', () => {
+    showCartModal();
+});
+
+function showCartModal() {
+    const cartContent = generateCartHTML();
+
+    modalSystem.show({
+        id: 'cart-modal',
+        title: `Shopping Cart (${cart.length} items)`,
+        content: cartContent,
+        size: 'large',
+        closeOnBackdrop: true
+    });
+}
+
+function generateCartHTML() {
+    if (cart.length === 0) {
+        return `
+            <div class="cart-empty">
+                <div class="cart-empty-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3>Your cart is empty</h3>
+                <p style="color: var(--dark-grey); margin-top: var(--space-sm);">Add some watches to get started!</p>
+                <button class="btn btn-primary" onclick="modalSystem.close(); scrollToSection('products');" style="margin-top: var(--space-lg);">Shop Now</button>
+            </div>
+        `;
+    }
+
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const shipping = subtotal > 2000 ? 0 : 50;
+    const total = subtotal + shipping;
+
+    const itemsHTML = cart.map(item => `
+        <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-item-info">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-brand">${item.brand}</div>
+                <div class="cart-item-controls">
+                    <div class="quantity-control">
+                        <button class="quantity-btn" onclick="updateCartQuantity(${item.id}, -1)">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="quantity-value">${item.quantity}</span>
+                        <button class="quantity-btn" onclick="updateCartQuantity(${item.id}, 1)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="cart-item-price">$${(item.price * item.quantity).toLocaleString()}</div>
+                    <div class="cart-item-remove" onclick="removeFromCart(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    return `
+        <div class="cart-items">
+            ${itemsHTML}
+        </div>
+        <div class="cart-summary">
+            <div class="cart-summary-row">
+                <span>Subtotal:</span>
+                <span>$${subtotal.toLocaleString()}</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>Shipping:</span>
+                <span>${shipping === 0 ? 'FREE' : '$' + shipping}</span>
+            </div>
+            <div class="cart-summary-row total">
+                <span>Total:</span>
+                <span>$${total.toLocaleString()}</span>
+            </div>
+        </div>
+        <div class="cart-actions">
+            <button class="btn btn-secondary" onclick="modalSystem.close()">Continue Shopping</button>
+            <button class="btn btn-primary" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    `;
+}
+
+function updateCartQuantity(productId, change) {
+    const item = cart.find(i => i.id === productId);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            removeFromCart(productId);
+        } else {
+            updateCartCount();
+            modalSystem.updateContent(generateCartHTML());
+        }
+    }
+}
+
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCartCount();
+    modalSystem.updateContent(generateCartHTML());
+    showNotification('Item removed from cart');
+}
+
+function checkout() {
+    // Save cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Close modal
+    modalSystem.close();
+
+    // Redirect to checkout page
+    window.location.href = 'checkout.html';
+}
+
+// Buy Now - Add to cart and go directly to checkout
+function buyNow(productId) {
+    const product = products.find(p => p.id === productId);
+
+    if (product) {
+        // Clear cart and add only this product
+        cart = [{ ...product, quantity: 1 }];
+
+        // Save to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // Update cart count
+        updateCartCount();
+
+        // Show notification
+        showNotification(`${product.name} - Proceeding to checkout!`);
+
+        // Redirect to checkout after short delay
+        setTimeout(() => {
+            window.location.href = 'checkout.html';
+        }, 500);
+    }
+}
+
+// ============================================
+// NOTIFICATION SYSTEM
+// ============================================
+function showNotification(message) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background-color: var(--black);
+    color: var(--primary-white);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-xl);
+    z-index: 10000;
+    animation: slideIn 0.3s ease-out;
+    font-family: var(--font-primary);
+    font-size: var(--text-sm);
+  `;
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// Add notification animations to CSS dynamically
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideIn {
+    from {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+`;
+document.head.appendChild(style);
+
+// ============================================
+// NEWSLETTER FORM
+// ============================================
+const newsletterForm = document.getElementById('newsletterForm');
+newsletterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const emailInput = newsletterForm.querySelector('input[type="email"]');
+    const email = emailInput.value;
+
+    showNotification(`Thank you for subscribing with ${email}!`);
+    emailInput.value = '';
+});
+
+// ============================================
+// LAZY LOADING IMAGES
+// ============================================
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.src; // Trigger load
+                img.classList.add('loaded');
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// ============================================
+// UTILITY: DEBOUNCE FUNCTION
+// ============================================
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// ============================================
+// SEARCH FUNCTIONALITY (DEBOUNCED)
+// ============================================
+const searchIcon = document.getElementById('searchIcon');
+if (searchIcon) {
+    searchIcon.addEventListener('click', () => {
+        showSearchOverlay();
+    });
+}
+
+function showSearchOverlay() {
+    const searchContent = `
+        <div class="search-overlay">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <input type="text" class="search-input-large" id="searchInputModal" placeholder="Search for watches..." autofocus>
+                    <i class="fas fa-search search-icon-large"></i>
+                </div>
+                <div class="search-results" id="searchResultsContainer">
+                    <div class="search-no-results">
+                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                        <p>Start typing to search for watches...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    modalSystem.show({
+        id: 'search-modal',
+        title: '',
+        content: searchContent,
+        size: 'fullscreen',
+        closeOnBackdrop: true
+    });
+
+    // Add debounced search input listener
+    setTimeout(() => {
+        const searchInput = document.getElementById('searchInputModal');
+        if (searchInput) {
+            searchInput.focus();
+            // Debounce search with 300ms delay
+            const debouncedSearch = debounce((value) => {
+                performSearch(value);
+            }, 300);
+
+            searchInput.addEventListener('input', (e) => {
+                debouncedSearch(e.target.value);
+            });
+        }
+    }, 100);
+}
+
+function performSearch(searchTerm) {
+    const resultsContainer = document.getElementById('searchResultsContainer');
+
+    if (!resultsContainer) return;
+
+    if (!searchTerm || searchTerm.trim() === '') {
+        resultsContainer.innerHTML = `
+            <div class="search-no-results">
+                <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                <p>Start typing to search for watches...</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Validate products array exists
+    if (!products || !Array.isArray(products)) {
+        resultsContainer.innerHTML = `
+            <div class="search-no-results">
+                <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3; color: var(--error-red);"></i>
+                <p>Error loading products. Please refresh the page.</p>
+            </div>
+        `;
+        console.error('Products array is not available');
+        return;
+    }
+
+    const searchResults = products.filter(product =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (product.description && product.description.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+
+    if (searchResults.length === 0) {
+        resultsContainer.innerHTML = `
+            <div class="search-no-results">
+                <i class="fas fa-times-circle" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                <p>No results found for "${searchTerm}"</p>
+            </div>
+        `;
+        return;
+    }
+
+    resultsContainer.innerHTML = searchResults.map(product => `
+        <div class="search-result-item" onclick="selectSearchResult(${product.id})">
+            <img src="${product.image}" alt="${product.name}" class="search-result-image" onerror="this.src='images/placeholder.svg'">
+            <div class="search-result-info">
+                <div class="search-result-brand">${product.brand}</div>
+                <div class="search-result-name">${product.name}</div>
+                <div class="search-result-price">$${product.price.toLocaleString()}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function selectSearchResult(productId) {
+    modalSystem.close();
+    // Navigate to product detail page
+    window.location.href = `product-detail.html?id=${productId}`;
+}
+
+// ============================================
+// USER ACCOUNT MODAL
+// ============================================
+const accountIcon = document.getElementById('accountIcon');
+if (accountIcon) {
+    accountIcon.addEventListener('click', () => {
+        showAccountModal();
+    });
+}
+
+function showAccountModal() {
+    const accountContent = `
+        <div class="account-modal">
+            <div class="account-tabs">
+                <button class="account-tab active" onclick="switchAccountTab('login')">Login</button>
+                <button class="account-tab" onclick="switchAccountTab('signup')">Sign Up</button>
+            </div>
+            
+            <div class="account-form-container">
+                <!-- Login Form -->
+                <div class="account-form" id="loginForm" style="display: block;">
+                    <h3>Welcome Back</h3>
+                    <p style="color: var(--dark-grey); margin-bottom: var(--space-lg);">Login to your account</p>
+                    
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" required placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" required placeholder="Enter your password">
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox"> Remember me
+                            </label>
+                            <a href="#" class="forgot-password">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+                </div>
+                
+                <!-- Signup Form -->
+                <div class="account-form" id="signupForm" style="display: none;">
+                    <h3>Create Account</h3>
+                    <p style="color: var(--dark-grey); margin-bottom: var(--space-lg);">Join CHRONOLUX today</p>
+                    
+                    <form onsubmit="handleSignup(event)">
+                        <div class="form-group">
+                            <label for="signupName">Full Name</label>
+                            <input type="text" id="signupName" required placeholder="John Doe">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signupEmail">Email Address</label>
+                            <input type="email" id="signupEmail" required placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" required placeholder="Create a password" minlength="8">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signupConfirmPassword">Confirm Password</label>
+                            <input type="password" id="signupConfirmPassword" required placeholder="Confirm your password">
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" required> I agree to the Terms & Conditions
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    `;
+
+    modalSystem.show({
+        id: 'account-modal',
+        title: '',
+        content: accountContent,
+        size: 'medium',
+        closeOnBackdrop: true
+    });
+}
+
+function switchAccountTab(tab) {
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const tabs = document.querySelectorAll('.account-tab');
+
+    tabs.forEach(t => t.classList.remove('active'));
+
+    if (tab === 'login') {
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+        tabs[0].classList.add('active');
+    } else {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'block';
+        tabs[1].classList.add('active');
+    }
+}
+
+function handleLogin(event) {
+    event.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    showNotification(`Welcome back! Logged in as ${email}`);
+    modalSystem.close();
+}
+
+function handleSignup(event) {
+    event.preventDefault();
+    const name = document.getElementById('signupName').value;
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+    if (password !== confirmPassword) {
+        showNotification('Passwords do not match!');
+        return;
+    }
+
+    showNotification(`Welcome ${name}! Account created successfully!`);
+    modalSystem.close();
+}
+
+// ============================================
+// NAVIGATION ACTIVE STATE
+// ============================================
+function updateActiveNav() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+}
+
+// ============================================
+// INITIALIZATION
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if we're on a page with products grid
+    const productsGrid = document.getElementById('productsGrid');
+
+    if (productsGrid) {
+        // Render initial products
+        renderProducts(filteredProducts);
+    }
+
+    // Initialize lazy loading
+    lazyLoadImages();
+
+    // Initialize navigation active state
+    updateActiveNav();
+
+    // Hide badges initially if they exist
+    const wishlistCount = document.getElementById('wishlistCount');
+    const cartCount = document.getElementById('cartCount');
+
+    if (wishlistCount) wishlistCount.style.display = 'none';
+    if (cartCount) cartCount.style.display = 'none';
+
+    console.log('CHRONOLUX - Website initialized successfully');
+});

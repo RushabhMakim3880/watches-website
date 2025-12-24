@@ -1,0 +1,20 @@
+# CHRONOLUX Robots.txt
+# https://chronolux.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow checkout and order pages from indexing
+Disallow: /checkout.html
+Disallow: /payment.html
+Disallow: /order-confirmation.html
+Disallow: /track-order.html
+
+# Disallow login page
+Disallow: /login.html
+
+# Allow all images
+Allow: /images/
+
+# Sitemap location
+Sitemap: https://chronolux.com/sitemap.xml

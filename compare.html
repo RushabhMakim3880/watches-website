@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Compare luxury watches side-by-side at CHRONOLUX. Compare specifications, prices, and features.">
+    <title>Compare Watches - CHRONOLUX</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .comparison-container {
+            overflow-x: auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--space-md);
+            border: 1px solid var(--medium-grey);
+            text-align: center;
+        }
+
+        .comparison-table th {
+            background-color: var(--light-grey);
+            font-weight: var(--font-semibold);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: var(--light-grey);
+        }
+
+        .spec-label {
+            font-weight: var(--font-semibold);
+            text-align: left;
+            background-color: var(--primary-white) !important;
+        }
+
+        .product-column {
+            min-width: 250px;
+        }
+
+        .product-header {
+            padding: var(--space-xl);
+        }
+
+        .product-header img {
+            width: 100%;
+            max-width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin: 0 auto var(--space-md);
+            border-radius: var(--radius-md);
+        }
+
+        .product-header h3 {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-xs);
+        }
+
+        .product-header .price {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-bold);
+            color: var(--primary-color);
+            margin-bottom: var(--space-md);
+        }
+
+        .remove-product-btn {
+            background: var(--error-red);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--text-sm);
+        }
+
+        .remove-product-btn:hover {
+            opacity: 0.9;
+        }
+
+        .add-product-column {
+            background-color: var(--light-grey);
+            cursor: pointer;
+            transition: background-color var(--transition-base);
+        }
+
+        .add-product-column:hover {
+            background-color: var(--medium-grey);
+        }
+
+        .add-product-icon {
+            font-size: 3rem;
+            color: var(--dark-grey);
+            margin-bottom: var(--space-md);
+        }
+
+        .highlight-difference {
+            background-color: var(--primary-color-light) !important;
+            font-weight: var(--font-semibold);
+        }
+
+        .product-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-md);
+            max-height: 400px;
+            overflow-y: auto;
+            padding: var(--space-md);
+        }
+
+        .product-selector-item {
+            border: 2px solid var(--medium-grey);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-align: center;
+        }
+
+        .product-selector-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .product-selector-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-sm);
+        }
+
+        .product-selector-item .name {
+            font-size: var(--text-sm);
+            font-weight: var(--font-semibold);
+            margin-bottom: var(--space-xs);
+        }
+
+        .product-selector-item .price {
+            color: var(--primary-color);
+            font-weight: var(--font-bold);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">CHRONOLUX</a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="men.html">Men</a>
+                <a href="women.html">Women</a>
+                <a href="new-arrivals.html">New Arrivals</a>
+                <a href="best-sellers.html">Best Sellers</a>
+                <a href="brands.html">Brands</a>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+            <div class="nav-icons">
+                <div class="nav-icon" id="searchIcon" aria-label="Search"><i class="fas fa-search"></i></div>
+                <div class="nav-icon" id="wishlistIcon" aria-label="Wishlist"><i class="far fa-heart"></i><span
+                        class="badge" id="wishlistCount">0</span></div>
+                <div class="nav-icon" id="cartIcon" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i><span
+                        class="badge" id="cartCount">0</span></div>
+                <div class="nav-icon" id="accountIcon" aria-label="Account"><i class="far fa-user"></i></div>
+                <div class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Compare Watches</h1>
+            <p>Compare up to 4 watches side-by-side</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a><span>/</span>
+                <span>Compare</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <!-- Instructions -->
+            <div
+                style="background: var(--light-grey); padding: var(--space-xl); border-radius: var(--radius-md); margin-bottom: var(--space-xl); text-align: center;">
+                <h3 style="margin-bottom: var(--space-md);">How to Compare</h3>
+                <p style="color: var(--dark-grey);">Click the "+" button to add watches to compare. You can compare up
+                    to 4 watches at once. Differences will be highlighted in gold.</p>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="comparison-container">
+                <table class="comparison-table" id="comparisonTable">
+                    <thead>
+                        <tr id="productHeaders">
+                            <th class="spec-label">Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyComparison" class="hidden" style="text-align: center; padding: var(--space-3xl) 0;">
+                <i class="fas fa-balance-scale"
+                    style="font-size: 5rem; color: var(--medium-grey); margin-bottom: var(--space-xl);"></i>
+                <h3 style="margin-bottom: var(--space-md);">No products to compare</h3>
+                <p style="color: var(--dark-grey); margin-bottom: var(--space-xl);">Add watches to start comparing
+                    specifications</p>
+                <a href="index.html" class="btn btn-primary">Browse Watches</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CHRONOLUX</h4>
+                    <p
+                        style="color: var(--medium-grey); font-size: var(--text-sm); line-height: 1.8; margin-top: var(--space-md);">
+                        Premium timepiece collection dedicated to precision, elegance, and timeless design.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="men.html">Men's Watches</a></li>
+                        <li><a href="women.html">Women's Watches</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                        <li><a href="best-sellers.html">Best Sellers</a></li>
+                        <li><a href="brands.html">Brands</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Support</h4>
+                    <ul>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p style="color: var(--medium-grey); font-size: var(--text-sm); margin-top: var(--space-md);">
+                        Subscribe for exclusive offers.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="Your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CHRONOLUX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/modal-system.js"></script>
+    <script src="data/products.js"></script>
+    <script>let cart = JSON.parse(localStorage.getItem('cart')) || []; let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];</script>
+    <script src="script.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script>
+        // Comparison Page Logic
+        let compareList = JSON.parse(localStorage.getItem('compareList')) || [];
+        const MAX_COMPARE = 4;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check for products in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlProducts = urlParams.get('products');
+            if (urlProducts) {
+                compareList = urlProducts.split(',').map(id => parseInt(id)).slice(0, MAX_COMPARE);
+                localStorage.setItem('compareList', JSON.stringify(compareList));
+            }
+
+            renderComparison();
+        });
+
+        function renderComparison() {
+            const comparisonTable = document.getElementById('comparisonTable');
+            const comparisonBody = document.getElementById('comparisonBody');
+            const productHeaders = document.getElementById('productHeaders');
+            const emptyComparison = document.getElementById('emptyComparison');
+
+            if (compareList.length === 0) {
+                comparisonTable.classList.add('hidden');
+                emptyComparison.classList.remove('hidden');
+                return;
+            }
+
+            emptyComparison.classList.add('hidden');
+            comparisonTable.classList.remove('hidden');
+
+            // Get products
+            const compareProducts = products.filter(p => compareList.includes(p.id));
+
+            // Build headers
+            let headersHtml = '<th class="spec-label">Specification</th>';
+            compareProducts.forEach(product => {
+                headersHtml += `
+                    <th class="product-column">
+                        <div class="product-header">
+                            <img src="${product.image}" alt="${product.name}">
+                            <h3>${product.name}</h3>
+                            <div class="price">$${product.price.toLocaleString()}</div>
+                            <button class="remove-product-btn" onclick="removeFromComparison(${product.id})">
+                                <i class="fas fa-times"></i> Remove
+                            </button>
+                        </div>
+                    </th>
+                `;
+            });
+
+            // Add "Add Product" column if less than MAX_COMPARE
+            if (compareList.length < MAX_COMPARE) {
+                headersHtml += `
+                    <th class="product-column add-product-column" onclick="showProductSelector()">
+                        <div class="product-header">
+                            <i class="fas fa-plus add-product-icon"></i>
+                            <h3>Add Product</h3>
+                            <p style="color: var(--dark-grey); font-size: var(--text-sm);">Click to add</p>
+                        </div>
+                    </th>
+                `;
+            }
+
+            productHeaders.innerHTML = headersHtml;
+
+            // Build comparison rows
+            const specs = [
+                { label: 'Brand', key: 'brand' },
+                { label: 'Price', key: 'price', format: (v) => '$' + v.toLocaleString() },
+                { label: 'Category', key: 'category', format: (v) => v.charAt(0).toUpperCase() + v.slice(1) },
+                { label: 'Movement', key: 'movement', format: (v) => v.charAt(0).toUpperCase() + v.slice(1) },
+                { label: 'Strap Type', key: 'strapType', format: (v) => v.charAt(0).toUpperCase() + v.slice(1) },
+                { label: 'Dial Color', key: 'dialColor', format: (v) => v ? v.charAt(0).toUpperCase() + v.slice(1) : 'N/A' },
+                { label: 'Rating', key: 'rating', format: (v) => v + ' ★' },
+                { label: 'Reviews', key: 'reviews' },
+                { label: 'Discount', key: 'discount', format: (v) => v ? v + '%' : 'No discount' }
+            ];
+
+            let bodyHtml = '';
+            specs.forEach(spec => {
+                let rowHtml = `<tr><td class="spec-label">${spec.label}</td>`;
+
+                // Get values for this spec
+                const values = compareProducts.map(p => {
+                    const value = p[spec.key];
+                    return spec.format ? spec.format(value) : value;
+                });
+
+                // Check if all values are the same
+                const allSame = values.every(v => v === values[0]);
+
+                // Add cells
+                compareProducts.forEach((product, index) => {
+                    const value = values[index];
+                    const highlightClass = !allSame ? 'highlight-difference' : '';
+                    rowHtml += `<td class="${highlightClass}">${value || 'N/A'}</td>`;
+                });
+
+                // Add empty cell for "Add Product" column
+                if (compareList.length < MAX_COMPARE) {
+                    rowHtml += '<td class="add-product-column" onclick="showProductSelector()">-</td>';
+                }
+
+                rowHtml += '</tr>';
+                bodyHtml += rowHtml;
+            });
+
+            // Add action row
+            let actionRowHtml = '<tr><td class="spec-label">Actions</td>';
+            compareProducts.forEach(product => {
+                actionRowHtml += `
+                    <td>
+                        <button class="btn btn-primary" style="width: 100%; margin-bottom: var(--space-sm);" onclick="window.location.href='product-detail.html?id=${product.id}'">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="btn btn-secondary" style="width: 100%;" onclick="addToCart(${product.id}); showNotification('Added to cart!')">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </td>
+                `;
+            });
+            if (compareList.length < MAX_COMPARE) {
+                actionRowHtml += '<td class="add-product-column" onclick="showProductSelector()">-</td>';
+            }
+            actionRowHtml += '</tr>';
+            bodyHtml += actionRowHtml;
+
+            comparisonBody.innerHTML = bodyHtml;
+        }
+
+        function removeFromComparison(productId) {
+            compareList = compareList.filter(id => id !== productId);
+            localStorage.setItem('compareList', JSON.stringify(compareList));
+            renderComparison();
+            showNotification('Product removed from comparison');
+        }
+
+        function showProductSelector() {
+            const availableProducts = products.filter(p => !compareList.includes(p.id));
+
+            const selectorHtml = `
+                <div class="product-selector">
+                    ${availableProducts.map(product => `
+                        <div class="product-selector-item" onclick="addToComparison(${product.id})">
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="name">${product.name}</div>
+                            <div class="price">$${product.price.toLocaleString()}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            if (typeof modalSystem !== 'undefined') {
+                modalSystem.show({
+                    id: 'product-selector-modal',
+                    title: 'Select a Product to Compare',
+                    content: selectorHtml,
+                    size: 'large'
+                });
+            }
+        }
+
+        function addToComparison(productId) {
+            if (compareList.length >= MAX_COMPARE) {
+                showNotification('Maximum 4 products can be compared');
+                return;
+            }
+
+            if (!compareList.includes(productId)) {
+                compareList.push(productId);
+                localStorage.setItem('compareList', JSON.stringify(compareList));
+                renderComparison();
+                showNotification('Product added to comparison');
+
+                if (typeof modalSystem !== 'undefined') {
+                    modalSystem.close();
+                }
+            }
+        }
+
+        // Add global function to add products from other pages
+        window.addToCompare = function (productId) {
+            let compareList = JSON.parse(localStorage.getItem('compareList')) || [];
+            if (compareList.length >= MAX_COMPARE) {
+                showNotification('Maximum 4 products can be compared. Remove one to add more.');
+                return;
+            }
+            if (!compareList.includes(productId)) {
+                compareList.push(productId);
+                localStorage.setItem('compareList', JSON.stringify(compareList));
+                showNotification('Product added to comparison');
+            } else {
+                showNotification('Product already in comparison');
+            }
+        };
+    </script>
+</body>
+
+</html>

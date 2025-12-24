@@ -1,0 +1,400 @@
+/* ============================================
+   LIVE WATCH DISPLAY - Animated Clock Faces
+   ============================================ */
+
+.live-watch-container {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 450px;
+    height: 450px;
+}
+
+.live-watch {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow:
+        0 0 60px rgba(0, 0, 0, 0.5),
+        inset 0 0 30px rgba(0, 0, 0, 0.3);
+    animation: floatWatch 6s ease-in-out infinite;
+}
+
+@keyframes floatWatch {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(2deg);
+    }
+}
+
+/* Watch Face Backgrounds */
+.watch-chronograph {
+    background: radial-gradient(circle at 30% 30%, #2a2a2a, #0a0a0a);
+    border: 8px solid #d4af37;
+}
+
+.watch-automatic {
+    background: radial-gradient(circle at 30% 30%, #1a3a52, #0a1a2a);
+    border: 8px solid #4a90c8;
+}
+
+.watch-sport {
+    background: radial-gradient(circle at 30% 30%, #2d1b4e, #1a0f2e);
+    border: 8px solid #a855f7;
+}
+
+.watch-luxury {
+    background: radial-gradient(circle at 30% 30%, #3d2817, #1d1207);
+    border: 8px solid #d4af37;
+}
+
+/* Watch Center */
+.watch-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, #d4af37, #b8941f);
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+.watch-center::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background: #1a1a1a;
+    border-radius: 50%;
+}
+
+/* Hour Markers */
+.watch-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hour-marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 20px;
+    background: #d4af37;
+    transform-origin: center;
+    margin-left: -2px;
+    margin-top: -210px;
+}
+
+.hour-marker.major {
+    height: 30px;
+    width: 6px;
+    margin-left: -3px;
+    background: linear-gradient(180deg, #ffd700, #d4af37);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* Chronograph Sub-dials */
+.subdial {
+    position: absolute;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.subdial-1 {
+    width: 80px;
+    height: 80px;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.subdial-2 {
+    width: 80px;
+    height: 80px;
+    bottom: 25%;
+    left: 20%;
+}
+
+.subdial-3 {
+    width: 80px;
+    height: 80px;
+    bottom: 25%;
+    right: 20%;
+}
+
+/* Watch Hands */
+.watch-hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 10px 10px 0 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.hour-hand {
+    width: 8px;
+    height: 120px;
+    background: linear-gradient(180deg, #d4af37, #ffd700);
+    margin-left: -4px;
+    z-index: 7;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+}
+
+.minute-hand {
+    width: 6px;
+    height: 160px;
+    background: linear-gradient(180deg, #e8e8e8, #ffffff);
+    margin-left: -3px;
+    z-index: 8;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.second-hand {
+    width: 3px;
+    height: 180px;
+    background: linear-gradient(180deg, #ff4444, #ff0000);
+    margin-left: -1.5px;
+    z-index: 9;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.8);
+}
+
+/* Automatic Watch - Visible Gears */
+.watch-automatic .gear-decoration {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid rgba(74, 144, 200, 0.4);
+    border-radius: 50%;
+    background: rgba(26, 58, 82, 0.5);
+}
+
+.watch-automatic .gear-decoration::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(74, 144, 200, 0.6);
+    border-radius: 50%;
+    animation: rotateGear 10s linear infinite;
+}
+
+@keyframes rotateGear {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Sport Watch - Bezel */
+.watch-sport::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg,
+            #a855f7 0deg,
+            #7c3aed 90deg,
+            #a855f7 180deg,
+            #7c3aed 270deg,
+            #a855f7 360deg);
+    z-index: -1;
+    animation: rotateBezel 60s linear infinite;
+}
+
+@keyframes rotateBezel {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Luxury Watch - Roman Numerals */
+.roman-numeral {
+    position: absolute;
+    font-family: 'Georgia', serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #d4af37;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.roman-12 {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.roman-3 {
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.roman-6 {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.roman-9 {
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Brand Name */
+.watch-brand {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #d4af37;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* Digital Time Display (for Sport Watch) */
+.digital-time {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    font-weight: bold;
+    color: #a855f7;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .live-watch-container {
+        width: 350px;
+        height: 350px;
+        right: 5%;
+    }
+
+    .hour-hand {
+        height: 90px;
+    }
+
+    .minute-hand {
+        height: 120px;
+    }
+
+    .second-hand {
+        height: 140px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .live-watch-container {
+        width: 280px;
+        height: 280px;
+    }
+
+    .hour-hand {
+        height: 70px;
+    }
+
+    .minute-hand {
+        height: 95px;
+    }
+
+    .second-hand {
+        height: 110px;
+    }
+
+    .watch-brand {
+        font-size: 14px;
+    }
+
+    .roman-numeral {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .live-watch-container {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 250px;
+        height: 250px;
+        margin: 0 auto var(--space-xl);
+    }
+
+    .hour-hand {
+        height: 60px;
+    }
+
+    .minute-hand {
+        height: 80px;
+    }
+
+    .second-hand {
+        height: 95px;
+    }
+
+    .subdial {
+        display: none;
+    }
+}
+
+/* Glass Effect */
+.watch-glass {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 100%);
+    pointer-events: none;
+}

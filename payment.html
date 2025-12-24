@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Options - CHRONOLUX</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .payment-container {
+            padding: calc(var(--header-height) + var(--space-2xl)) 0 var(--space-3xl);
+            background: var(--light-grey);
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-2xl);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .payment-section {
+            background: white;
+            padding: var(--space-2xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .payment-methods-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .payment-option {
+            border: 3px solid var(--medium-grey);
+            border-radius: var(--radius-md);
+            padding: var(--space-xl);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary-color);
+            background: var(--light-grey);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .payment-option.selected {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        .payment-option.selected::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .payment-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-md);
+            color: var(--primary-color);
+        }
+
+        .payment-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .payment-desc {
+            color: var(--dark-grey);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .payment-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .payment-features li {
+            font-size: var(--text-sm);
+            color: var(--dark-grey);
+            margin-bottom: var(--space-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .payment-features li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--success-green);
+            font-size: 0.7rem;
+        }
+
+        .payment-form {
+            display: none;
+            margin-top: var(--space-2xl);
+            padding-top: var(--space-2xl);
+            border-top: 2px solid var(--light-grey);
+        }
+
+        .payment-form.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-sm);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: var(--space-md);
+            border: 2px solid var(--medium-grey);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+
+        .installment-plans {
+            display: grid;
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+        }
+
+        .installment-option {
+            border: 2px solid var(--medium-grey);
+            border-radius: var(--radius-sm);
+            padding: var(--space-md);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .installment-option:hover,
+        .installment-option.selected {
+            border-color: var(--primary-color);
+            background: var(--light-grey);
+        }
+
+        .installment-option input[type="radio"] {
+            margin-right: var(--space-sm);
+        }
+
+        .security-badges {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+            justify-content: center;
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--light-grey);
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--dark-grey);
+            font-size: var(--text-sm);
+        }
+
+        @media (max-width: 768px) {
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">CHRONOLUX</a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="men.html">Men</a>
+                <a href="women.html">Women</a>
+                <a href="new-arrivals.html">New Arrivals</a>
+                <a href="best-sellers.html">Best Sellers</a>
+                <a href="brands.html">Brands</a>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+            <div class="nav-icons">
+                <div class="nav-icon" id="searchIcon"><i class="fas fa-search"></i></div>
+                <div class="nav-icon" id="wishlistIcon"><i class="far fa-heart"></i><span class="badge"
+                        id="wishlistCount">0</span></div>
+                <div class="nav-icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span class="badge"
+                        id="cartCount">0</span></div>
+                <div class="nav-icon" id="accountIcon"><i class="far fa-user"></i></div>
+                <div class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="payment-container">
+        <div class="payment-grid">
+            <!-- Payment Methods -->
+            <div>
+                <div class="payment-section">
+                    <h1 style="margin-bottom: var(--space-md);">Choose Payment Method</h1>
+                    <p style="color: var(--dark-grey); margin-bottom: var(--space-2xl);">Select your preferred payment
+                        option to complete your purchase securely.</p>
+
+                    <div class="payment-methods-grid">
+                        <!-- Credit/Debit Card -->
+                        <div class="payment-option selected" onclick="selectPayment('card')">
+                            <div class="payment-icon"><i class="fas fa-credit-card"></i></div>
+                            <div class="payment-title">Credit/Debit Card</div>
+                            <div class="payment-desc">Pay securely with your card</div>
+                            <ul class="payment-features">
+                                <li>Instant confirmation</li>
+                                <li>Secure SSL encryption</li>
+                                <li>All major cards accepted</li>
+                            </ul>
+                        </div>
+
+                        <!-- PayPal -->
+                        <div class="payment-option" onclick="selectPayment('paypal')">
+                            <div class="payment-icon"><i class="fab fa-paypal"></i></div>
+                            <div class="payment-title">PayPal</div>
+                            <div class="payment-desc">Fast and secure checkout</div>
+                            <ul class="payment-features">
+                                <li>Buyer protection</li>
+                                <li>No card details needed</li>
+                                <li>One-click payment</li>
+                            </ul>
+                        </div>
+
+                        <!-- Digital Wallets -->
+                        <div class="payment-option" onclick="selectPayment('wallet')">
+                            <div class="payment-icon"><i class="fas fa-wallet"></i></div>
+                            <div class="payment-title">Digital Wallets</div>
+                            <div class="payment-desc">Apple Pay, Google Pay, Samsung Pay</div>
+                            <ul class="payment-features">
+                                <li>Touch/Face ID payment</li>
+                                <li>Ultra-fast checkout</li>
+                                <li>Highly secure</li>
+                            </ul>
+                        </div>
+
+                        <!-- Bank Transfer -->
+                        <div class="payment-option" onclick="selectPayment('bank')">
+                            <div class="payment-icon"><i class="fas fa-university"></i></div>
+                            <div class="payment-title">Bank Transfer</div>
+                            <div class="payment-desc">Direct bank account transfer</div>
+                            <ul class="payment-features">
+                                <li>No processing fees</li>
+                                <li>Secure transfer</li>
+                                <li>2-3 business days</li>
+                            </ul>
+                        </div>
+
+                        <!-- Cryptocurrency -->
+                        <div class="payment-option" onclick="selectPayment('crypto')">
+                            <div class="payment-icon"><i class="fab fa-bitcoin"></i></div>
+                            <div class="payment-title">Cryptocurrency</div>
+                            <div class="payment-desc">Bitcoin, Ethereum, USDT</div>
+                            <ul class="payment-features">
+                                <li>Decentralized payment</li>
+                                <li>Low transaction fees</li>
+                                <li>Global acceptance</li>
+                            </ul>
+                        </div>
+
+                        <!-- Installment Plans -->
+                        <div class="payment-option" onclick="selectPayment('installment')">
+                            <div class="payment-icon"><i class="fas fa-calendar-alt"></i></div>
+                            <div class="payment-title">Installment Plans</div>
+                            <div class="payment-desc">Split your payment over time</div>
+                            <ul class="payment-features">
+                                <li>0% interest available</li>
+                                <li>Flexible terms</li>
+                                <li>Easy approval</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card Payment Form -->
+                    <div id="cardForm" class="payment-form active">
+                        <h3 style="margin-bottom: var(--space-lg);">Card Details</h3>
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+                        <div class="form-group">
+                            <label>Cardholder Name</label>
+                            <input type="text" placeholder="John Doe">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Expiry Date</label>
+                                <input type="text" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="text" placeholder="123" maxlength="4">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: var(--space-lg);"
+                            onclick="processPayment()">
+                            <i class="fas fa-lock"></i> Pay Securely
+                        </button>
+                    </div>
+
+                    <!-- PayPal Form -->
+                    <div id="paypalForm" class="payment-form">
+                        <h3 style="margin-bottom: var(--space-lg);">PayPal Payment</h3>
+                        <p style="color: var(--dark-grey); margin-bottom: var(--space-xl);">You will be redirected to
+                            PayPal to complete your payment securely.</p>
+                        <button class="btn btn-primary" style="width: 100%; background: #0070ba;"
+                            onclick="processPayment()">
+                            <i class="fab fa-paypal"></i> Continue with PayPal
+                        </button>
+                    </div>
+
+                    <!-- Digital Wallet Form -->
+                    <div id="walletForm" class="payment-form">
+                        <h3 style="margin-bottom: var(--space-lg);">Choose Your Wallet</h3>
+                        <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+                            <button class="btn btn-secondary"
+                                style="width: 100%; display: flex; align-items: center; justify-content: center; gap: var(--space-md);"
+                                onclick="processPayment()">
+                                <i class="fab fa-apple"></i> Apple Pay
+                            </button>
+                            <button class="btn btn-secondary"
+                                style="width: 100%; display: flex; align-items: center; justify-content: center; gap: var(--space-md);"
+                                onclick="processPayment()">
+                                <i class="fab fa-google"></i> Google Pay
+                            </button>
+                            <button class="btn btn-secondary"
+                                style="width: 100%; display: flex; align-items: center; justify-content: center; gap: var(--space-md);"
+                                onclick="processPayment()">
+                                <i class="fas fa-mobile-alt"></i> Samsung Pay
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bank Transfer Form -->
+                    <div id="bankForm" class="payment-form">
+                        <h3 style="margin-bottom: var(--space-lg);">Bank Transfer Details</h3>
+                        <div
+                            style="background: var(--light-grey); padding: var(--space-xl); border-radius: var(--radius-md); margin-bottom: var(--space-xl);">
+                            <p style="margin-bottom: var(--space-md);"><strong>Bank Name:</strong> CHRONOLUX Bank</p>
+                            <p style="margin-bottom: var(--space-md);"><strong>Account Name:</strong> CHRONOLUX Ltd.</p>
+                            <p style="margin-bottom: var(--space-md);"><strong>Account Number:</strong> 1234567890</p>
+                            <p style="margin-bottom: var(--space-md);"><strong>SWIFT Code:</strong> CHROLUXXX</p>
+                            <p style="margin-bottom: 0;"><strong>Reference:</strong> <span
+                                    id="orderRef">CHR-12345678</span></p>
+                        </div>
+                        <p style="color: var(--dark-grey); margin-bottom: var(--space-xl);">Please include the reference
+                            number in your transfer. Your order will be processed once payment is received (2-3 business
+                            days).</p>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="processPayment()">
+                            I've Made the Transfer
+                        </button>
+                    </div>
+
+                    <!-- Cryptocurrency Form -->
+                    <div id="cryptoForm" class="payment-form">
+                        <h3 style="margin-bottom: var(--space-lg);">Cryptocurrency Payment</h3>
+                        <div class="form-group">
+                            <label>Select Cryptocurrency</label>
+                            <select>
+                                <option>Bitcoin (BTC)</option>
+                                <option>Ethereum (ETH)</option>
+                                <option>Tether (USDT)</option>
+                                <option>USD Coin (USDC)</option>
+                            </select>
+                        </div>
+                        <div
+                            style="background: var(--light-grey); padding: var(--space-xl); border-radius: var(--radius-md); margin-bottom: var(--space-xl); text-align: center;">
+                            <p style="margin-bottom: var(--space-md);">Scan QR Code or Copy Address</p>
+                            <div
+                                style="width: 150px; height: 150px; background: white; margin: 0 auto var(--space-md); display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm);">
+                                <i class="fas fa-qrcode" style="font-size: 4rem; color: var(--dark-grey);"></i>
+                            </div>
+                            <input type="text" value="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa" readonly
+                                style="text-align: center; font-family: monospace;">
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="processPayment()">
+                            Confirm Payment
+                        </button>
+                    </div>
+
+                    <!-- Installment Form -->
+                    <div id="installmentForm" class="payment-form">
+                        <h3 style="margin-bottom: var(--space-lg);">Choose Installment Plan</h3>
+                        <div class="installment-plans">
+                            <label class="installment-option">
+                                <input type="radio" name="installment" value="3" checked>
+                                <strong>3 Months</strong> - <span id="monthly3">$0</span>/month (0% interest)
+                            </label>
+                            <label class="installment-option">
+                                <input type="radio" name="installment" value="6">
+                                <strong>6 Months</strong> - <span id="monthly6">$0</span>/month (0% interest)
+                            </label>
+                            <label class="installment-option">
+                                <input type="radio" name="installment" value="12">
+                                <strong>12 Months</strong> - <span id="monthly12">$0</span>/month (2% interest)
+                            </label>
+                            <label class="installment-option">
+                                <input type="radio" name="installment" value="24">
+                                <strong>24 Months</strong> - <span id="monthly24">$0</span>/month (5% interest)
+                            </label>
+                        </div>
+                        <div style="margin-top: var(--space-xl);">
+                            <h4 style="margin-bottom: var(--space-md);">Card Details for Auto-Debit</h4>
+                            <div class="form-group">
+                                <label>Card Number</label>
+                                <input type="text" placeholder="1234 5678 9012 3456">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Expiry Date</label>
+                                    <input type="text" placeholder="MM/YY">
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV</label>
+                                    <input type="text" placeholder="123">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: var(--space-lg);"
+                            onclick="processPayment()">
+                            Confirm Installment Plan
+                        </button>
+                    </div>
+
+                    <!-- Security Badges -->
+                    <div class="security-badges">
+                        <div class="security-badge">
+                            <i class="fas fa-lock"></i> SSL Encrypted
+                        </div>
+                        <div class="security-badge">
+                            <i class="fas fa-shield-alt"></i> PCI Compliant
+                        </div>
+                        <div class="security-badge">
+                            <i class="fas fa-check-circle"></i> Verified Secure
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div>
+                <div class="payment-section"
+                    style="position: sticky; top: calc(var(--header-height) + var(--space-md));">
+                    <h3 style="margin-bottom: var(--space-lg);">Order Summary</h3>
+                    <div id="orderSummary"></div>
+                    <div
+                        style="margin-top: var(--space-xl); padding-top: var(--space-xl); border-top: 2px solid var(--light-grey);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-sm);">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">$0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-sm);">
+                            <span>Shipping:</span>
+                            <span id="shipping">$0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-sm);">
+                            <span>Tax:</span>
+                            <span id="tax">$0</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; font-size: 1.25rem; font-weight: 700; color: var(--primary-color); margin-top: var(--space-md); padding-top: var(--space-md); border-top: 2px solid var(--light-grey);">
+                            <span>Total:</span>
+                            <span id="total">$0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/modal-system.js"></script>
+    <script src="data/products.js"></script>
+    <script>let cart = JSON.parse(localStorage.getItem('cart')) || []; let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];</script>
+    <script src="script.js"></script>
+    <script>
+        let selectedMethod = 'card';
+
+        // Check if cart is empty
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            window.location.href = 'index.html';
+        }
+
+        function displayOrderSummary() {
+            const orderSummary = document.getElementById('orderSummary');
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 2000 ? 0 : 50;
+            const tax = subtotal * 0.08;
+            const total = subtotal + shipping + tax;
+
+            orderSummary.innerHTML = cart.map(item => `
+                <div style="display: flex; gap: var(--space-md); padding: var(--space-md) 0; border-bottom: 1px solid var(--light-grey);">
+                    <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: var(--radius-sm);">
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; font-size: var(--text-sm);">${item.name}</div>
+                        <div style="color: var(--dark-grey); font-size: var(--text-sm);">Qty: ${item.quantity}</div>
+                        <div style="color: var(--primary-color); font-weight: 600;">$${(item.price * item.quantity).toLocaleString()}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('subtotal').textContent = '$' + subtotal.toLocaleString();
+            document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : '$' + shipping;
+            document.getElementById('tax').textContent = '$' + tax.toFixed(2);
+            document.getElementById('total').textContent = '$' + total.toLocaleString();
+
+            // Update installment amounts
+            document.getElementById('monthly3').textContent = '$' + (total / 3).toFixed(2);
+            document.getElementById('monthly6').textContent = '$' + (total / 6).toFixed(2);
+            document.getElementById('monthly12').textContent = '$' + ((total * 1.02) / 12).toFixed(2);
+            document.getElementById('monthly24').textContent = '$' + ((total * 1.05) / 24).toFixed(2);
+
+            // Set order reference
+            document.getElementById('orderRef').textContent = 'CHR-' + Date.now().toString().slice(-8);
+        }
+
+        function selectPayment(method) {
+            selectedMethod = method;
+
+            // Update selected option
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            event.target.closest('.payment-option').classList.add('selected');
+
+            // Hide all forms
+            document.querySelectorAll('.payment-form').forEach(form => form.classList.remove('active'));
+
+            // Show selected form
+            const formMap = {
+                'card': 'cardForm',
+                'paypal': 'paypalForm',
+                'wallet': 'walletForm',
+                'bank': 'bankForm',
+                'crypto': 'cryptoForm',
+                'installment': 'installmentForm'
+            };
+            document.getElementById(formMap[method]).classList.add('active');
+        }
+
+        function processPayment() {
+            const orderNumber = 'CHR-' + Date.now().toString().slice(-8);
+
+            // Store order
+            localStorage.setItem('lastOrder', JSON.stringify({
+                orderNumber: orderNumber,
+                date: new Date().toISOString(),
+                items: cart,
+                total: document.getElementById('total').textContent,
+                paymentMethod: selectedMethod
+            }));
+
+            // Clear cart
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Redirect to confirmation
+            window.location.href = 'order-confirmation.html?order=' + orderNumber;
+        }
+
+        // Initialize
+        displayOrderSummary();
+    </script>
+</body>
+
+</html>
