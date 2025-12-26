@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Men's luxury watches - Premium automatic, chronograph, and sport watches for men at CHRONOLUX.">
-    <title>Men's Watches - CHRONOLUX</title>
+        content="Men's luxury watches - Premium automatic, chronograph, and sport watches for men at TM WATCH.">
+    <title>Men's Watches - TM WATCH</title>
 
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+
 </head>
 
 <body>
@@ -18,7 +20,7 @@
     <!-- HEADER -->
     <header class="header" id="header">
         <div class="container">
-            <a href="index.html" class="logo">CHRONOLUX</a>
+            <a href="index.html" class="logo">TM WATCH</a>
 
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html">Home</a>
@@ -81,10 +83,10 @@
                     <label for="priceFilter">Price Range</label>
                     <select id="priceFilter" onchange="applyFilters()">
                         <option value="all">All Prices</option>
-                        <option value="0-1000">Under $1,000</option>
-                        <option value="1000-2000">$1,000 - $2,000</option>
-                        <option value="2000-3000">$2,000 - $3,000</option>
-                        <option value="3000+">$3,000+</option>
+                        <option value="0-1000">Under ?1,000</option>
+                        <option value="1000-2000">?1,000 - ?2,000</option>
+                        <option value="2000-3000">?2,000 - ?3,000</option>
+                        <option value="3000+">?3,000+</option>
                     </select>
                 </div>
 
@@ -132,7 +134,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>About CHRONOLUX</h4>
+                    <h4>About TM WATCH</h4>
                     <p
                         style="color: var(--medium-grey); font-size: var(--text-sm); line-height: 1.8; margin-top: var(--space-md);">
                         Premium timepiece collection dedicated to precision, elegance, and timeless design.
@@ -181,7 +183,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2024 CHRONOLUX. All rights reserved.</p>
+                <p>&copy; 2024 TM WATCH. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -205,6 +207,8 @@
             updateWishlistCount();
         });
     </script>
+    <script src="js/dark-mode.js"></script>
+
 </body>
 
 </html>

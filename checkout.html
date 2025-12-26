@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - CHRONOLUX</title>
+    <title>Checkout - TM WATCH</title>
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -186,12 +186,14 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="css/dark-mode.css">
+
 </head>
 
 <body>
     <header class="header" id="header">
         <div class="container">
-            <a href="index.html" class="logo">CHRONOLUX</a>
+            <a href="index.html" class="logo">TM WATCH</a>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html">Home</a>
                 <a href="men.html">Men</a>
@@ -366,19 +368,19 @@
                     <div class="summary-totals">
                         <div class="total-row">
                             <span>Subtotal:</span>
-                            <span id="subtotal">$0</span>
+                            <span id="subtotal">₹0</span>
                         </div>
                         <div class="total-row">
                             <span>Shipping:</span>
-                            <span id="shipping">$0</span>
+                            <span id="shipping">₹0</span>
                         </div>
                         <div class="total-row">
                             <span>Tax:</span>
-                            <span id="tax">$0</span>
+                            <span id="tax">₹0</span>
                         </div>
                         <div class="total-row grand-total">
                             <span>Total:</span>
-                            <span id="total">$0</span>
+                            <span id="total">₹0</span>
                         </div>
                     </div>
                 </div>
@@ -422,15 +424,15 @@
                     <div style="flex: 1;">
                         <div style="font-weight: 600;">${item.name}</div>
                         <div style="color: var(--dark-grey); font-size: var(--text-sm);">Qty: ${item.quantity}</div>
-                        <div style="color: var(--primary-color); font-weight: 600;">$${(item.price * item.quantity).toLocaleString()}</div>
+                        <div style="color: var(--primary-color); font-weight: 600;">₹${(item.price * item.quantity).toLocaleString('en-IN')}</div>
                     </div>
                 </div>
             `).join('');
 
-            document.getElementById('subtotal').textContent = '$' + subtotal.toLocaleString();
-            document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : '$' + shipping;
-            document.getElementById('tax').textContent = '$' + tax.toFixed(2);
-            document.getElementById('total').textContent = '$' + total.toLocaleString();
+            document.getElementById('subtotal').textContent = '₹' + subtotal.toLocaleString('en-IN');
+            document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : '₹' + shipping;
+            document.getElementById('tax').textContent = '₹' + tax.toFixed(2);
+            document.getElementById('total').textContent = '₹' + total.toLocaleString('en-IN');
         }
 
         function nextStep(step) {
@@ -536,6 +538,8 @@
         // Initialize
         displayCartItems();
     </script>
+    <script src="js/dark-mode.js"></script>
+
 </body>
 
 </html>

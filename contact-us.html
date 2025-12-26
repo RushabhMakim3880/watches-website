@@ -5,17 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Contact CHRONOLUX customer service for assistance with your luxury watch purchase.">
-    <title>Contact Us - CHRONOLUX</title>
+        content="Contact TM WATCH customer service for assistance with your luxury watch purchase.">
+    <title>Contact Us - TM WATCH</title>
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/dark-mode.css">
+
 </head>
 
 <body>
     <header class="header" id="header">
         <div class="container">
-            <a href="index.html" class="logo">CHRONOLUX</a>
+            <a href="index.html" class="logo">TM WATCH</a>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html">Home</a><a href="men.html">Men</a><a href="women.html">Women</a><a
                     href="new-arrivals.html">New Arrivals</a><a href="best-sellers.html">Best Sellers</a><a
@@ -58,7 +60,7 @@
                     <i class="fas fa-envelope"
                         style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: var(--space-md);"></i>
                     <h3 style="margin-bottom: var(--space-sm);">Email</h3>
-                    <p style="color: var(--dark-grey);">support@chronolux.com</p>
+                    <p style="color: var(--dark-grey);">support@TM WATCH.com</p>
                     <p style="color: var(--dark-grey); font-size: var(--text-sm);">24-48 hour response time</p>
                 </div>
                 <div
@@ -127,7 +129,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>About CHRONOLUX</h4>
+                    <h4>About TM WATCH</h4>
                     <p
                         style="color: var(--medium-grey); font-size: var(--text-sm); line-height: 1.8; margin-top: var(--space-md);">
                         Premium timepiece collection dedicated to precision, elegance, and timeless design.</p>
@@ -166,7 +168,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 CHRONOLUX. All rights reserved.</p>
+                <p>&copy; 2024 TM WATCH. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -186,7 +188,7 @@
                     firstName: {
                         required: true,
                         minLength: 2,
-                        pattern: /^[a-zA-Z\s]+$/,
+                        pattern: /^[a-zA-Z\s]+?/,
                         errorMessages: {
                             required: 'First name is required',
                             minLength: 'First name must be at least 2 characters',
@@ -196,7 +198,7 @@
                     lastName: {
                         required: true,
                         minLength: 2,
-                        pattern: /^[a-zA-Z\s]+$/,
+                        pattern: /^[a-zA-Z\s]+?/,
                         errorMessages: {
                             required: 'Last name is required',
                             minLength: 'Last name must be at least 2 characters',
@@ -261,6 +263,8 @@
             }
         });
     </script>
+  <script src="js/dark-mode.js"></script>
+
 </body>
 
 </html>

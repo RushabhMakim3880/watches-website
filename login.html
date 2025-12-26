@@ -4,54 +4,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - CHRONOLUX</title>
+    <title>Login - TM WATCH</title>
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .auth-container {
-            min-height: calc(100vh - var(--header-height));
+        /* Reset body margin for full-screen layout */
+        body {
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Split Screen Container */
+        .auth-split-container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Left Side - Visual Branding */
+        .auth-visual-side {
+            flex: 1;
+            background: linear-gradient(135deg, #0A0E27 0%, #1A1F3A 50%, #0A0E27 100%);
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: var(--space-2xl) var(--space-md);
-            background: linear-gradient(135deg, var(--light-grey) 0%, var(--primary-white) 100%);
+            padding: var(--space-3xl);
         }
 
-        .auth-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-xl);
+        .auth-visual-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--primary-white);
             max-width: 500px;
+        }
+
+        .auth-visual-logo {
+            font-family: var(--font-secondary);
+            font-size: 3rem;
+            font-weight: var(--font-extrabold);
+            letter-spacing: 2px;
+            margin-bottom: var(--space-lg);
+            background: var(--gradient-rainbow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .auth-visual-tagline {
+            font-size: var(--text-xl);
+            font-weight: var(--font-light);
+            margin-bottom: var(--space-xl);
+            opacity: 0.9;
+        }
+
+        .auth-visual-features {
+            display: grid;
+            gap: var(--space-md);
+            margin-top: var(--space-2xl);
+        }
+
+        .auth-feature-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all var(--transition-base);
+        }
+
+        .auth-feature-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .auth-feature-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-neon);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-lg);
+        }
+
+        .auth-feature-text {
+            text-align: left;
+            flex: 1;
+        }
+
+        .auth-feature-title {
+            font-weight: var(--font-semibold);
+            margin-bottom: 4px;
+        }
+
+        .auth-feature-desc {
+            font-size: var(--text-sm);
+            opacity: 0.7;
+        }
+
+        /* Animated Background Elements */
+        .auth-bg-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
             overflow: hidden;
+            z-index: 1;
+        }
+
+        .auth-bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--neon-cyan) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .auth-bg-shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .auth-bg-shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 5s;
+            background: radial-gradient(circle, var(--vibrant-gold) 0%, transparent 70%);
+        }
+
+        .auth-bg-shape:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 10s;
+            background: radial-gradient(circle, var(--cyber-magenta) 0%, transparent 70%);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        /* Right Side - Form */
+        .auth-form-side {
+            flex: 1;
+            background: var(--primary-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-2xl);
+            position: relative;
+        }
+
+        .auth-form-wrapper {
+            width: 100%;
+            max-width: 480px;
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .auth-back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--dark-grey);
+            text-decoration: none;
+            margin-bottom: var(--space-xl);
+            font-size: var(--text-sm);
+            transition: color var(--transition-fast);
+        }
+
+        .auth-back-link:hover {
+            color: var(--accent-red);
+        }
+
+        .auth-form-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .auth-form-header h1 {
+            font-size: var(--text-4xl);
+            margin-bottom: var(--space-sm);
+            color: var(--black);
+        }
+
+        .auth-form-header p {
+            color: var(--dark-grey);
+            font-size: var(--text-base);
         }
 
         .auth-tabs {
             display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-2xl);
             border-bottom: 2px solid var(--light-grey);
         }
 
         .auth-tab {
             flex: 1;
-            padding: var(--space-lg);
+            padding: var(--space-md) 0;
             background: none;
             border: none;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
             color: var(--dark-grey);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all var(--transition-base);
+            position: relative;
+        }
+
+        .auth-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-red);
+            transition: width var(--transition-base);
         }
 
         .auth-tab.active {
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--primary-color);
-            margin-bottom: -2px;
+            color: var(--accent-red);
         }
 
-        .auth-form-container {
-            padding: var(--space-2xl);
+        .auth-tab.active::after {
+            width: 100%;
         }
 
         .auth-form {
@@ -60,6 +288,17 @@
 
         .auth-form.active {
             display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .form-group {
@@ -69,42 +308,59 @@
         .form-group label {
             display: block;
             margin-bottom: var(--space-sm);
-            font-weight: 600;
+            font-weight: var(--font-semibold);
             color: var(--black);
+            font-size: var(--text-sm);
+        }
+
+        .form-input-wrapper {
+            position: relative;
+        }
+
+        .form-input-icon {
+            position: absolute;
+            left: var(--space-md);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dark-grey);
+            opacity: 0.5;
         }
 
         .form-group input {
             width: 100%;
-            padding: var(--space-md);
+            padding: var(--space-md) var(--space-md) var(--space-md) 45px;
             border: 2px solid var(--medium-grey);
-            border-radius: var(--radius-sm);
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+            border-radius: var(--radius-md);
+            font-size: var(--text-base);
+            transition: all var(--transition-base);
+            font-family: var(--font-primary);
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 3px rgba(255, 0, 110, 0.1);
         }
 
         .form-options {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            font-size: var(--text-sm);
         }
 
         .checkbox-label {
             display: flex;
             align-items: center;
             gap: var(--space-sm);
-            font-size: var(--text-sm);
+            cursor: pointer;
         }
 
         .forgot-password {
-            color: var(--primary-color);
+            color: var(--accent-red);
             text-decoration: none;
-            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
         }
 
         .forgot-password:hover {
@@ -114,6 +370,7 @@
         .btn-block {
             width: 100%;
             padding: var(--space-md);
+            font-size: var(--text-lg);
         }
 
         .auth-divider {
@@ -133,88 +390,164 @@
         }
 
         .auth-divider span {
-            background: white;
+            background: var(--primary-white);
             padding: 0 var(--space-md);
             position: relative;
             color: var(--dark-grey);
+            font-size: var(--text-sm);
         }
 
         .social-login {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: var(--space-md);
-            margin-top: var(--space-lg);
         }
 
         .social-btn {
-            flex: 1;
             padding: var(--space-md);
             border: 2px solid var(--medium-grey);
-            background: white;
-            border-radius: var(--radius-sm);
+            background: var(--primary-white);
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all var(--transition-base);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: var(--space-sm);
+            font-weight: var(--font-medium);
         }
 
         .social-btn:hover {
-            border-color: var(--primary-color);
+            border-color: var(--accent-red);
             background: var(--light-grey);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .social-btn i {
+            font-size: var(--text-lg);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .auth-split-container {
+                flex-direction: column;
+            }
+
+            .auth-visual-side {
+                min-height: 40vh;
+                padding: var(--space-xl);
+            }
+
+            .auth-visual-logo {
+                font-size: 2rem;
+            }
+
+            .auth-visual-features {
+                display: none;
+            }
+
+            .auth-form-side {
+                padding: var(--space-xl) var(--space-md);
+            }
+
+            .auth-form-header h1 {
+                font-size: var(--text-3xl);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-login {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
+  <link rel="stylesheet" href="css/dark-mode.css">
+
 </head>
 
 <body>
-    <header class="header" id="header">
-        <div class="container">
-            <a href="index.html" class="logo">CHRONOLUX</a>
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html">Home</a>
-                <a href="men.html">Men</a>
-                <a href="women.html">Women</a>
-                <a href="new-arrivals.html">New Arrivals</a>
-                <a href="best-sellers.html">Best Sellers</a>
-                <a href="brands.html">Brands</a>
-                <a href="blog.html">Blog</a>
-                <a href="index.html#contact">Contact</a>
-            </nav>
-            <div class="nav-icons">
-                <div class="nav-icon" id="searchIcon"><i class="fas fa-search"></i></div>
-                <div class="nav-icon" id="wishlistIcon"><i class="far fa-heart"></i><span class="badge"
-                        id="wishlistCount">0</span></div>
-                <div class="nav-icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span class="badge"
-                        id="cartCount">0</span></div>
-                <div class="nav-icon" id="accountIcon"><i class="far fa-user"></i></div>
-                <div class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></div>
+    <div class="auth-split-container">
+        <!-- Left Side - Visual Branding -->
+        <div class="auth-visual-side">
+            <div class="auth-bg-shapes">
+                <div class="auth-bg-shape"></div>
+                <div class="auth-bg-shape"></div>
+                <div class="auth-bg-shape"></div>
+            </div>
+
+            <div class="auth-visual-content">
+                <div class="auth-visual-logo">TM WATCH</div>
+                <p class="auth-visual-tagline">Every Second Counts. Every Moment Matters.</p>
+
+                <div class="auth-visual-features">
+                    <div class="auth-feature-item">
+                        <div class="auth-feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="auth-feature-text">
+                            <div class="auth-feature-title">Secure Authentication</div>
+                            <div class="auth-feature-desc">Your data is protected with encryption</div>
+                        </div>
+                    </div>
+
+                    <div class="auth-feature-item">
+                        <div class="auth-feature-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="auth-feature-text">
+                            <div class="auth-feature-title">Premium Collection</div>
+                            <div class="auth-feature-desc">Access exclusive luxury timepieces</div>
+                        </div>
+                    </div>
+
+                    <div class="auth-feature-item">
+                        <div class="auth-feature-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="auth-feature-text">
+                            <div class="auth-feature-title">Free Shipping</div>
+                            <div class="auth-feature-desc">On all orders over ?2,000</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
 
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-tabs">
-                <button class="auth-tab active" onclick="switchTab('login')">Login</button>
-                <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
-            </div>
+        <!-- Right Side - Form -->
+        <div class="auth-form-side">
+            <div class="auth-form-wrapper">
+                <a href="index.html" class="auth-back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
 
-            <div class="auth-form-container">
+                <div class="auth-form-header">
+                    <h1>Welcome</h1>
+                    <p>Sign in to your account or create a new one</p>
+                </div>
+
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+                    <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+                </div>
+
                 <!-- Login Form -->
                 <div class="auth-form active" id="loginForm">
-                    <h2 style="margin-bottom: var(--space-sm);">Welcome Back</h2>
-                    <p style="color: var(--dark-grey); margin-bottom: var(--space-xl);">Login to your CHRONOLUX account
-                    </p>
-
                     <form onsubmit="handleLogin(event)">
                         <div class="form-group">
                             <label for="loginEmail">Email Address</label>
-                            <input type="email" id="loginEmail" required placeholder="your@email.com">
+                            <div class="form-input-wrapper">
+                                <i class="fas fa-envelope form-input-icon"></i>
+                                <input type="email" id="loginEmail" required placeholder="your@email.com">
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="loginPassword">Password</label>
-                            <input type="password" id="loginPassword" required placeholder="Enter your password">
+                            <div class="form-input-wrapper">
+                                <i class="fas fa-lock form-input-icon"></i>
+                                <input type="password" id="loginPassword" required placeholder="Enter your password">
+                            </div>
                         </div>
 
                         <div class="form-options">
@@ -243,36 +576,45 @@
 
                 <!-- Signup Form -->
                 <div class="auth-form" id="signupForm">
-                    <h2 style="margin-bottom: var(--space-sm);">Create Account</h2>
-                    <p style="color: var(--dark-grey); margin-bottom: var(--space-xl);">Join CHRONOLUX today</p>
-
                     <form onsubmit="handleSignup(event)">
                         <div class="form-group">
                             <label for="signupName">Full Name</label>
-                            <input type="text" id="signupName" required placeholder="John Doe">
+                            <div class="form-input-wrapper">
+                                <i class="fas fa-user form-input-icon"></i>
+                                <input type="text" id="signupName" required placeholder="John Doe">
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="signupEmail">Email Address</label>
-                            <input type="email" id="signupEmail" required placeholder="your@email.com">
+                            <div class="form-input-wrapper">
+                                <i class="fas fa-envelope form-input-icon"></i>
+                                <input type="email" id="signupEmail" required placeholder="your@email.com">
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="signupPassword">Password</label>
-                            <input type="password" id="signupPassword" required placeholder="Create a password"
-                                minlength="8">
+                            <div class="form-input-wrapper">
+                                <i class="fas fa-lock form-input-icon"></i>
+                                <input type="password" id="signupPassword" required placeholder="Create a password"
+                                    minlength="8">
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="signupConfirmPassword">Confirm Password</label>
-                            <input type="password" id="signupConfirmPassword" required
-                                placeholder="Confirm your password">
+                            <div class="form-input-wrapper">
+                                <i class="fas fa-lock form-input-icon"></i>
+                                <input type="password" id="signupConfirmPassword" required
+                                    placeholder="Confirm your password">
+                            </div>
                         </div>
 
                         <div class="form-options">
                             <label class="checkbox-label">
                                 <input type="checkbox" required> I agree to the <a href="terms-of-service.html"
-                                    style="color: var(--primary-color);">Terms & Conditions</a>
+                                    style="color: var(--accent-red);">Terms & Conditions</a>
                             </label>
                         </div>
 
@@ -353,14 +695,14 @@
             localStorage.setItem('isLoggedIn', 'true');
 
             // Show success message
-            alert(`Welcome ${name}! Account created successfully.`);
+            alert(`Welcome ?{name}! Account created successfully.`);
 
             // Redirect to homepage
             window.location.href = 'index.html';
         }
 
         function socialLogin(provider) {
-            alert(`${provider.charAt(0).toUpperCase() + provider.slice(1)} login coming soon!`);
+            alert(`?{provider.charAt(0).toUpperCase() + provider.slice(1)} login coming soon!`);
         }
 
         // Check if already logged in
@@ -371,6 +713,8 @@
             }
         }
     </script>
+  <script src="js/dark-mode.js"></script>
+
 </body>
 
 </html>

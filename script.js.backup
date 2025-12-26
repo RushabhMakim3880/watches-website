@@ -12,7 +12,7 @@ function safeParseJSON(key, defaultValue = []) {
         const parsed = JSON.parse(item);
         return Array.isArray(parsed) ? parsed : defaultValue;
     } catch (error) {
-        console.warn(`Error parsing localStorage key "${key}":`, error);
+        console.warn(`Error parsing localStorage key "?{key}":`, error);
         localStorage.removeItem(key); // Remove corrupted data
         return defaultValue;
     }
@@ -23,7 +23,7 @@ function safeSetLocalStorage(key, value) {
         localStorage.setItem(key, JSON.stringify(value));
         return true;
     } catch (error) {
-        console.error(`Error setting localStorage key "${key}":`, error);
+        console.error(`Error setting localStorage key "?{key}":`, error);
         return false;
     }
 }
@@ -86,7 +86,7 @@ function scrollToSection(sectionId) {
 function scrollToProduct(productId) {
     scrollToSection('products');
     setTimeout(() => {
-        const productCard = document.querySelector(`[data-product-id="${productId}"]`);
+        const productCard = document.querySelector(`[data-product-id="?{productId}"]`);
         if (productCard) {
             productCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
             productCard.style.animation = 'pulse 1s ease-in-out';
@@ -115,30 +115,30 @@ function renderProducts(productsToRender = products) {
         const stars = generateStars(product.rating);
 
         return `
-      <div class="product-card" data-product-id="${product.id}">
-        <div class="product-image-container" onclick="window.location.href='product-detail.html?id=${product.id}'" style="cursor: pointer;">
-          <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
-          ${product.discount ? `<div class="product-badge">-${product.discount}%</div>` : ''}
-          <div class="wishlist-icon ${isInWishlist ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(${product.id})">
-            <i class="${isInWishlist ? 'fas' : 'far'} fa-heart"></i>
+      <div class="product-card" data-product-id="?{product.id}">
+        <div class="product-image-container" onclick="window.location.href='product-detail.html?id=?{product.id}'" style="cursor: pointer;">
+          <img src="?{product.image}" alt="?{product.name}" class="product-image" loading="lazy">
+          ?{product.discount ? `<div class="product-badge">-?{product.discount}%</div>` : ''}
+          <div class="wishlist-icon ?{isInWishlist ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(?{product.id})">
+            <i class="?{isInWishlist ? 'fas' : 'far'} fa-heart"></i>
           </div>
         </div>
         <div class="product-info">
-          <div class="product-brand">${product.brand}</div>
-          <h3 class="product-name" onclick="window.location.href='product-detail.html?id=${product.id}'" style="cursor: pointer;">${product.name}</h3>
+          <div class="product-brand">?{product.brand}</div>
+          <h3 class="product-name" onclick="window.location.href='product-detail.html?id=?{product.id}'" style="cursor: pointer;">?{product.name}</h3>
           <div class="product-rating">
-            <span class="stars">${stars}</span>
-            <span class="rating-count">(${product.reviews})</span>
+            <span class="stars">?{stars}</span>
+            <span class="rating-count">(?{product.reviews})</span>
           </div>
           <div class="product-price">
-            <span class="current-price">₹${product.price.toLocaleString('en-IN')}</span>
-            ${product.originalPrice ? `<span class="original-price">₹${product.originalPrice.toLocaleString('en-IN')}</span>` : ''}
+            <span class="current-price">??{product.price.toLocaleString()}</span>
+            ?{product.originalPrice ? `<span class="original-price">??{product.originalPrice.toLocaleString()}</span>` : ''}
           </div>
           <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-md);">
-            <button class="add-to-cart" onclick="addToCart(${product.id})" style="flex: 1;">
+            <button class="add-to-cart" onclick="addToCart(?{product.id})" style="flex: 1;">
               <i class="fas fa-shopping-cart"></i> Add to Cart
             </button>
-            <button class="btn btn-primary" onclick="buyNow(${product.id})" style="flex: 1; padding: var(--space-sm) var(--space-md); font-size: var(--text-sm);">
+            <button class="btn btn-primary" onclick="buyNow(?{product.id})" style="flex: 1; padding: var(--space-sm) var(--space-md); font-size: var(--text-sm);">
               <i class="fas fa-bolt"></i> Buy Now
             </button>
           </div>
@@ -230,7 +230,7 @@ function applyFilters() {
     // Update product count if element exists
     const productCount = document.getElementById('productCount');
     if (productCount) {
-        productCount.textContent = `${filteredProducts.length} products`;
+        productCount.textContent = `?{filteredProducts.length} products`;
     }
 }
 
@@ -285,7 +285,7 @@ function showWishlistModal() {
 
     modalSystem.show({
         id: 'wishlist-modal',
-        title: `My Wishlist (${wishlist.length} items)`,
+        title: `My Wishlist (?{wishlist.length} items)`,
         content: wishlistContent,
         size: 'large',
         closeOnBackdrop: true
@@ -310,15 +310,15 @@ function generateWishlistHTML() {
 
     const itemsHTML = wishlistProducts.map(product => `
         <div class="wishlist-item">
-            <img src="${product.image}" alt="${product.name}" class="wishlist-item-image">
+            <img src="?{product.image}" alt="?{product.name}" class="wishlist-item-image">
             <div class="wishlist-item-info">
-                <div class="wishlist-item-name">${product.name}</div>
-                <div class="wishlist-item-price">₹${product.price.toLocaleString('en-IN')}</div>
+                <div class="wishlist-item-name">?{product.name}</div>
+                <div class="wishlist-item-price">??{product.price.toLocaleString()}</div>
                 <div class="wishlist-item-actions">
-                    <button class="btn btn-primary" onclick="addToCartFromWishlist(${product.id})">
+                    <button class="btn btn-primary" onclick="addToCartFromWishlist(?{product.id})">
                         <i class="fas fa-shopping-cart"></i> Add to Cart
                     </button>
-                    <button class="btn btn-secondary" onclick="removeFromWishlist(${product.id})">
+                    <button class="btn btn-secondary" onclick="removeFromWishlist(?{product.id})">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -328,7 +328,7 @@ function generateWishlistHTML() {
 
     return `
         <div class="wishlist-grid">
-            ${itemsHTML}
+            ?{itemsHTML}
         </div>
     `;
 }
@@ -368,7 +368,7 @@ function addToCart(productId) {
         safeSetLocalStorage('cart', cart);
 
         updateCartCount();
-        showNotification(`${product.name} added to cart!`);
+        showNotification(`?{product.name} added to cart!`);
     }
 }
 
@@ -395,7 +395,7 @@ function showCartModal() {
 
     modalSystem.show({
         id: 'cart-modal',
-        title: `Shopping Cart (${cart.length} items)`,
+        title: `Shopping Cart (?{cart.length} items)`,
         content: cartContent,
         size: 'large',
         closeOnBackdrop: true
@@ -422,22 +422,22 @@ function generateCartHTML() {
 
     const itemsHTML = cart.map(item => `
         <div class="cart-item">
-            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <img src="?{item.image}" alt="?{item.name}" class="cart-item-image">
             <div class="cart-item-info">
-                <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-brand">${item.brand}</div>
+                <div class="cart-item-name">?{item.name}</div>
+                <div class="cart-item-brand">?{item.brand}</div>
                 <div class="cart-item-controls">
                     <div class="quantity-control">
-                        <button class="quantity-btn" onclick="updateCartQuantity(${item.id}, -1)">
+                        <button class="quantity-btn" onclick="updateCartQuantity(?{item.id}, -1)">
                             <i class="fas fa-minus"></i>
                         </button>
-                        <span class="quantity-value">${item.quantity}</span>
-                        <button class="quantity-btn" onclick="updateCartQuantity(${item.id}, 1)">
+                        <span class="quantity-value">?{item.quantity}</span>
+                        <button class="quantity-btn" onclick="updateCartQuantity(?{item.id}, 1)">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
-                    <div class="cart-item-price">₹${(item.price * item.quantity).toLocaleString('en-IN')}</div>
-                    <div class="cart-item-remove" onclick="removeFromCart(${item.id})">
+                    <div class="cart-item-price">??{(item.price * item.quantity).toLocaleString()}</div>
+                    <div class="cart-item-remove" onclick="removeFromCart(?{item.id})">
                         <i class="fas fa-trash"></i>
                     </div>
                 </div>
@@ -447,20 +447,20 @@ function generateCartHTML() {
 
     return `
         <div class="cart-items">
-            ${itemsHTML}
+            ?{itemsHTML}
         </div>
         <div class="cart-summary">
             <div class="cart-summary-row">
                 <span>Subtotal:</span>
-                <span>?${subtotal.toLocaleString()}</span>
+                <span>??{subtotal.toLocaleString()}</span>
             </div>
             <div class="cart-summary-row">
                 <span>Shipping:</span>
-                <span>${shipping === 0 ? 'FREE' : '?' + shipping}</span>
+                <span>?{shipping === 0 ? 'FREE' : '?' + shipping}</span>
             </div>
             <div class="cart-summary-row total">
                 <span>Total:</span>
-                <span>?${total.toLocaleString()}</span>
+                <span>??{total.toLocaleString()}</span>
             </div>
         </div>
         <div class="cart-actions">
@@ -516,7 +516,7 @@ function buyNow(productId) {
         updateCartCount();
 
         // Show notification
-        showNotification(`${product.name} - Proceeding to checkout!`);
+        showNotification(`?{product.name} - Proceeding to checkout!`);
 
         // Redirect to checkout after short delay
         setTimeout(() => {
@@ -603,7 +603,7 @@ newsletterForm.addEventListener('submit', (e) => {
     const emailInput = newsletterForm.querySelector('input[type="email"]');
     const email = emailInput.value;
 
-    showNotification(`Thank you for subscribing with ${email}!`);
+    showNotification(`Thank you for subscribing with ?{email}!`);
     emailInput.value = '';
 });
 
@@ -730,19 +730,19 @@ function performSearch(searchTerm) {
         resultsContainer.innerHTML = `
             <div class="search-no-results">
                 <i class="fas fa-times-circle" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
-                <p>No results found for "${searchTerm}"</p>
+                <p>No results found for "?{searchTerm}"</p>
             </div>
         `;
         return;
     }
 
     resultsContainer.innerHTML = searchResults.map(product => `
-        <div class="search-result-item" onclick="selectSearchResult(${product.id})">
-            <img src="${product.image}" alt="${product.name}" class="search-result-image" onerror="this.src='images/placeholder.svg'">
+        <div class="search-result-item" onclick="selectSearchResult(?{product.id})">
+            <img src="?{product.image}" alt="?{product.name}" class="search-result-image" onerror="this.src='images/placeholder.svg'">
             <div class="search-result-info">
-                <div class="search-result-brand">${product.brand}</div>
-                <div class="search-result-name">${product.name}</div>
-                <div class="search-result-price">₹${product.price.toLocaleString('en-IN')}</div>
+                <div class="search-result-brand">?{product.brand}</div>
+                <div class="search-result-name">?{product.name}</div>
+                <div class="search-result-price">??{product.price.toLocaleString()}</div>
             </div>
         </div>
     `).join('');
@@ -751,7 +751,7 @@ function performSearch(searchTerm) {
 function selectSearchResult(productId) {
     modalSystem.close();
     // Navigate to product detail page
-    window.location.href = `product-detail.html?id=${productId}`;
+    window.location.href = `product-detail.html?id=?{productId}`;
 }
 
 // ============================================
@@ -785,7 +785,7 @@ function updateActiveNav() {
 
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
+            if (link.getAttribute('href') === `#?{current}`) {
                 link.classList.add('active');
             }
         });

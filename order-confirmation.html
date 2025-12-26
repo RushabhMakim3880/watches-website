@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmation - CHRONOLUX</title>
+    <title>Order Confirmation - TM WATCH</title>
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -112,12 +112,14 @@
             }
         }
     </style>
+  <link rel="stylesheet" href="css/dark-mode.css">
+
 </head>
 
 <body>
     <header class="header" id="header">
         <div class="container">
-            <a href="index.html" class="logo">CHRONOLUX</a>
+            <a href="index.html" class="logo">TM WATCH</a>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html">Home</a>
                 <a href="men.html">Men</a>
@@ -243,11 +245,11 @@
             const orderItemsContainer = document.getElementById('orderItems');
             const itemsHtml = orderData.items.map(item => `
                 <div style="display: flex; gap: var(--space-md); padding: var(--space-md); border-bottom: 1px solid var(--light-grey);">
-                    <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: var(--radius-sm);">
+                    <img src="?{item.image}" alt="?{item.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: var(--radius-sm);">
                     <div style="flex: 1;">
-                        <div style="font-weight: 600;">${item.name}</div>
-                        <div style="color: var(--dark-grey); font-size: var(--text-sm);">Quantity: ${item.quantity}</div>
-                        <div style="color: var(--primary-color); font-weight: 600;">$${(item.price * item.quantity).toLocaleString()}</div>
+                        <div style="font-weight: 600;">?{item.name}</div>
+                        <div style="color: var(--dark-grey); font-size: var(--text-sm);">Quantity: ?{item.quantity}</div>
+                        <div style="color: var(--primary-color); font-weight: 600;">??{(item.price * item.quantity).toLocaleString()}</div>
                     </div>
                 </div>
             `).join('');
@@ -263,6 +265,8 @@
             window.print();
         }
     </script>
+  <script src="js/dark-mode.js"></script>
+
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Options - CHRONOLUX</title>
+    <title>Payment Options - TM WATCH</title>
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -224,12 +224,14 @@
             }
         }
     </style>
+  <link rel="stylesheet" href="css/dark-mode.css">
+
 </head>
 
 <body>
     <header class="header" id="header">
         <div class="container">
-            <a href="index.html" class="logo">CHRONOLUX</a>
+            <a href="index.html" class="logo">TM WATCH</a>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html">Home</a>
                 <a href="men.html">Men</a>
@@ -400,8 +402,8 @@
                         <h3 style="margin-bottom: var(--space-lg);">Bank Transfer Details</h3>
                         <div
                             style="background: var(--light-grey); padding: var(--space-xl); border-radius: var(--radius-md); margin-bottom: var(--space-xl);">
-                            <p style="margin-bottom: var(--space-md);"><strong>Bank Name:</strong> CHRONOLUX Bank</p>
-                            <p style="margin-bottom: var(--space-md);"><strong>Account Name:</strong> CHRONOLUX Ltd.</p>
+                            <p style="margin-bottom: var(--space-md);"><strong>Bank Name:</strong> TM WATCH Bank</p>
+                            <p style="margin-bottom: var(--space-md);"><strong>Account Name:</strong> TM WATCH Ltd.</p>
                             <p style="margin-bottom: var(--space-md);"><strong>Account Number:</strong> 1234567890</p>
                             <p style="margin-bottom: var(--space-md);"><strong>SWIFT Code:</strong> CHROLUXXX</p>
                             <p style="margin-bottom: 0;"><strong>Reference:</strong> <span
@@ -448,19 +450,19 @@
                         <div class="installment-plans">
                             <label class="installment-option">
                                 <input type="radio" name="installment" value="3" checked>
-                                <strong>3 Months</strong> - <span id="monthly3">$0</span>/month (0% interest)
+                                <strong>3 Months</strong> - <span id="monthly3">?0</span>/month (0% interest)
                             </label>
                             <label class="installment-option">
                                 <input type="radio" name="installment" value="6">
-                                <strong>6 Months</strong> - <span id="monthly6">$0</span>/month (0% interest)
+                                <strong>6 Months</strong> - <span id="monthly6">?0</span>/month (0% interest)
                             </label>
                             <label class="installment-option">
                                 <input type="radio" name="installment" value="12">
-                                <strong>12 Months</strong> - <span id="monthly12">$0</span>/month (2% interest)
+                                <strong>12 Months</strong> - <span id="monthly12">?0</span>/month (2% interest)
                             </label>
                             <label class="installment-option">
                                 <input type="radio" name="installment" value="24">
-                                <strong>24 Months</strong> - <span id="monthly24">$0</span>/month (5% interest)
+                                <strong>24 Months</strong> - <span id="monthly24">?0</span>/month (5% interest)
                             </label>
                         </div>
                         <div style="margin-top: var(--space-xl);">
@@ -511,20 +513,20 @@
                         style="margin-top: var(--space-xl); padding-top: var(--space-xl); border-top: 2px solid var(--light-grey);">
                         <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-sm);">
                             <span>Subtotal:</span>
-                            <span id="subtotal">$0</span>
+                            <span id="subtotal">?0</span>
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-sm);">
                             <span>Shipping:</span>
-                            <span id="shipping">$0</span>
+                            <span id="shipping">?0</span>
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-sm);">
                             <span>Tax:</span>
-                            <span id="tax">$0</span>
+                            <span id="tax">?0</span>
                         </div>
                         <div
                             style="display: flex; justify-content: space-between; font-size: 1.25rem; font-weight: 700; color: var(--primary-color); margin-top: var(--space-md); padding-top: var(--space-md); border-top: 2px solid var(--light-grey);">
                             <span>Total:</span>
-                            <span id="total">$0</span>
+                            <span id="total">?0</span>
                         </div>
                     </div>
                 </div>
@@ -554,25 +556,25 @@
 
             orderSummary.innerHTML = cart.map(item => `
                 <div style="display: flex; gap: var(--space-md); padding: var(--space-md) 0; border-bottom: 1px solid var(--light-grey);">
-                    <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: var(--radius-sm);">
+                    <img src="?{item.image}" alt="?{item.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: var(--radius-sm);">
                     <div style="flex: 1;">
-                        <div style="font-weight: 600; font-size: var(--text-sm);">${item.name}</div>
-                        <div style="color: var(--dark-grey); font-size: var(--text-sm);">Qty: ${item.quantity}</div>
-                        <div style="color: var(--primary-color); font-weight: 600;">$${(item.price * item.quantity).toLocaleString()}</div>
+                        <div style="font-weight: 600; font-size: var(--text-sm);">?{item.name}</div>
+                        <div style="color: var(--dark-grey); font-size: var(--text-sm);">Qty: ?{item.quantity}</div>
+                        <div style="color: var(--primary-color); font-weight: 600;">??{(item.price * item.quantity).toLocaleString()}</div>
                     </div>
                 </div>
             `).join('');
 
-            document.getElementById('subtotal').textContent = '$' + subtotal.toLocaleString();
-            document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : '$' + shipping;
-            document.getElementById('tax').textContent = '$' + tax.toFixed(2);
-            document.getElementById('total').textContent = '$' + total.toLocaleString();
+            document.getElementById('subtotal').textContent = '?' + subtotal.toLocaleString();
+            document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : '?' + shipping;
+            document.getElementById('tax').textContent = '?' + tax.toFixed(2);
+            document.getElementById('total').textContent = '?' + total.toLocaleString();
 
             // Update installment amounts
-            document.getElementById('monthly3').textContent = '$' + (total / 3).toFixed(2);
-            document.getElementById('monthly6').textContent = '$' + (total / 6).toFixed(2);
-            document.getElementById('monthly12').textContent = '$' + ((total * 1.02) / 12).toFixed(2);
-            document.getElementById('monthly24').textContent = '$' + ((total * 1.05) / 24).toFixed(2);
+            document.getElementById('monthly3').textContent = '?' + (total / 3).toFixed(2);
+            document.getElementById('monthly6').textContent = '?' + (total / 6).toFixed(2);
+            document.getElementById('monthly12').textContent = '?' + ((total * 1.02) / 12).toFixed(2);
+            document.getElementById('monthly24').textContent = '?' + ((total * 1.05) / 24).toFixed(2);
 
             // Set order reference
             document.getElementById('orderRef').textContent = 'CHR-' + Date.now().toString().slice(-8);
@@ -623,6 +625,8 @@
         // Initialize
         displayOrderSummary();
     </script>
+  <script src="js/dark-mode.js"></script>
+
 </body>
 
 </html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to TM WATCH - Luxury Timepieces</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* Main Container */
+        .splash-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0f0f1e 50%, #000000 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Animated Grid Background */
+        .grid-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 110, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        /* Floating Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: floatOrb 15s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #00D4FF, transparent);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #FF006E, transparent);
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #9D4EDD, transparent);
+            top: 50%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes floatOrb {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            25% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+
+            50% {
+                transform: translate(-30px, 30px) scale(0.9);
+            }
+
+            75% {
+                transform: translate(40px, 20px) scale(1.05);
+            }
+        }
+
+        /* Rotating Watch Icon */
+        .watch-icon-container {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            animation: rotateWatch 20s linear infinite;
+            opacity: 0.1;
+        }
+
+        @keyframes rotateWatch {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .watch-icon-container i {
+            font-size: 200px;
+            background: linear-gradient(135deg, #00D4FF, #FF006E, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Main Content */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            animation: contentAppear 1.5s ease-out;
+        }
+
+        @keyframes contentAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Luxury Badge */
+        .luxury-badge {
+            display: inline-block;
+            padding: 10px 30px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 30px;
+            color: #FFD700;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            animation: badgeGlow 2s infinite;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        @keyframes badgeGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        /* Brand Logo with 3D Effect */
+        .brand-logo {
+            font-size: 6rem;
+            font-weight: 900;
+            letter-spacing: 12px;
+            background: linear-gradient(135deg, #00D4FF 0%, #FF006E 25%, #FFD700 50%, #9D4EDD 75%, #00D4FF 100%);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 5s ease infinite;
+            margin-bottom: 20px;
+            text-shadow: 0 0 80px rgba(0, 212, 255, 0.8);
+            position: relative;
+            display: inline-block;
+        }
+
+        .brand-logo::before {
+            content: 'TM WATCH';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            z-index: -1;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(255, 0, 110, 0.3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(8px);
+        }
+
+        @keyframes gradientFlow {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Animated Underline */
+        .brand-underline {
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00D4FF, #FF006E, #FFD700);
+            margin: 0 auto 30px;
+            animation: expandLine 2s ease-out forwards;
+            animation-delay: 0.5s;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+        }
+
+        @keyframes expandLine {
+            to {
+                width: 300px;
+            }
+        }
+
+        /* Tagline with Typing Effect */
+        .tagline {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 4px;
+            margin-bottom: 50px;
+            font-weight: 300;
+            overflow: hidden;
+            border-right: 3px solid #00D4FF;
+            white-space: nowrap;
+            animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite;
+            width: 0;
+            display: inline-block;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        /* Premium Enter Button */
+        .enter-btn {
+            position: relative;
+            padding: 20px 70px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, #FF006E 0%, #9D4EDD 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 0 15px 50px rgba(255, 0, 110, 0.5);
+            animation: buttonFloat 3s ease-in-out infinite;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        @keyframes buttonFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .enter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .enter-btn:hover::before {
+            left: 100%;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 0, 110, 0.7);
+        }
+
+        .enter-btn span {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .enter-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .enter-btn:hover .enter-icon {
+            transform: translateX(10px);
+        }
+
+        /* Animated Rings Around Button */
+        .button-ring {
+            position: absolute;
+            border: 2px solid rgba(255, 0, 110, 0.3);
+            border-radius: 50%;
+            animation: ringPulse 2s infinite ease-out;
+        }
+
+        .button-ring:nth-child(1) {
+            width: 120%;
+            height: 120%;
+            animation-delay: 0s;
+        }
+
+        .button-ring:nth-child(2) {
+            width: 140%;
+            height: 140%;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes ringPulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Features Showcase */
+        .features-preview {
+            position: absolute;
+            bottom: 50px;
+            display: flex;
+            gap: 40px;
+            animation: featuresSlide 1.5s ease-out;
+            animation-delay: 2s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes featuresSlide {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(255, 0, 110, 0.2));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1) rotate(360deg);
+            border-color: #00D4FF;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+        }
+
+        /* Sparkle Effects */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkleFloat 3s infinite ease-in-out;
+            box-shadow: 0 0 10px white;
+        }
+
+        @keyframes sparkleFloat {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateY(-100px) scale(1);
+            }
+        }
+
+        /* Fade Out */
+        .splash-container.fade-out {
+            animation: fadeOut 1s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(1.1);
+                visibility: hidden;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .brand-logo {
+                font-size: 3.5rem;
+                letter-spacing: 6px;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+            }
+
+            .enter-btn {
+                padding: 15px 50px;
+                font-size: 1rem;
+            }
+
+            .features-preview {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .orb {
+                filter: blur(40px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="splash-container" id="splashScreen">
+        <!-- Animated Background -->
+        <div class="grid-background"></div>
+
+        <!-- Floating Orbs -->
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+
+        <!-- Rotating Watch Icon -->
+        <div class="watch-icon-container">
+            <i class="fas fa-clock"></i>
+        </div>
+
+        <!-- Sparkles -->
+        <div class="sparkle" style="top: 20%; left: 15%; animation-delay: 0s;"></div>
+        <div class="sparkle" style="top: 30%; right: 20%; animation-delay: 1s;"></div>
+        <div class="sparkle" style="bottom: 25%; left: 25%; animation-delay: 2s;"></div>
+        <div class="sparkle" style="bottom: 35%; right: 30%; animation-delay: 1.5s;"></div>
+
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <div class="luxury-badge">
+                <i class="fas fa-crown"></i> Luxury Timepieces
+            </div>
+
+            <div class="brand-logo">TM WATCH</div>
+            <div class="brand-underline"></div>
+
+            <div class="tagline">Every Moment Matters</div>
+
+            <button class="enter-btn" id="enterBtn">
+                <div class="button-ring"></div>
+                <div class="button-ring"></div>
+                <span>
+                    Enter Experience
+                    <i class="fas fa-arrow-right enter-icon"></i>
+                </span>
+            </button>
+        </div>
+
+        <!-- Features Preview -->
+        <div class="features-preview">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <span>Premium Quality</span>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <span>Authenticity Guaranteed</span>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <span>Free Worldwide Shipping</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enter button functionality
+        const enterBtn = document.getElementById('enterBtn');
+        const splashScreen = document.getElementById('splashScreen');
+
+        enterBtn.addEventListener('click', function () {
+            splashScreen.classList.add('fade-out');
+            setTimeout(function () {
+                window.location.href = 'index.html';
+            }, 1000);
+        });
+
+        // Keyboard support
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                enterBtn.click();
+            }
+        });
+
+        // Auto-redirect after 15 seconds
+        setTimeout(function () {
+            if (!splashScreen.classList.contains('fade-out')) {
+                splashScreen.classList.add('fade-out');
+                setTimeout(function () {
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+        }, 15000);
+
+        // Mouse move parallax effect
+        document.addEventListener('mousemove', function (e) {
+            const orbs = document.querySelectorAll('.orb');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 20;
+                const xMove = (x - 0.5) * speed;
+                const yMove = (y - 0.5) * speed;
+                orb.style.transform = `translate(?{xMove}px, ?{yMove}px)`;
+            });
+        });
+
+        console.log('✨ TM WATCH - Luxury Entrance Experience Loaded');
+    </script>
+</body>
+
+</html>

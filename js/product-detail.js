@@ -72,8 +72,8 @@ function populateProductDetails(product) {
     if (productPrice) {
         if (product.originalPrice) {
             productPrice.innerHTML = `
-                <span style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">$${product.price.toLocaleString()}</span>
-                <span style="font-size: 1.2rem; color: var(--dark-grey); text-decoration: line-through; margin-left: var(--space-md);">$${product.originalPrice.toLocaleString()}</span>
+                <span style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">₹${product.price.toLocaleString('en-IN')}</span>
+                <span style="font-size: 1.2rem; color: var(--dark-grey); text-decoration: line-through; margin-left: var(--space-md);">₹${product.originalPrice.toLocaleString('en-IN')}</span>
                 <span style="background: var(--error-red); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.875rem; margin-left: var(--space-sm);">-${product.discount}%</span>
             `;
         } else {
@@ -271,7 +271,7 @@ function showSocialShareModal(product) {
     const productUrl = encodeURIComponent(window.location.href);
     const productTitle = encodeURIComponent(`${product.name} - CHRONOLUX`);
     const productImage = encodeURIComponent(window.location.origin + '/' + product.image);
-    const productDescription = encodeURIComponent(`Check out this ${product.brand} watch for $${product.price}!`);
+    const productDescription = encodeURIComponent(`Check out this ${product.brand} watch for ₹${product.price.toLocaleString('en-IN')}!`);
 
     const shareContent = `
         <div style="padding: var(--space-lg);">
@@ -385,8 +385,8 @@ function loadRelatedProducts(product) {
                     <span class="rating-count">(${p.reviews})</span>
                 </div>
                 <div class="product-price">
-                    <span class="current-price">$${p.price.toLocaleString()}</span>
-                    ${p.originalPrice ? `<span class="original-price">$${p.originalPrice.toLocaleString()}</span>` : ''}
+                    <span class="current-price">₹${p.price.toLocaleString('en-IN')}</span>
+                    ${p.originalPrice ? `<span class="original-price">₹${p.originalPrice.toLocaleString('en-IN')}</span>` : ''}
                 </div>
             </div>
         </div>
@@ -433,7 +433,7 @@ function updatePageMeta(product) {
         metaDescription.name = 'description';
         document.head.appendChild(metaDescription);
     }
-    metaDescription.content = `${product.name} by ${product.brand} - $${product.price}. ${product.description || getDefaultDescription(product)}`;
+    metaDescription.content = `${product.name} by ${product.brand} - ₹${product.price.toLocaleString('en-IN')}. ${product.description || getDefaultDescription(product)}`;
 
     // Add Open Graph tags
     updateMetaTag('og:title', `${product.name} - CHRONOLUX`);

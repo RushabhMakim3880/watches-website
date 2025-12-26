@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Compare luxury watches side-by-side at CHRONOLUX. Compare specifications, prices, and features.">
-    <title>Compare Watches - CHRONOLUX</title>
+        content="Compare luxury watches side-by-side at TM WATCH. Compare specifications, prices, and features.">
+    <title>Compare Watches - TM WATCH</title>
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -151,12 +151,14 @@
             font-weight: var(--font-bold);
         }
     </style>
+  <link rel="stylesheet" href="css/dark-mode.css">
+
 </head>
 
 <body>
     <header class="header" id="header">
         <div class="container">
-            <a href="index.html" class="logo">CHRONOLUX</a>
+            <a href="index.html" class="logo">TM WATCH</a>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html">Home</a>
                 <a href="men.html">Men</a>
@@ -229,7 +231,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>About CHRONOLUX</h4>
+                    <h4>About TM WATCH</h4>
                     <p
                         style="color: var(--medium-grey); font-size: var(--text-sm); line-height: 1.8; margin-top: var(--space-md);">
                         Premium timepiece collection dedicated to precision, elegance, and timeless design.</p>
@@ -271,7 +273,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 CHRONOLUX. All rights reserved.</p>
+                <p>&copy; 2024 TM WATCH. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -323,10 +325,10 @@
                 headersHtml += `
                     <th class="product-column">
                         <div class="product-header">
-                            <img src="${product.image}" alt="${product.name}">
-                            <h3>${product.name}</h3>
-                            <div class="price">$${product.price.toLocaleString()}</div>
-                            <button class="remove-product-btn" onclick="removeFromComparison(${product.id})">
+                            <img src="?{product.image}" alt="?{product.name}">
+                            <h3>?{product.name}</h3>
+                            <div class="price">??{product.price.toLocaleString()}</div>
+                            <button class="remove-product-btn" onclick="removeFromComparison(?{product.id})">
                                 <i class="fas fa-times"></i> Remove
                             </button>
                         </div>
@@ -352,7 +354,7 @@
             // Build comparison rows
             const specs = [
                 { label: 'Brand', key: 'brand' },
-                { label: 'Price', key: 'price', format: (v) => '$' + v.toLocaleString() },
+                { label: 'Price', key: 'price', format: (v) => '?' + v.toLocaleString() },
                 { label: 'Category', key: 'category', format: (v) => v.charAt(0).toUpperCase() + v.slice(1) },
                 { label: 'Movement', key: 'movement', format: (v) => v.charAt(0).toUpperCase() + v.slice(1) },
                 { label: 'Strap Type', key: 'strapType', format: (v) => v.charAt(0).toUpperCase() + v.slice(1) },
@@ -364,7 +366,7 @@
 
             let bodyHtml = '';
             specs.forEach(spec => {
-                let rowHtml = `<tr><td class="spec-label">${spec.label}</td>`;
+                let rowHtml = `<tr><td class="spec-label">?{spec.label}</td>`;
 
                 // Get values for this spec
                 const values = compareProducts.map(p => {
@@ -379,7 +381,7 @@
                 compareProducts.forEach((product, index) => {
                     const value = values[index];
                     const highlightClass = !allSame ? 'highlight-difference' : '';
-                    rowHtml += `<td class="${highlightClass}">${value || 'N/A'}</td>`;
+                    rowHtml += `<td class="?{highlightClass}">?{value || 'N/A'}</td>`;
                 });
 
                 // Add empty cell for "Add Product" column
@@ -396,10 +398,10 @@
             compareProducts.forEach(product => {
                 actionRowHtml += `
                     <td>
-                        <button class="btn btn-primary" style="width: 100%; margin-bottom: var(--space-sm);" onclick="window.location.href='product-detail.html?id=${product.id}'">
+                        <button class="btn btn-primary" style="width: 100%; margin-bottom: var(--space-sm);" onclick="window.location.href='product-detail.html?id=?{product.id}'">
                             <i class="fas fa-eye"></i> View
                         </button>
-                        <button class="btn btn-secondary" style="width: 100%;" onclick="addToCart(${product.id}); showNotification('Added to cart!')">
+                        <button class="btn btn-secondary" style="width: 100%;" onclick="addToCart(?{product.id}); showNotification('Added to cart!')">
                             <i class="fas fa-shopping-cart"></i> Add to Cart
                         </button>
                     </td>
@@ -426,11 +428,11 @@
 
             const selectorHtml = `
                 <div class="product-selector">
-                    ${availableProducts.map(product => `
-                        <div class="product-selector-item" onclick="addToComparison(${product.id})">
-                            <img src="${product.image}" alt="${product.name}">
-                            <div class="name">${product.name}</div>
-                            <div class="price">$${product.price.toLocaleString()}</div>
+                    ?{availableProducts.map(product => `
+                        <div class="product-selector-item" onclick="addToComparison(?{product.id})">
+                            <img src="?{product.image}" alt="?{product.name}">
+                            <div class="name">?{product.name}</div>
+                            <div class="price">??{product.price.toLocaleString()}</div>
                         </div>
                     `).join('')}
                 </div>
@@ -480,6 +482,8 @@
             }
         };
     </script>
+  <script src="js/dark-mode.js"></script>
+
 </body>
 
 </html>
