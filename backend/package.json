@@ -8,18 +8,24 @@
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["ecommerce", "watches", "api", "mysql"],
+  "keywords": [
+    "ecommerce",
+    "watches",
+    "api",
+    "mysql"
+  ],
   "author": "TM WATCH",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
-    "mysql2": "^3.6.5",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.0.2",
-    "dotenv": "^16.3.1",
-    "cors": "^2.8.5",
+    "better-sqlite3": "^12.5.0",
     "body-parser": "^1.20.2",
-    "express-validator": "^7.0.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.6.5"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
