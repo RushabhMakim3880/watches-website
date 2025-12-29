@@ -28,10 +28,11 @@ function safeSetLocalStorage(key, value) {
     }
 }
 
+
 // State Management with validation
 let cart = safeParseJSON('cart', []);
 let wishlist = safeParseJSON('wishlist', []);
-let filteredProducts = [...products];
+let filteredProducts = typeof products !== 'undefined' ? [...products] : [];
 
 // ============================================
 // HEADER SCROLL EFFECT
@@ -598,14 +599,50 @@ document.head.appendChild(style);
 // NEWSLETTER FORM
 // ============================================
 const newsletterForm = document.getElementById('newsletterForm');
-newsletterForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const emailInput = newsletterForm.querySelector('input[type="email"]');
-    const email = emailInput.value;
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emailInput = newsletterForm.querySelector('input[type="email"]');
+        const email = emailInput.value;
 
-    showNotification(`Thank you for subscribing with ${email}!`);
-    emailInput.value = '';
-});
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showNotification('Please enter a valid email address');
+            return;
+        }
+
+        // Show success modal with more information
+        modalSystem.show({
+            id: 'newsletter-success',
+            title: 'Successfully Subscribed!',
+            content: `
+                <div style="text-align: center; padding: var(--space-xl);">
+                    <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--success-green); margin-bottom: var(--space-lg);"></i>
+                    <h3 style="margin-bottom: var(--space-md);">Welcome to TM WATCH Newsletter!</h3>
+                    <p style="color: var(--dark-grey); margin-bottom: var(--space-lg);">
+                        Thank you for subscribing with <strong>${email}</strong>
+                    </p>
+                    <p style="color: var(--dark-grey); font-size: var(--text-sm); margin-bottom: var(--space-xl);">
+                        You'll receive exclusive offers, new arrivals, and watch care tips directly to your inbox.
+                    </p>
+                    ${siteConfig && siteConfig.features.demoMode ? `
+                        <div style="background: #fff3cd; padding: var(--space-md); border-radius: var(--radius-sm); margin-bottom: var(--space-lg);">
+                            <p style="color: #856404; font-size: var(--text-sm); margin: 0;">
+                                <i class="fas fa-info-circle"></i> Demo Mode: Emails are not actually sent in this demo version.
+                            </p>
+                        </div>
+                    ` : ''}
+                    <button class="btn btn-primary" onclick="modalSystem.close()">Continue Shopping</button>
+                </div>
+            `,
+            size: 'medium',
+            closeOnBackdrop: true
+        });
+
+        emailInput.value = '';
+    });
+}
 
 // ============================================
 // LAZY LOADING IMAGES
@@ -799,9 +836,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if we're on a page with products grid
     const productsGrid = document.getElementById('productsGrid');
 
-    if (productsGrid) {
-        // Render initial products
-        renderProducts(filteredProducts);
+    if (productsGrid && typeof products !== 'undefined' && typeof filteredProducts !== 'undefined') {
+        // Only render if filteredProducts is defined and has products
+        if (filteredProducts && filteredProducts.length > 0) {
+            renderProducts(filteredProducts);
+        }
     }
 
     // Initialize lazy loading

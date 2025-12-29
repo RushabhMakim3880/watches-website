@@ -10,7 +10,7 @@
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
 
 </head>
 
@@ -162,21 +162,26 @@
 
     <script src="js/modal-system.js"></script>
     <script src="data/products.js"></script>
+    <script>let cart = JSON.parse(localStorage.getItem('cart')) || []; let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];</script>
+    <script src="script.js"></script>
     <script>
-        // Show all products as best sellers
-        let filteredProducts = [...products];
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-
-        // Render products when page loads
+        // Show all products as best sellers - runs after script.js is loaded
         document.addEventListener('DOMContentLoaded', function () {
-            if (filteredProducts.length > 0) {
-                renderProducts(filteredProducts);
+            if (typeof products !== 'undefined' && products.length > 0) {
+                // Sort by rating and reviews (best sellers)
+                const sortedProducts = [...products].sort((a, b) => {
+                    // First sort by rating
+                    if (b.rating !== a.rating) {
+                        return b.rating - a.rating;
+                    }
+                    // Then by number of reviews
+                    return b.reviews - a.reviews;
+                });
+                renderProducts(sortedProducts);
             }
         });
     </script>
-    <script src="script.js"></script>
-  <script src="js/dark-mode.js"></script>
+    <script src="js/dark-mode.js"></script>
 
 </body>
 
