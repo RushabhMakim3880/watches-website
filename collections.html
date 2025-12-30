@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#FF006E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TM WATCH">
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="description"
+        content="Explore our curated watch collections - Automatic, Chronograph, Luxury Leather, and Smart watches at TM WATCH.">
+    <title>Collections - TM WATCH</title>
+
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+
+    <!-- Mobile Optimization Stylesheets -->
+    <link rel="stylesheet" href="css/mobile-navigation.css">
+    <link rel="stylesheet" href="css/mobile-responsive.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">TM WATCH</a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="men.html">Men</a>
+                <a href="women.html">Women</a>
+                <a href="new-arrivals.html">New Arrivals</a>
+                <a href="best-sellers.html">Best Sellers</a>
+                <a href="brands.html">Brands</a>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+
+            <div class="nav-icons">
+                <div class="nav-icon" id="searchIcon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="nav-icon" id="wishlistIcon">
+                    <i class="far fa-heart"></i>
+                    <span class="badge" id="wishlistCount">0</span>
+                </div>
+                <div class="nav-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </div>
+                <div class="nav-icon" id="accountIcon">
+                    <i class="far fa-user"></i>
+                </div>
+
+                <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Our Collections</h1>
+            <p>Explore our curated selection of premium timepieces</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Collections</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLLECTIONS SECTION -->
+    <section class="section">
+        <div class="container">
+            <div class="collections-grid">
+                <!-- Collection 1: Automatic Watches -->
+                <div class="collection-card" onclick="window.location.href='men.html?category=automatic'">
+                    <img src="images/collections/automatic.jpg" alt="Automatic Watches" loading="lazy">
+                    <div class="collection-overlay">
+                        <h3>Automatic Watches</h3>
+                        <p>Self-winding mechanical masterpieces</p>
+                        <span class="collection-count">12+ Models</span>
+                    </div>
+                </div>
+
+                <!-- Collection 2: Chronograph -->
+                <div class="collection-card" onclick="window.location.href='men.html?category=chronograph'">
+                    <img src="images/collections/chronograph.jpg" alt="Chronograph Collection" loading="lazy">
+                    <div class="collection-overlay">
+                        <h3>Chronograph</h3>
+                        <p>Precision timing instruments</p>
+                        <span class="collection-count">10+ Models</span>
+                    </div>
+                </div>
+
+                <!-- Collection 3: Luxury Leather -->
+                <div class="collection-card" onclick="window.location.href='men.html?category=luxury-leather'">
+                    <img src="images/collections/luxury-leather.jpg" alt="Luxury Leather Watches" loading="lazy">
+                    <div class="collection-overlay">
+                        <h3>Luxury Leather</h3>
+                        <p>Timeless elegance with premium straps</p>
+                        <span class="collection-count">15+ Models</span>
+                    </div>
+                </div>
+
+                <!-- Collection 4: Smart & Sport -->
+                <div class="collection-card" onclick="window.location.href='men.html?category=smart'">
+                    <img src="images/collections/smart.jpg" alt="Smart Watches" loading="lazy">
+                    <div class="collection-overlay">
+                        <h3>Smart & Sport</h3>
+                        <p>Technology meets sophistication</p>
+                        <span class="collection-count">8+ Models</span>
+                    </div>
+                </div>
+
+                <!-- Collection 5: Men's Collection -->
+                <div class="collection-card" onclick="window.location.href='men.html'">
+                    <img src="images/menu/men-category.jpg" alt="Men's Watches" loading="lazy">
+                    <div class="collection-overlay">
+                        <h3>Men's Collection</h3>
+                        <p>Watches designed for men</p>
+                        <span class="collection-count">20+ Models</span>
+                    </div>
+                </div>
+
+                <!-- Collection 6: Women's Collection -->
+                <div class="collection-card" onclick="window.location.href='women.html'">
+                    <img src="images/menu/women-category.jpg" alt="Women's Watches" loading="lazy">
+                    <div class="collection-overlay">
+                        <h3>Women's Collection</h3>
+                        <p>Elegant timepieces for women</p>
+                        <span class="collection-count">18+ Models</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED SECTION -->
+    <section class="section" style="background: var(--light-grey);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Our Collections?</h2>
+                <p>Curated with precision and passion</p>
+            </div>
+
+            <div class="features-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-xl); margin-top: var(--space-2xl);">
+                <div style="text-align: center; padding: var(--space-xl); background: white; border-radius: 12px;">
+                    <i class="fas fa-gem"
+                        style="font-size: 3rem; color: var(--accent-red); margin-bottom: var(--space-md);"></i>
+                    <h3>Premium Quality</h3>
+                    <p style="color: var(--dark-grey); margin-top: var(--space-sm);">Only the finest timepieces make it
+                        to our collections</p>
+                </div>
+
+                <div style="text-align: center; padding: var(--space-xl); background: white; border-radius: 12px;">
+                    <i class="fas fa-certificate"
+                        style="font-size: 3rem; color: var(--accent-red); margin-bottom: var(--space-md);"></i>
+                    <h3>Authenticity Guaranteed</h3>
+                    <p style="color: var(--dark-grey); margin-top: var(--space-sm);">Every watch comes with a
+                        certificate of authenticity</p>
+                </div>
+
+                <div style="text-align: center; padding: var(--space-xl); background: white; border-radius: 12px;">
+                    <i class="fas fa-shipping-fast"
+                        style="font-size: 3rem; color: var(--accent-red); margin-bottom: var(--space-md);"></i>
+                    <h3>Free Shipping</h3>
+                    <p style="color: var(--dark-grey); margin-top: var(--space-sm);">Complimentary shipping on all
+                        orders</p>
+                </div>
+
+                <div style="text-align: center; padding: var(--space-xl); background: white; border-radius: 12px;">
+                    <i class="fas fa-shield-alt"
+                        style="font-size: 3rem; color: var(--accent-red); margin-bottom: var(--space-md);"></i>
+                    <h3>Warranty Protection</h3>
+                    <p style="color: var(--dark-grey); margin-top: var(--space-sm);">Comprehensive warranty on all
+                        timepieces</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About TM WATCH</h4>
+                    <p
+                        style="color: var(--medium-grey); font-size: var(--text-sm); line-height: 1.8; margin-top: var(--space-md);">
+                        Premium timepiece collection dedicated to precision, elegance, and timeless design.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="men.html">Men's Watches</a></li>
+                        <li><a href="women.html">Women's Watches</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                        <li><a href="best-sellers.html">Best Sellers</a></li>
+                        <li><a href="brands.html">Brands</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Customer Support</h4>
+                    <ul>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="warranty.html">Warranty</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p style="color: var(--medium-grey); font-size: var(--text-sm); margin-top: var(--space-md);">
+                        Subscribe for exclusive offers.
+                    </p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="Your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 TM WATCH. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/modal-system.js"></script>
+    <script src="data/products.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Update cart and wishlist counts
+        window.addEventListener('load', function () {
+            updateCartCount();
+            updateWishlistCount();
+        });
+    </script>
+    <script src="js/dark-mode.js"></script>
+
+    <!-- Mobile Optimization Scripts -->
+    <script src="js/lazy-loading.js"></script>
+    <script src="js/mobile-navigation.js"></script>
+    <script src="js/touch-gestures.js"></script>
+    <script src="js/pwa-installer.js"></script>
+</body>
+
+</html>
