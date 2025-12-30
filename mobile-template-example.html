@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="TM WATCH - Premium Luxury Watches">
+    <title>Mobile-Optimized Template - TM WATCH</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Critical CSS (inline for faster load) -->
+    <style>
+        /* Critical above-the-fold styles */
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .header {
+            height: 60px;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+    </style>
+
+    <!-- Main Stylesheets (load in order) -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/mobile-navigation.css">
+    <link rel="stylesheet" href="css/mobile-responsive.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Theme Color for mobile browsers -->
+    <meta name="theme-color" content="#FF006E">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">TM WATCH</a>
+
+            <!-- Desktop Navigation (hidden on mobile) -->
+            <nav class="nav-menu">
+                <a href="men.html">Men</a>
+                <a href="women.html">Women</a>
+                <a href="collections.html">Collections</a>
+                <a href="sale.html">Sale</a>
+            </nav>
+
+            <!-- Navigation Icons -->
+            <div class="nav-icons">
+                <a href="search.html" class="nav-icon hide-mobile">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="wishlist.html" class="nav-icon hide-mobile">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge" id="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="nav-icon hide-mobile">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cart-count">0</span>
+                </a>
+                <!-- Mobile menu toggle will be added by JavaScript -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <!-- Use data-src for lazy loading -->
+            <img data-src="images/hero-banner.jpg"
+                data-srcset="images/hero-banner-mobile.jpg 480w, images/hero-banner-tablet.jpg 768w, images/hero-banner.jpg 1200w"
+                sizes="100vw" alt="TM WATCH Collection" class="hero-image">
+            <div class="hero-overlay">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Every Moment Matters</h1>
+                        <p>Discover our premium collection of luxury timepieces</p>
+                        <div class="hero-cta">
+                            <a href="collections.html" class="btn btn-primary">Shop Now</a>
+                            <a href="about.html" class="btn btn-white">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="section products-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Featured Products</h2>
+                    <p>Handpicked timepieces for the discerning collector</p>
+                </div>
+
+                <!-- Product Grid (responsive: 4 cols desktop, 2 cols tablet, 1 col mobile) -->
+                <div class="products-grid" id="productsGrid">
+                    <!-- Example Product Card with Lazy Loading -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img data-src="images/product-1.jpg" data-fallback="images/placeholder.jpg"
+                                alt="Chronograph Master" class="product-image">
+                            <span class="product-badge">New</span>
+                            <button class="wishlist-icon" aria-label="Add to wishlist">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-brand">TM WATCH</div>
+                            <h3 class="product-name">Chronograph Master</h3>
+                            <div class="product-rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-count">(128)</span>
+                            </div>
+                            <div class="product-price">₹1,299</div>
+                            <button class="btn btn-primary btn-block">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- More products will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 TM WATCH. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation and Bottom Nav will be added by JavaScript -->
+
+    <!-- Scripts (load in order) -->
+    <!-- Core scripts first -->
+    <script src="js/config.js"></script>
+
+    <!-- Mobile features -->
+    <script src="js/lazy-loading.js"></script>
+    <script src="js/mobile-navigation.js"></script>
+
+    <!-- Page-specific scripts -->
+    <script src="data/products.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Initialize mobile features -->
+    <script>
+        // Update cart and wishlist counts
+        function updateCounts() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+            const cartCount = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+            const wishlistCount = wishlist.length;
+
+            const cartBadge = document.getElementById('cart-count');
+            const wishlistBadge = document.getElementById('wishlist-count');
+
+            if (cartBadge) {
+                cartBadge.textContent = cartCount;
+                cartBadge.style.display = cartCount > 0 ? 'flex' : 'none';
+            }
+
+            if (wishlistBadge) {
+                wishlistBadge.textContent = wishlistCount;
+                wishlistBadge.style.display = wishlistCount > 0 ? 'flex' : 'none';
+            }
+        }
+
+        // Initialize on page load
+        updateCounts();
+
+        // Listen for storage changes
+        window.addEventListener('storage', updateCounts);
+    </script>
+</body>
+
+</html>

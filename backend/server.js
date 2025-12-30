@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 require('dotenv').config();
 
 // Import routes
@@ -10,6 +11,8 @@ const cartRoutes = require('./routes/cart');
 const wishlistRoutes = require('./routes/wishlist');
 const orderRoutes = require('./routes/orders');
 const newsletterRoutes = require('./routes/newsletter');
+const profileRoutes = require('./routes/profile');
+const settingsRoutes = require('./routes/settings');
 
 // Initialize Express app
 const app = express();
@@ -24,6 +27,12 @@ app.use(cors({
     origin: process.env.FRONTEND_URL || 'http://localhost:8000',
     credentials: true
 }));
+
+// Serve uploaded files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Serve frontend static files from parent directory
+app.use(express.static(path.join(__dirname, '..')));
 
 // Body parser
 app.use(bodyParser.json());
@@ -51,7 +60,9 @@ app.get('/', (req, res) => {
             cart: '/api/cart',
             wishlist: '/api/wishlist',
             orders: '/api/orders',
-            newsletter: '/api/newsletter'
+            newsletter: '/api/newsletter',
+            profile: '/api/profile',
+            settings: '/api/settings'
         }
     });
 });
@@ -63,6 +74,8 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/newsletter', newsletterRoutes);
+app.use('/api/profile', profileRoutes);
+app.use('/api/settings', settingsRoutes);
 
 // ============================================
 // ERROR HANDLING

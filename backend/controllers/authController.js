@@ -92,7 +92,9 @@ exports.login = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 phone: user.phone,
-                address: user.address
+                address: user.address,
+                profile_picture: user.profile_picture,
+                newsletter_subscribed: user.newsletter_subscribed
             }
         });
     } catch (error) {
@@ -108,7 +110,7 @@ exports.login = async (req, res) => {
 exports.getProfile = async (req, res) => {
     try {
         const [users] = await db.query(
-            'SELECT id, name, email, phone, address, created_at FROM users WHERE id = ?',
+            'SELECT id, name, email, phone, address, profile_picture, newsletter_subscribed, created_at FROM users WHERE id = ?',
             [req.userId]
         );
 

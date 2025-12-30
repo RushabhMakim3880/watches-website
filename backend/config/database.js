@@ -24,6 +24,7 @@ initFile('cart.json', []);
 initFile('wishlist.json', []);
 initFile('orders.json', []);
 initFile('newsletter.json', []);
+initFile('addresses.json', []);
 
 console.log('✅ JSON file storage initialized:', dataDir);
 
@@ -94,7 +95,19 @@ const query = async (sql, params = []) => {
                 writeFile('users.json', users);
                 return [{ insertId: newUser.id, affectedRows: 1 }];
             } else if (sqlUpper.startsWith('UPDATE')) {
-                // Simple update logic
+                // Handle UPDATE users SET ... WHERE id = ?
+                // Simple update logic - for profile updates
+                const users = readFile('users.json');
+                const userId = params[params.length - 1]; // Last param is always user ID
+                const user = users.find(u => u.id === parseInt(userId));
+
+                if (user && sql.includes('profile_picture')) {
+                    user.profile_picture = params[0];
+                } else if (user && sql.includes('password')) {
+                    user.password = params[0];
+                }
+
+                writeFile('users.json', users);
                 return [{ affectedRows: 1 }];
             }
         }
@@ -176,6 +189,82 @@ const query = async (sql, params = []) => {
                 newsletter.push(newSub);
                 writeFile('newsletter.json', newsletter);
                 return [{ insertId: newSub.id, affectedRows: 1 }];
+            }
+        }
+
+        // Addresses queries
+        if (sqlUpper.includes('FROM ADDRESSES') || sqlUpper.includes('FROM addresses')) {
+            const addresses = readFile('addresses.json');
+
+            if (sqlUpper.startsWith('SELECT')) {
+                if (sql.includes('WHERE user_id = ?')) {
+                    const results = addresses.filter(a => a.user_id === parseInt(params[0]));
+                    return [results];
+                } else if (sql.includes('WHERE id = ? AND user_id = ?')) {
+                    const results = addresses.filter(a => a.id === parseInt(params[0]) && a.user_id === parseInt(params[1]));
+                    return [results];
+                }
+                return [addresses];
+            } else if (sqlUpper.startsWith('INSERT')) {
+                const newAddress = {
+                    id: addresses.length + 1,
+                    user_id: parseInt(params[0]),
+                    label: params[1],
+                    full_name: params[2],
+                    phone: params[3],
+                    address_line1: params[4],
+                    address_line2: params[5],
+                    city: params[6],
+                    state: params[7],
+                    pincode: params[8],
+                    is_default: parseInt(params[9]) || 0,
+                    created_at: new Date().toISOString()
+                };
+                addresses.push(newAddress);
+                writeFile('addresses.json', addresses);
+                return [{ insertId: newAddress.id, affectedRows: 1 }];
+            } else if (sqlUpper.startsWith('UPDATE')) {
+                if (sql.includes('is_default = 0')) {
+                    // Unset all defaults for user
+                    const userId = parseInt(params[0]);
+                    addresses.forEach(a => {
+                        if (a.user_id === userId) a.is_default = 0;
+                    });
+                    writeFile('addresses.json', addresses);
+                    return [{ affectedRows: 1 }];
+                } else if (sql.includes('is_default = 1')) {
+                    // Set specific address as default
+                    const addressId = parseInt(params[0]);
+                    const userId = parseInt(params[1]);
+                    const address = addresses.find(a => a.id === addressId && a.user_id === userId);
+                    if (address) address.is_default = 1;
+                    writeFile('addresses.json', addresses);
+                    return [{ affectedRows: 1 }];
+                } else {
+                    // Full update
+                    const addressId = parseInt(params[9]);
+                    const userId = parseInt(params[10]);
+                    const address = addresses.find(a => a.id === addressId && a.user_id === userId);
+                    if (address) {
+                        address.label = params[0];
+                        address.full_name = params[1];
+                        address.phone = params[2];
+                        address.address_line1 = params[3];
+                        address.address_line2 = params[4];
+                        address.city = params[5];
+                        address.state = params[6];
+                        address.pincode = params[7];
+                        address.is_default = parseInt(params[8]) || 0;
+                    }
+                    writeFile('addresses.json', addresses);
+                    return [{ affectedRows: 1 }];
+                }
+            } else if (sqlUpper.startsWith('DELETE')) {
+                const addressId = parseInt(params[0]);
+                const userId = parseInt(params[1]);
+                const filtered = addresses.filter(a => !(a.id === addressId && a.user_id === userId));
+                writeFile('addresses.json', filtered);
+                return [{ affectedRows: addresses.length - filtered.length }];
             }
         }
 

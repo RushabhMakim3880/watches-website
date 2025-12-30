@@ -131,7 +131,7 @@ exports.getOrderDetails = async (req, res) => {
         }
 
         const [items] = await db.query(
-            `SELECT oi.*, p.name, p.image, p.brand 
+            `SELECT oi.*, p.name as product_name, p.image, p.brand 
              FROM order_items oi 
              JOIN products p ON oi.product_id = p.id 
              WHERE oi.order_id = ?`,

@@ -3,14 +3,29 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="description"
     content="TM WATCH - Premium luxury watches for professionals and enthusiasts. Discover our collection of automatic, chronograph, and luxury timepieces.">
   <meta name="keywords" content="luxury watches, automatic watches, chronograph, premium timepieces, watch collection">
+
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#FF006E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TM WATCH">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TM WATCH - Every Moment Matters">
+  <meta property="og:description" content="Premium luxury watches. Discover our exclusive collection of timepieces.">
+  <meta property="og:image" content="/images/og-image.jpg">
+
   <title>TM WATCH - Every Second Counts. Every Moment Matters.</title>
 
-  <!-- Favicon -->
+  <!-- Favicon & App Icons -->
   <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
+  <link rel="manifest" href="manifest.json">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="styles.css">
@@ -23,6 +38,11 @@
   <link rel="stylesheet" href="css/ar-tryon.css">
   <link rel="stylesheet" href="css/parallax.css">
   <link rel="stylesheet" href="css/whatsapp-chat.css">
+  <link rel="stylesheet" href="css/user-dropdown.css">
+
+  <!-- Mobile Optimization Stylesheets -->
+  <link rel="stylesheet" href="css/mobile-navigation.css">
+  <link rel="stylesheet" href="css/mobile-responsive.css">
 
   <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -134,9 +154,74 @@
           <i class="fas fa-shopping-cart"></i>
           <span class="badge" id="cartCount">0</span>
         </div>
+
+        <!-- User Dropdown (shown when logged in) -->
+        <div class="user-dropdown" id="userDropdown">
+          <button class="user-dropdown-trigger" id="userDropdownTrigger">
+            <img src="images/default-avatar.png" alt="User" class="user-avatar" id="dropdownUserAvatar">
+            <span class="user-name" id="dropdownUserName">User</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+
+          <div class="user-dropdown-menu">
+            <div class="user-dropdown-header">
+              <img src="images/default-avatar.png" alt="User" class="user-avatar-large" id="dropdownUserAvatarLarge">
+              <h4 class="user-name-large" id="dropdownUserNameLarge">User Name</h4>
+              <p class="user-email" id="dropdownUserEmail">user@example.com</p>
+            </div>
+
+            <div class="user-dropdown-body">
+              <a href="profile.html" class="user-dropdown-item">
+                <i class="fas fa-user"></i>
+                <span>My Profile</span>
+              </a>
+              <a href="profile.html#orders" class="user-dropdown-item">
+                <i class="fas fa-shopping-bag"></i>
+                <span>My Orders</span>
+              </a>
+              <a href="profile.html#wishlist" class="user-dropdown-item">
+                <i class="fas fa-heart"></i>
+                <span>My Wishlist</span>
+              </a>
+              <a href="profile.html#addresses" class="user-dropdown-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Saved Addresses</span>
+              </a>
+
+              <div class="user-dropdown-divider"></div>
+
+              <div class="theme-toggle user-dropdown-item">
+                <div class="theme-toggle-label">
+                  <i class="fas fa-moon"></i>
+                  <span>Dark Mode</span>
+                </div>
+                <label class="theme-switch">
+                  <input type="checkbox" id="darkModeToggle">
+                  <span class="theme-switch-slider"></span>
+                </label>
+              </div>
+
+              <div class="user-dropdown-divider"></div>
+
+              <a href="#" class="user-dropdown-item logout-item" id="dropdownLogout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Login Button (shown when not logged in) -->
+        <div class="nav-icon" id="loginBtn">
+          <a href="login.html">
+            <i class="far fa-user"></i>
+          </a>
+        </div>
+
         <div class="nav-icon" id="accountIcon">
           <i class="far fa-user"></i>
         </div>
+
 
         <!-- Mobile Menu Toggle -->
         <div class="mobile-menu-toggle" id="mobileMenuToggle">
@@ -666,6 +751,13 @@
   <script src="js/ar-tryon.js"></script>
   <script src="js/parallax.js"></script>
   <script src="js/whatsapp-chat.js"></script>
+  <script src="js/user-dropdown.js"></script>
+
+  <!-- Mobile Optimization Scripts -->
+  <script src="js/lazy-loading.js"></script>
+  <script src="js/mobile-navigation.js"></script>
+  <script src="js/touch-gestures.js"></script>
+  <script src="js/pwa-installer.js"></script>
 </body>
 
 </html>

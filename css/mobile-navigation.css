@@ -1,0 +1,402 @@
+/* ============================================
+   MOBILE NAVIGATION SYSTEM
+   Hamburger Menu + Bottom Navigation Bar
+   ============================================ */
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+    display: none;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: var(--black);
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.mobile-menu-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Mobile Menu Drawer */
+.mobile-menu-drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 400px;
+    height: 100%;
+    background-color: var(--primary-white);
+    z-index: 1000;
+    transition: right 0.3s ease-in-out;
+    overflow-y: auto;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-drawer.active {
+    right: 0;
+}
+
+/* Mobile Menu Header */
+.mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid var(--medium-grey);
+}
+
+.mobile-menu-header .logo {
+    font-size: var(--text-xl);
+}
+
+.mobile-menu-close {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--dark-grey);
+}
+
+/* Mobile Menu Content */
+.mobile-menu-content {
+    padding: 20px;
+}
+
+.mobile-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.mobile-nav-links li {
+    margin-bottom: 0;
+}
+
+.mobile-nav-links a {
+    display: flex;
+    align-items: center;
+    padding: 16px 12px;
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
+    color: var(--dark-grey);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.mobile-nav-links a:hover,
+.mobile-nav-links a.active {
+    background-color: var(--light-grey);
+    color: var(--accent-red);
+}
+
+.mobile-nav-links i {
+    margin-right: 12px;
+    font-size: 20px;
+    width: 24px;
+}
+
+/* Mobile Menu User Section */
+.mobile-menu-user {
+    padding: 20px;
+    background-color: var(--light-grey);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.mobile-menu-user.logged-out {
+    text-align: center;
+}
+
+.mobile-menu-user .user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.mobile-menu-user .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--gradient-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: var(--font-bold);
+    font-size: var(--text-lg);
+}
+
+.mobile-menu-user .user-details h4 {
+    margin: 0;
+    font-size: var(--text-base);
+    color: var(--black);
+}
+
+.mobile-menu-user .user-details p {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--dark-grey);
+}
+
+/* Mobile Menu Actions */
+.mobile-menu-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.mobile-menu-actions .btn {
+    flex: 1;
+    padding: 12px;
+    font-size: var(--text-sm);
+}
+
+/* ============================================
+   BOTTOM NAVIGATION BAR (Mobile Only)
+   ============================================ */
+.bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--primary-white);
+    border-top: 1px solid var(--medium-grey);
+    padding: 8px 0;
+    z-index: 998;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-nav-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    min-width: 60px;
+    text-decoration: none;
+    color: var(--dark-grey);
+    transition: all 0.2s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.bottom-nav-item i {
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+.bottom-nav-item span {
+    font-size: 11px;
+    font-weight: var(--font-medium);
+}
+
+.bottom-nav-item.active {
+    color: var(--accent-red);
+}
+
+.bottom-nav-item .badge {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    background-color: var(--accent-red);
+    color: white;
+    font-size: 10px;
+    font-weight: var(--font-bold);
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Show mobile navigation on tablets and phones */
+@media (max-width: 968px) {
+
+    /* Hide desktop navigation */
+    .nav-menu {
+        display: none;
+    }
+
+    /* Show mobile menu toggle */
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    /* Show bottom navigation */
+    .bottom-nav {
+        display: block;
+    }
+
+    /* Add padding to body for bottom nav */
+    body {
+        padding-bottom: 65px;
+    }
+
+    /* Adjust header for mobile */
+    .header {
+        height: 60px;
+    }
+
+    .header .logo {
+        font-size: var(--text-lg);
+    }
+
+    /* Hide some nav icons on mobile (they're in bottom nav) */
+    .nav-icons .nav-icon:not(.mobile-menu-toggle) {
+        display: none;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .mobile-menu-drawer {
+        width: 90%;
+    }
+
+    .bottom-nav-item {
+        min-width: 50px;
+        padding: 6px 8px;
+    }
+
+    .bottom-nav-item i {
+        font-size: 20px;
+    }
+
+    .bottom-nav-item span {
+        font-size: 10px;
+    }
+}
+
+/* ============================================
+   MOBILE TOUCH OPTIMIZATION
+   ============================================ */
+
+/* Ensure all interactive elements are touch-friendly */
+@media (max-width: 968px) {
+
+    /* Minimum touch target size: 44x44px */
+    .btn,
+    button,
+    a.btn,
+    input[type="submit"],
+    input[type="button"] {
+        min-height: 44px;
+        padding: 12px 20px;
+    }
+
+    /* Larger product cards on mobile */
+    .product-card {
+        min-height: 380px;
+    }
+
+    /* Better spacing for form elements */
+    input,
+    select,
+    textarea {
+        min-height: 48px;
+        font-size: 16px;
+        /* Prevents zoom on iOS */
+        padding: 12px 16px;
+    }
+
+    /* Larger checkboxes and radio buttons */
+    input[type="checkbox"],
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Better tap targets for icons */
+    .nav-icon,
+    .wishlist-icon,
+    .cart-icon {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* ============================================
+   MOBILE ANIMATIONS (Reduced Motion)
+   ============================================ */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+    .mobile-menu-drawer,
+    .mobile-menu-overlay,
+    .mobile-menu-toggle span,
+    .bottom-nav-item {
+        transition: none;
+    }
+}
+
+/* Smooth scrolling for mobile */
+@media (max-width: 968px) {
+    html {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+}

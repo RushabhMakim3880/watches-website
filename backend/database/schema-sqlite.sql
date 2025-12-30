@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS users (
     password TEXT NOT NULL,
     phone TEXT,
     address TEXT,
+    profile_picture TEXT DEFAULT '/images/default-avatar.png',
+    newsletter_subscribed INTEGER DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -141,3 +143,27 @@ CREATE TABLE IF NOT EXISTS contact_messages (
 );
 
 CREATE INDEX IF NOT EXISTS idx_contact_status ON contact_messages(status);
+
+-- ============================================
+-- Addresses Table
+-- ============================================
+CREATE TABLE IF NOT EXISTS addresses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    label TEXT NOT NULL DEFAULT 'Home',
+    full_name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    address_line1 TEXT NOT NULL,
+    address_line2 TEXT,
+    city TEXT NOT NULL,
+    state TEXT NOT NULL,
+    pincode TEXT NOT NULL,
+    is_default INTEGER DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CHECK (label IN ('Home', 'Work', 'Other'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_addresses_user ON addresses(user_id);
+CREATE INDEX IF NOT EXISTS idx_addresses_default ON addresses(user_id, is_default);

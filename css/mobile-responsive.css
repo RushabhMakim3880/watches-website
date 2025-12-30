@@ -1,0 +1,477 @@
+/* ============================================
+   MOBILE RESPONSIVE PRODUCT GRID
+   Optimized for mobile devices
+   ============================================ */
+
+/* Mobile Product Grid Adjustments */
+@media (max-width: 968px) {
+
+    /* 2 columns on tablets */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+    }
+
+    /* Larger product images on mobile */
+    .product-image-container {
+        height: 220px;
+    }
+
+    /* Adjust product info padding */
+    .product-info {
+        padding: var(--space-sm);
+    }
+
+    /* Smaller text on mobile */
+    .product-name {
+        font-size: var(--text-base);
+    }
+
+    .product-brand {
+        font-size: 10px;
+    }
+
+    /* Always show wishlist icon on mobile */
+    .wishlist-icon {
+        opacity: 1;
+    }
+
+    /* Better product card spacing */
+    .product-card {
+        margin-bottom: 0;
+    }
+}
+
+/* Single column on small phones */
+@media (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    /* Larger images for single column */
+    .product-image-container {
+        height: 280px;
+    }
+
+    /* Full width product cards */
+    .product-card {
+        max-width: 100%;
+    }
+}
+
+/* ============================================
+   MOBILE COLLECTIONS GRID
+   ============================================ */
+
+@media (max-width: 968px) {
+    .collections-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+    }
+
+    .collection-card {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .collections-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .collection-card {
+        height: 300px;
+    }
+}
+
+/* ============================================
+   MOBILE HERO SECTION
+   ============================================ */
+
+@media (max-width: 968px) {
+    .hero {
+        height: 400px;
+    }
+
+    .hero-content h1 {
+        font-size: var(--text-3xl);
+    }
+
+    .hero-content p {
+        font-size: var(--text-base);
+    }
+
+    .hero-cta {
+        flex-direction: column;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 350px;
+    }
+
+    .hero-content h1 {
+        font-size: var(--text-2xl);
+    }
+}
+
+/* ============================================
+   MOBILE PAGE HERO
+   ============================================ */
+
+@media (max-width: 968px) {
+    .page-hero {
+        padding: var(--space-2xl) 0 var(--space-lg);
+    }
+
+    .page-hero h1 {
+        font-size: var(--text-3xl);
+    }
+
+    .page-hero p {
+        font-size: var(--text-base);
+    }
+}
+
+/* ============================================
+   MOBILE FILTERS
+   ============================================ */
+
+@media (max-width: 968px) {
+    .filters-container {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-group select {
+        width: 100%;
+    }
+}
+
+/* ============================================
+   MOBILE SECTION SPACING
+   ============================================ */
+
+@media (max-width: 968px) {
+    .section {
+        padding: var(--space-2xl) 0;
+    }
+
+    .section-header {
+        margin-bottom: var(--space-lg);
+    }
+
+    .section-header h2 {
+        font-size: var(--text-2xl);
+    }
+
+    .section-header p {
+        font-size: var(--text-base);
+    }
+
+    .container {
+        padding: 0 var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: var(--space-xl) 0;
+    }
+
+    .container {
+        padding: 0 var(--space-sm);
+    }
+}
+
+/* ============================================
+   MOBILE TYPOGRAPHY
+   ============================================ */
+
+@media (max-width: 968px) {
+    h1 {
+        font-size: var(--text-3xl);
+    }
+
+    h2 {
+        font-size: var(--text-2xl);
+    }
+
+    h3 {
+        font-size: var(--text-xl);
+    }
+
+    h4 {
+        font-size: var(--text-lg);
+    }
+
+    h5,
+    h6 {
+        font-size: var(--text-base);
+    }
+}
+
+/* ============================================
+   MOBILE BUTTONS
+   ============================================ */
+
+@media (max-width: 968px) {
+    .btn {
+        padding: 14px 24px;
+        font-size: var(--text-base);
+    }
+
+    .btn-block {
+        width: 100%;
+        display: block;
+    }
+}
+
+/* ============================================
+   MOBILE CARDS & MODALS
+   ============================================ */
+
+@media (max-width: 968px) {
+
+    /* Full-width modals on mobile */
+    .modal-content {
+        width: 95%;
+        max-width: 500px;
+        margin: 20px auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    /* Better modal padding */
+    .modal-body {
+        padding: var(--space-md);
+    }
+
+    /* Larger close button */
+    .modal-close,
+    .close-modal {
+        width: 44px;
+        height: 44px;
+        font-size: 24px;
+    }
+}
+
+/* ============================================
+   MOBILE FORMS
+   ============================================ */
+
+@media (max-width: 968px) {
+
+    /* Better form spacing */
+    .form-group {
+        margin-bottom: var(--space-md);
+    }
+
+    /* Larger form inputs */
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+        /* Prevents iOS zoom */
+        padding: 14px 16px;
+        border-radius: 8px;
+    }
+
+    /* Stack form buttons */
+    .form-actions {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+}
+
+/* ============================================
+   MOBILE TABLES
+   ============================================ */
+
+@media (max-width: 968px) {
+
+    /* Responsive tables */
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Card-style table on mobile */
+    .mobile-table-card {
+        display: block;
+        margin-bottom: var(--space-md);
+        border: 1px solid var(--medium-grey);
+        border-radius: 8px;
+        padding: var(--space-md);
+    }
+}
+
+/* ============================================
+   MOBILE CART & CHECKOUT
+   ============================================ */
+
+@media (max-width: 968px) {
+
+    /* Stack cart layout */
+    .cart-container {
+        flex-direction: column;
+    }
+
+    .cart-items,
+    .cart-summary {
+        width: 100%;
+    }
+
+    /* Larger cart item cards */
+    .cart-item {
+        padding: var(--space-md);
+    }
+
+    /* Better quantity controls */
+    .quantity-controls button {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+/* ============================================
+   MOBILE FOOTER
+   ============================================ */
+
+@media (max-width: 968px) {
+    footer {
+        padding: var(--space-xl) 0;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: var(--space-lg);
+    }
+
+    .footer-section {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+}
+
+/* ============================================
+   MOBILE UTILITIES
+   ============================================ */
+
+/* Hide on mobile */
+.hide-mobile {
+    display: none !important;
+}
+
+/* Show only on mobile */
+.show-mobile {
+    display: block !important;
+}
+
+@media (min-width: 969px) {
+    .hide-desktop {
+        display: none !important;
+    }
+
+    .show-mobile {
+        display: none !important;
+    }
+
+    .hide-mobile {
+        display: block !important;
+    }
+}
+
+/* ============================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 968px) {
+
+    /* Reduce animations on mobile */
+    * {
+        animation-duration: 0.3s !important;
+        transition-duration: 0.2s !important;
+    }
+
+    /* Simplify shadows */
+    .product-card:hover,
+    .collection-card:hover {
+        box-shadow: var(--shadow-md);
+    }
+
+    /* Disable hover effects on touch devices */
+    @media (hover: none) {
+
+        .product-card:hover,
+        .collection-card:hover,
+        .btn:hover {
+            transform: none;
+        }
+    }
+}
+
+/* ============================================
+   MOBILE ACCESSIBILITY
+   ============================================ */
+
+@media (max-width: 968px) {
+
+    /* Larger focus indicators */
+    *:focus {
+        outline: 3px solid var(--accent-red);
+        outline-offset: 2px;
+    }
+
+    /* Better link visibility */
+    a {
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        transition: text-decoration-color 0.2s;
+    }
+
+    a:hover,
+    a:focus {
+        text-decoration-color: currentColor;
+    }
+}
+
+/* ============================================
+   MOBILE SAFE AREAS (iPhone X+)
+   ============================================ */
+
+@supports (padding: max(0px)) {
+    @media (max-width: 968px) {
+        body {
+            padding-left: max(0px, env(safe-area-inset-left));
+            padding-right: max(0px, env(safe-area-inset-right));
+        }
+
+        .bottom-nav {
+            padding-bottom: max(8px, env(safe-area-inset-bottom));
+        }
+
+        .header {
+            padding-top: max(0px, env(safe-area-inset-top));
+        }
+    }
+}
