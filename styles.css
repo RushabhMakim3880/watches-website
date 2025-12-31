@@ -389,6 +389,8 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 3rem;
+  /* Added gap between logo, nav-menu, and nav-icons */
 }
 
 .logo {
@@ -397,20 +399,33 @@ p {
   font-weight: var(--font-extrabold);
   letter-spacing: 1px;
   color: var(--black);
+  flex-shrink: 0;
+  /* Prevent logo from shrinking */
+  margin-right: auto;
+  /* Push logo to the left corner */
 }
 
 .nav-menu {
   display: flex;
-  gap: var(--space-lg);
+  gap: 2.5rem;
+  /* Increased from var(--space-lg) (2rem) for better spacing */
   align-items: center;
+  margin-right: 3rem;
+  /* Added space between nav menu and search icons */
 }
 
 .nav-menu a {
-  font-size: var(--text-sm);
+  font-size: 0.9375rem;
+  /* Increased from var(--text-sm) (0.875rem) for better readability */
   font-weight: var(--font-medium);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  /* Increased from 0.5px for better spacing between letters */
   position: relative;
+  padding: 0.5rem 0;
+  /* Added vertical padding for better click area */
+  white-space: nowrap;
+  /* Prevent menu items from wrapping */
 }
 
 .nav-menu a::after {
@@ -431,8 +446,11 @@ p {
 
 .nav-icons {
   display: flex;
-  gap: var(--space-md);
+  gap: 2rem;
+  /* Increased from var(--space-md) (1.5rem) for better spacing */
   align-items: center;
+  flex-shrink: 0;
+  /* Prevent icons from shrinking */
 }
 
 .nav-icon {
