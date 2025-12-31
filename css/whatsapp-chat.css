@@ -312,16 +312,27 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .whatsapp-float {
-        bottom: 20px;
-        right: 90px;
-        width: 55px;
-        height: 55px;
+        bottom: 100px;
+        /* Moved higher to avoid blocking bottom navigation */
+        right: 20px;
+        /* Moved to right edge for better accessibility */
+        width: 50px;
+        /* Slightly smaller on mobile */
+        height: 50px;
+    }
+
+    .whatsapp-float i {
+        font-size: 1.5rem;
+        /* Smaller icon on mobile */
     }
 
     .whatsapp-chat-popup {
         width: calc(100vw - 20px);
         right: 10px;
-        bottom: 90px;
+        bottom: 170px;
+        /* Adjusted to match new button position */
+        max-height: 400px;
+        /* Reduced height for mobile */
     }
 
     .whatsapp-tooltip {

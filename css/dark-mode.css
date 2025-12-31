@@ -488,3 +488,33 @@ body {
     background-color: var(--light-grey);
     color: var(--dark-grey) !important;
 }
+
+/* ============================================
+   MOBILE RESPONSIVE - DARK MODE TOGGLE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .theme-toggle {
+        /* Move to top-right on mobile to avoid bottom nav conflict */
+        top: 80px;
+        /* Below header */
+        right: 15px;
+        bottom: auto;
+        /* Remove bottom positioning */
+        width: 50px;
+        /* Smaller on mobile */
+        height: 50px;
+        box-shadow: var(--shadow-md);
+        /* Lighter shadow on mobile */
+    }
+
+    .theme-toggle i {
+        font-size: 1.2rem;
+        /* Smaller icon */
+    }
+
+    .theme-toggle:hover {
+        transform: scale(1.05) rotate(10deg);
+        /* Less dramatic on mobile */
+    }
+}

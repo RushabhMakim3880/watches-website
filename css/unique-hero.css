@@ -665,30 +665,91 @@
 @media (max-width: 768px) {
     .unique-hero {
         min-height: auto;
-        padding: var(--space-2xl) 0;
+        /* Remove fixed height on mobile */
+        padding: 4rem 0 2rem;
+        /* Reduced vertical padding */
+    }
+
+    .unique-hero-container {
+        padding: 0 1rem;
+        /* Better horizontal padding */
+    }
+
+    .hero-badge {
+        font-size: 0.7rem;
+        /* Smaller badge */
+        padding: 0.4rem 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+        /* Better mobile scaling */
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+        /* Better mobile scaling */
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+        max-width: 100%;
+        /* Prevent truncation */
+        overflow-wrap: break-word;
+        /* Wrap long words */
     }
 
     .hero-features {
         flex-direction: column;
-        gap: var(--space-md);
+        /* Stack vertically */
+        gap: 1rem;
+        /* Reduced gap */
+        margin-bottom: 1.5rem;
+        /* Less vertical space */
+    }
+
+    .hero-feature {
+        text-align: center;
+        /* Center on mobile */
+    }
+
+    .feature-number {
+        font-size: 1.8rem;
+        /* Smaller numbers */
+    }
+
+    .feature-label {
+        font-size: 0.75rem;
+        /* Smaller labels */
     }
 
     .hero-cta-group {
         flex-direction: column;
+        /* Stack buttons */
+        gap: 0.75rem;
     }
 
     .hero-btn {
         width: 100%;
+        /* Full width buttons */
         text-align: center;
+        padding: 0.875rem 2rem;
+        /* Slightly smaller padding */
+        font-size: 0.9rem;
     }
 
     .hero-right {
-        height: 300px;
+        height: 250px;
+        /* Reduced height */
+        margin-top: 2rem;
     }
 
     .watch-card {
-        width: 150px !important;
-        padding: var(--space-sm);
+        width: 140px !important;
+        /* Smaller cards */
+        padding: 0.5rem;
+        /* Less padding */
     }
 
     .watch-card-1 {
@@ -704,5 +765,25 @@
     .watch-card-3 {
         bottom: 5%;
         left: 10%;
+    }
+
+    .watch-name {
+        font-size: 0.8rem;
+        /* Smaller text */
+    }
+
+    .watch-price {
+        font-size: 1rem;
+        /* Smaller price */
+    }
+
+    .scroll-indicator {
+        bottom: 20px;
+        /* Closer to bottom */
+    }
+
+    .scroll-indicator i {
+        font-size: 1.5rem;
+        /* Smaller icon */
     }
 }
