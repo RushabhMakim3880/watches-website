@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - TM WATCH</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset body margin for full-screen layout */
+        body {
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Split Screen Container */
+        .auth-split-container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Left Side - Visual Branding */
+        .auth-visual-side {
+            flex: 1;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-3xl);
+        }
+
+        .auth-visual-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--primary-white);
+            max-width: 500px;
+        }
+
+        .auth-visual-logo {
+            font-family: var(--font-secondary);
+            font-size: 3rem;
+            font-weight: var(--font-extrabold);
+            letter-spacing: 2px;
+            margin-bottom: var(--space-lg);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .auth-visual-tagline {
+            font-size: var(--text-xl);
+            font-weight: var(--font-light);
+            margin-bottom: var(--space-xl);
+            opacity: 0.9;
+        }
+
+        .auth-visual-features {
+            display: grid;
+            gap: var(--space-md);
+            margin-top: var(--space-2xl);
+        }
+
+        .auth-feature-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all var(--transition-base);
+        }
+
+        .auth-feature-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .auth-feature-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-lg);
+        }
+
+        .auth-feature-text {
+            text-align: left;
+            flex: 1;
+        }
+
+        .auth-feature-title {
+            font-weight: var(--font-semibold);
+            margin-bottom: 4px;
+        }
+
+        .auth-feature-desc {
+            font-size: var(--text-sm);
+            opacity: 0.7;
+        }
+
+        /* Animated Background Elements */
+        .auth-bg-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .auth-bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .auth-bg-shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .auth-bg-shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 5s;
+            background: radial-gradient(circle, #764ba2 0%, transparent 70%);
+        }
+
+        .auth-bg-shape:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 10s;
+            background: radial-gradient(circle, #f093fb 0%, transparent 70%);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        /* Right Side - Form */
+        .auth-form-side {
+            flex: 1;
+            background: var(--primary-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-2xl);
+            position: relative;
+        }
+
+        .auth-form-wrapper {
+            width: 100%;
+            max-width: 480px;
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .auth-back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--dark-grey);
+            text-decoration: none;
+            margin-bottom: var(--space-xl);
+            font-size: var(--text-sm);
+            transition: color var(--transition-fast);
+        }
+
+        .auth-back-link:hover {
+            color: #667eea;
+        }
+
+        .auth-form-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .auth-form-header h1 {
+            font-size: var(--text-4xl);
+            margin-bottom: var(--space-sm);
+            color: var(--black);
+        }
+
+        .auth-form-header p {
+            color: var(--dark-grey);
+            font-size: var(--text-base);
+        }
+
+        .admin-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            font-size: var(--text-sm);
+            font-weight: var(--font-semibold);
+            margin-bottom: var(--space-md);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-sm);
+            font-weight: var(--font-semibold);
+            color: var(--black);
+            font-size: var(--text-sm);
+        }
+
+        .form-input-wrapper {
+            position: relative;
+        }
+
+        .form-input-icon {
+            position: absolute;
+            left: var(--space-md);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dark-grey);
+            opacity: 0.5;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: var(--space-md) var(--space-md) var(--space-md) 45px;
+            border: 2px solid var(--medium-grey);
+            border-radius: var(--radius-md);
+            font-size: var(--text-base);
+            transition: all var(--transition-base);
+            font-family: var(--font-primary);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+            font-size: var(--text-sm);
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: var(--font-medium);
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .btn-block {
+            width: 100%;
+            padding: var(--space-md);
+            font-size: var(--text-lg);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .btn-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .admin-notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-top: var(--space-xl);
+            display: flex;
+            align-items: start;
+            gap: var(--space-sm);
+        }
+
+        .admin-notice i {
+            color: #856404;
+            font-size: var(--text-lg);
+            margin-top: 2px;
+        }
+
+        .admin-notice-text {
+            color: #856404;
+            font-size: var(--text-sm);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .auth-split-container {
+                flex-direction: column;
+            }
+
+            .auth-visual-side {
+                min-height: 40vh;
+                padding: var(--space-xl);
+            }
+
+            .auth-visual-logo {
+                font-size: 2rem;
+            }
+
+            .auth-visual-features {
+                display: none;
+            }
+
+            .auth-form-side {
+                padding: var(--space-xl) var(--space-md);
+            }
+
+            .auth-form-header h1 {
+                font-size: var(--text-3xl);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">TM WATCH</a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="men.html">Men</a>
+                <a href="women.html">Women</a>
+                <a href="new-arrivals.html">New Arrivals</a>
+                <a href="best-sellers.html">Best Sellers</a>
+                <a href="brands.html">Brands</a>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+            <div class="nav-icons">
+                <div class="nav-icon" id="searchIcon"><i class="fas fa-search"></i></div>
+                <div class="nav-icon" id="wishlistIcon"><i class="far fa-heart"></i><span class="badge"
+                        id="wishlistCount">0</span></div>
+                <div class="nav-icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span class="badge"
+                        id="cartCount">0</span></div>
+                <div class="nav-icon" id="loginBtn">
+                    <a href="login.html">
+                        <i class="far fa-user"></i>
+                    </a>
+                </div>
+                <div class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="auth-split-container">
+        <!-- Left Side - Visual Branding -->
+        <div class="auth-visual-side">
+            <div class="auth-bg-shapes">
+                <div class="auth-bg-shape"></div>
+                <div class="auth-bg-shape"></div>
+                <div class="auth-bg-shape"></div>
+            </div>
+
+            <div class="auth-visual-content">
+                <div class="auth-visual-logo">TM WATCH</div>
+                <p class="auth-visual-tagline">Admin Control Panel</p>
+
+                <div class="auth-visual-features">
+                    <div class="auth-feature-item">
+                        <div class="auth-feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="auth-feature-text">
+                            <div class="auth-feature-title">Secure Access</div>
+                            <div class="auth-feature-desc">Protected admin authentication</div>
+                        </div>
+                    </div>
+
+                    <div class="auth-feature-item">
+                        <div class="auth-feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="auth-feature-text">
+                            <div class="auth-feature-title">Analytics Dashboard</div>
+                            <div class="auth-feature-desc">Real-time business insights</div>
+                        </div>
+                    </div>
+
+                    <div class="auth-feature-item">
+                        <div class="auth-feature-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="auth-feature-text">
+                            <div class="auth-feature-title">Full Control</div>
+                            <div class="auth-feature-desc">Manage products, orders & users</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Form -->
+        <div class="auth-form-side">
+            <div class="auth-form-wrapper">
+                <a href="index.html" class="auth-back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Website
+                </a>
+
+                <div class="auth-form-header">
+                    <span class="admin-badge"><i class="fas fa-shield-alt"></i> Admin Access</span>
+                    <h1>Admin Login</h1>
+                    <p>Sign in to access the admin control panel</p>
+                </div>
+
+                <!-- Admin Login Form -->
+                <form onsubmit="handleAdminLogin(event)">
+                    <div class="form-group">
+                        <label for="adminEmail">Admin Email</label>
+                        <div class="form-input-wrapper">
+                            <i class="fas fa-user-shield form-input-icon"></i>
+                            <input type="email" id="adminEmail" required placeholder="admin@tmwatch.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminPassword">Password</label>
+                        <div class="form-input-wrapper">
+                            <i class="fas fa-lock form-input-icon"></i>
+                            <input type="password" id="adminPassword" required placeholder="Enter admin password">
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox"> Remember me
+                        </label>
+                        <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-block">
+                        <i class="fas fa-sign-in-alt"></i> Admin Login
+                    </button>
+                </form>
+
+                <!-- Admin Notice -->
+                <div class="admin-notice">
+                    <i class="fas fa-info-circle"></i>
+                    <div class="admin-notice-text">
+                        <strong>Admin Access Only:</strong> This area is restricted to authorized administrators.
+                        Regular users should use the <a href="login.html"
+                            style="color: #856404; text-decoration: underline;">customer login</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/modal-system.js"></script>
+    <script src="data/products.js"></script>
+    <script>let cart = JSON.parse(localStorage.getItem('cart')) || []; let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];</script>
+    <script src="script.js"></script>
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+                color: white;
+                border-radius: 6px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideIn 0.3s;
+            `;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        async function handleAdminLogin(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+            submitBtn.disabled = true;
+
+            try {
+                // Check if admin credentials (demo mode)
+                if (email === 'admin@tmwatch.com' && password === 'admin123') {
+                    // Store admin authentication data
+                    localStorage.setItem('adminToken', 'demo-admin-token');
+                    localStorage.setItem('isAdmin', 'true');
+                    localStorage.setItem('adminEmail', email);
+
+                    showToast('Admin login successful! Welcome back.');
+
+                    // Redirect to admin dashboard (you can create this later)
+                    setTimeout(() => {
+                        window.location.href = 'index.html'; // Change to admin dashboard when created
+                    }, 1000);
+                } else {
+                    throw new Error('Invalid admin credentials');
+                }
+
+            } catch (error) {
+                console.error('Admin login error:', error);
+                showToast(error.message, 'error');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Add toast animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+
+</html>
