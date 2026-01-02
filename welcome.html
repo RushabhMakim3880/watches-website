@@ -47,6 +47,115 @@
             border-color: #FF006E;
         }
 
+        .cursor-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 214, 10, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: trailFade 0.5s ease-out forwards;
+        }
+
+        @keyframes trailFade {
+            to {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        /* Control Panel */
+        .control-panel {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            border-radius: 50%;
+            color: #FFD60A;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 214, 10, 0.2);
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 214, 10, 0.2);
+            border-color: #FFD60A;
+            box-shadow: 0 0 30px rgba(255, 214, 10, 0.5);
+            transform: scale(1.1);
+        }
+
+        .control-btn.active {
+            background: rgba(255, 0, 110, 0.3);
+            border-color: #FF006E;
+            color: #FF006E;
+        }
+
+        /* Theme Selector */
+        .theme-selector {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .theme-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-option:hover {
+            transform: scale(1.2);
+            border-color: #fff;
+        }
+
+        .theme-option.active {
+            border-color: #fff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+        }
+
+        .theme-pink {
+            background: linear-gradient(135deg, #FF006E, #7B2CBF);
+        }
+
+        .theme-blue {
+            background: linear-gradient(135deg, #00D4FF, #0066FF);
+        }
+
+        .theme-gold {
+            background: linear-gradient(135deg, #FFD60A, #FF8C00);
+        }
+
+        .theme-green {
+            background: linear-gradient(135deg, #00FF88, #00CC66);
+        }
+
+        .theme-purple {
+            background: linear-gradient(135deg, #9D4EDD, #5A189A);
+        }
+
         /* Main Container */
         .welcome-container {
             position: relative;
@@ -175,42 +284,9 @@
             }
         }
 
-        /* Floating Time Particles */
+        /* Floating Time Particles - HIDDEN */
         .time-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .time-particle {
-            position: absolute;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: rgba(255, 214, 10, 0.6);
-            font-weight: bold;
-            animation: floatTime 15s linear infinite;
-            text-shadow: 0 0 10px rgba(255, 214, 10, 0.8);
-        }
-
-        @keyframes floatTime {
-            0% {
-                transform: translateY(100vh) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-100vh) translateX(50px) rotate(360deg);
-                opacity: 0;
-            }
+            display: none;
         }
 
         /* Main Content */
@@ -465,6 +541,58 @@
             }
         }
 
+        /* Particle Burst */
+        .particle-burst {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            animation: burstParticle 1s ease-out forwards;
+        }
+
+        @keyframes burstParticle {
+            to {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* 3D Watch Model */
+        .watch-model {
+            position: absolute;
+            bottom: 10%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            animation: rotateWatch 10s linear infinite;
+            opacity: 0.3;
+            filter: drop-shadow(0 0 30px rgba(255, 214, 10, 0.5));
+        }
+
+        @keyframes rotateWatch {
+            from {
+                transform: rotateY(0deg) rotateX(20deg);
+            }
+
+            to {
+                transform: rotateY(360deg) rotateX(20deg);
+            }
+        }
+
+        .watch-model::before {
+            content: '⌚';
+            font-size: 10rem;
+            display: block;
+            text-align: center;
+            background: linear-gradient(45deg, #FFD60A, #FF006E, #00D4FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         /* Ripple Effect */
         .ripple {
             position: absolute;
@@ -568,6 +696,33 @@
             .custom-cursor {
                 display: none;
             }
+
+            .control-panel {
+                top: 1rem;
+                right: 1rem;
+                gap: 0.5rem;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .theme-selector {
+                top: 1rem;
+                left: 1rem;
+                gap: 0.3rem;
+            }
+
+            .theme-option {
+                width: 30px;
+                height: 30px;
+            }
+
+            .watch-model {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -575,6 +730,28 @@
 <body>
     <!-- Custom Cursor -->
     <div class="custom-cursor" id="cursor"></div>
+
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <button class="control-btn" id="soundToggle" title="Toggle Sound">
+            🔇
+        </button>
+        <button class="control-btn active" id="particleToggle" title="Toggle Particles">
+            ✨
+        </button>
+        <button class="control-btn" id="speedToggle" title="Animation Speed">
+            ⚡
+        </button>
+    </div>
+
+    <!-- Theme Selector -->
+    <div class="theme-selector">
+        <div class="theme-option theme-pink active" data-theme="pink"></div>
+        <div class="theme-option theme-blue" data-theme="blue"></div>
+        <div class="theme-option theme-gold" data-theme="gold"></div>
+        <div class="theme-option theme-green" data-theme="green"></div>
+        <div class="theme-option theme-purple" data-theme="purple"></div>
+    </div>
 
     <div class="welcome-container" id="welcomeContainer">
         <!-- 3D Background -->
@@ -587,8 +764,8 @@
             </div>
         </div>
 
-        <!-- Time Particles -->
-        <div class="time-particles" id="timeParticles"></div>
+        <!-- Time Particles - REMOVED -->
+        <!-- 3D Watch Model - REMOVED -->
 
         <!-- Main Content -->
         <div class="welcome-content">
@@ -634,24 +811,226 @@
     </div>
 
     <script>
-        // Custom Cursor
+        // ==================== CURSOR EFFECTS ====================
         const cursor = document.getElementById('cursor');
         const enterButton = document.getElementById('enterButton');
+        let lastTrailTime = 0;
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
+
+            // Cursor trail effect
+            const now = Date.now();
+            if (now - lastTrailTime > 30) {
+                createCursorTrail(e.clientX, e.clientY);
+                lastTrailTime = now;
+            }
         });
+
+        function createCursorTrail(x, y) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = x + 'px';
+            trail.style.top = y + 'px';
+            document.body.appendChild(trail);
+            setTimeout(() => trail.remove(), 500);
+        }
 
         enterButton.addEventListener('mouseenter', () => {
             cursor.classList.add('active');
+            createParticleBurst(enterButton);
         });
 
         enterButton.addEventListener('mouseleave', () => {
             cursor.classList.remove('active');
         });
 
-        // Typewriter Effect
+        // ==================== PARTICLE BURST ====================
+        function createParticleBurst(element) {
+            if (!particlesEnabled) return;
+
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const colors = ['#FF006E', '#00D4FF', '#FFD60A', '#7B2CBF'];
+
+            for (let i = 0; i < 12; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle-burst';
+                particle.style.left = centerX + 'px';
+                particle.style.top = centerY + 'px';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+                const angle = (Math.PI * 2 * i) / 12;
+                const distance = 50 + Math.random() * 50;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 1000);
+            }
+        }
+
+        // ==================== THEME SYSTEM ====================
+        const themes = {
+            pink: {
+                primary: '#FF006E',
+                secondary: '#7B2CBF',
+                accent: '#FFD60A',
+                ring1: '#FF006E',
+                ring2: '#00D4FF',
+                ring3: '#FFD60A'
+            },
+            blue: {
+                primary: '#00D4FF',
+                secondary: '#0066FF',
+                accent: '#00FFFF',
+                ring1: '#00D4FF',
+                ring2: '#0066FF',
+                ring3: '#00FFFF'
+            },
+            gold: {
+                primary: '#FFD60A',
+                secondary: '#FF8C00',
+                accent: '#FFA500',
+                ring1: '#FFD60A',
+                ring2: '#FF8C00',
+                ring3: '#FFA500'
+            },
+            green: {
+                primary: '#00FF88',
+                secondary: '#00CC66',
+                accent: '#00FFAA',
+                ring1: '#00FF88',
+                ring2: '#00CC66',
+                ring3: '#00FFAA'
+            },
+            purple: {
+                primary: '#9D4EDD',
+                secondary: '#5A189A',
+                accent: '#C77DFF',
+                ring1: '#9D4EDD',
+                ring2: '#5A189A',
+                ring3: '#C77DFF'
+            }
+        };
+
+        let currentTheme = 'pink';
+
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.addEventListener('click', function () {
+                const theme = this.dataset.theme;
+                applyTheme(theme);
+
+                document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        function applyTheme(themeName) {
+            currentTheme = themeName;
+            const theme = themes[themeName];
+
+            // Update button gradient
+            const button = document.querySelector('.enter-button');
+            button.style.background = `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`;
+
+            // Update rings
+            document.querySelector('.ring-1').style.borderColor = theme.ring1;
+            document.querySelector('.ring-2').style.borderColor = theme.ring2;
+            document.querySelector('.ring-3').style.borderColor = theme.ring3;
+
+            // Update cursor
+            cursor.style.borderColor = theme.accent;
+
+            // Play sound if enabled
+            if (soundEnabled) {
+                playSound('click');
+            }
+        }
+
+        // ==================== CONTROL PANEL ====================
+        let soundEnabled = false;
+        let particlesEnabled = true;
+        let fastMode = false;
+
+        // Sound Toggle
+        document.getElementById('soundToggle').addEventListener('click', function () {
+            soundEnabled = !soundEnabled;
+            this.classList.toggle('active');
+            this.textContent = soundEnabled ? '🔊' : '🔇';
+            if (soundEnabled) playSound('toggle');
+        });
+
+        // Particle Toggle - DISABLED (particles removed)
+        document.getElementById('particleToggle').addEventListener('click', function () {
+            // Particles have been removed from the page
+            this.classList.remove('active');
+        });
+
+        // Speed Toggle
+        document.getElementById('speedToggle').addEventListener('click', function () {
+            fastMode = !fastMode;
+            this.classList.toggle('active');
+
+            const ringContainer = document.querySelector('.ring-container');
+            const rings = document.querySelectorAll('.ring');
+            const orbits = document.querySelectorAll('.orbit');
+
+            if (fastMode) {
+                ringContainer.style.animationDuration = '15s';
+                rings[0].style.animationDuration = '10s';
+                rings[1].style.animationDuration = '12s';
+                rings[2].style.animationDuration = '15s';
+                orbits.forEach(orbit => {
+                    const current = parseFloat(orbit.style.animationDuration || '10s');
+                    orbit.style.animationDuration = (current / 2) + 's';
+                });
+            } else {
+                ringContainer.style.animationDuration = '30s';
+                rings[0].style.animationDuration = '20s';
+                rings[1].style.animationDuration = '25s';
+                rings[2].style.animationDuration = '30s';
+                orbits.forEach(orbit => {
+                    orbit.style.animationDuration = '';
+                });
+            }
+        });
+
+        // Simple sound system (using Web Audio API)
+        function playSound(type) {
+            if (!soundEnabled) return;
+
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            if (type === 'click') {
+                oscillator.frequency.value = 800;
+                gainNode.gain.value = 0.1;
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } else if (type === 'toggle') {
+                oscillator.frequency.value = 600;
+                gainNode.gain.value = 0.1;
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.05);
+            } else if (type === 'enter') {
+                oscillator.frequency.value = 1000;
+                gainNode.gain.value = 0.15;
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.2);
+            }
+        }
+
+        // ==================== TYPEWRITER EFFECT ====================
         const typewriter = document.getElementById('typewriter');
         const texts = [
             'Every Second Counts.',
@@ -690,11 +1069,15 @@
 
         setTimeout(type, 1000);
 
-        // Create Time Particles
+        // ==================== TIME PARTICLES - REMOVED ====================
+        // Time particles have been removed from the page
+        /*
         const timeParticlesContainer = document.getElementById('timeParticles');
         const timeFormats = ['12:00', '03:30', '06:45', '09:15', '18:20', '21:50', '00:00'];
 
         function createTimeParticle() {
+            if (!particlesEnabled) return;
+
             const particle = document.createElement('div');
             particle.className = 'time-particle';
             particle.textContent = timeFormats[Math.floor(Math.random() * timeFormats.length)];
@@ -709,8 +1092,9 @@
         }
 
         setInterval(createTimeParticle, 500);
+        */
 
-        // Real-time Clock
+        // ==================== REAL-TIME CLOCK ====================
         const timerDisplay = document.getElementById('timerDisplay');
 
         function updateClock() {
@@ -724,10 +1108,12 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Enter Site Function
+        // ==================== ENTER SITE ====================
         function enterSite() {
             const container = document.getElementById('welcomeContainer');
             container.classList.add('fade-out');
+
+            if (soundEnabled) playSound('enter');
 
             // Create explosion effect
             for (let i = 0; i < 30; i++) {

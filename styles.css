@@ -403,6 +403,23 @@ p {
   /* Prevent logo from shrinking */
   margin-right: auto;
   /* Push logo to the left corner */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-image {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-family: var(--font-secondary);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-extrabold);
+  letter-spacing: 1px;
+  color: var(--black);
 }
 
 .nav-menu {

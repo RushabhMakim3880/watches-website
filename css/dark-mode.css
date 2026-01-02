@@ -338,6 +338,50 @@ body {
 }
 
 /* ============================================
+   PAGE HERO & SECTION HEADERS
+   ============================================ */
+
+/* Page Hero - Invert colors for dark mode */
+[data-theme="dark"] .page-hero {
+    background: linear-gradient(135deg, var(--light-grey), var(--medium-grey)) !important;
+    color: var(--black) !important;
+}
+
+[data-theme="dark"] .page-hero h1 {
+    color: var(--black) !important;
+}
+
+[data-theme="dark"] .page-hero p {
+    color: var(--dark-grey) !important;
+}
+
+[data-theme="dark"] .page-hero .breadcrumb {
+    color: var(--dark-grey) !important;
+}
+
+[data-theme="dark"] .page-hero .breadcrumb a {
+    color: var(--dark-grey) !important;
+}
+
+[data-theme="dark"] .page-hero .breadcrumb a:hover {
+    color: var(--cyber-magenta) !important;
+}
+
+[data-theme="dark"] .page-hero .breadcrumb span {
+    color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Section Headers */
+[data-theme="dark"] .section-header h2 {
+    color: var(--black) !important;
+}
+
+[data-theme="dark"] .section-header p {
+    color: var(--dark-grey) !important;
+}
+
+
+/* ============================================
    MODALS
    ============================================ */
 

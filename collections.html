@@ -82,66 +82,16 @@
     <!-- COLLECTIONS SECTION -->
     <section class="section">
         <div class="container">
-            <div class="collections-grid">
-                <!-- Collection 1: Automatic Watches -->
-                <div class="collection-card" onclick="window.location.href='men.html?category=automatic'">
-                    <img src="images/collections/automatic.jpg" alt="Automatic Watches" loading="lazy">
-                    <div class="collection-overlay">
-                        <h3>Automatic Watches</h3>
-                        <p>Self-winding mechanical masterpieces</p>
-                        <span class="collection-count">12+ Models</span>
-                    </div>
-                </div>
+            <!-- Category Title -->
+            <div class="section-header">
+                <h2 id="categoryTitle">Our Collections</h2>
+                <p id="categoryDescription">Explore our curated selection of premium timepieces</p>
+            </div>
 
-                <!-- Collection 2: Chronograph -->
-                <div class="collection-card" onclick="window.location.href='men.html?category=chronograph'">
-                    <img src="images/collections/chronograph.jpg" alt="Chronograph Collection" loading="lazy">
-                    <div class="collection-overlay">
-                        <h3>Chronograph</h3>
-                        <p>Precision timing instruments</p>
-                        <span class="collection-count">10+ Models</span>
-                    </div>
-                </div>
-
-                <!-- Collection 3: Luxury Leather -->
-                <div class="collection-card" onclick="window.location.href='men.html?category=luxury-leather'">
-                    <img src="images/collections/luxury-leather.jpg" alt="Luxury Leather Watches" loading="lazy">
-                    <div class="collection-overlay">
-                        <h3>Luxury Leather</h3>
-                        <p>Timeless elegance with premium straps</p>
-                        <span class="collection-count">15+ Models</span>
-                    </div>
-                </div>
-
-                <!-- Collection 4: Smart & Sport -->
-                <div class="collection-card" onclick="window.location.href='men.html?category=smart'">
-                    <img src="images/collections/smart.jpg" alt="Smart Watches" loading="lazy">
-                    <div class="collection-overlay">
-                        <h3>Smart & Sport</h3>
-                        <p>Technology meets sophistication</p>
-                        <span class="collection-count">8+ Models</span>
-                    </div>
-                </div>
-
-                <!-- Collection 5: Men's Collection -->
-                <div class="collection-card" onclick="window.location.href='men.html'">
-                    <img src="images/menu/men-category.jpg" alt="Men's Watches" loading="lazy">
-                    <div class="collection-overlay">
-                        <h3>Men's Collection</h3>
-                        <p>Watches designed for men</p>
-                        <span class="collection-count">20+ Models</span>
-                    </div>
-                </div>
-
-                <!-- Collection 6: Women's Collection -->
-                <div class="collection-card" onclick="window.location.href='women.html'">
-                    <img src="images/menu/women-category.jpg" alt="Women's Watches" loading="lazy">
-                    <div class="collection-overlay">
-                        <h3>Women's Collection</h3>
-                        <p>Elegant timepieces for women</p>
-                        <span class="collection-count">18+ Models</span>
-                    </div>
-                </div>
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid"
+                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-lg);">
+                <!-- Products will be dynamically inserted here by JavaScript -->
             </div>
         </div>
     </section>
@@ -255,8 +205,58 @@
     <script src="data/products.js"></script>
     <script src="script.js"></script>
     <script>
-        // Update cart and wishlist counts
+        // Get category from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+
+        // Category information
+        const categoryInfo = {
+            'automatic': {
+                title: 'Automatic Watches',
+                description: 'Self-winding mechanical masterpieces'
+            },
+            'chronograph': {
+                title: 'Chronograph Collection',
+                description: 'Precision timing instruments'
+            },
+            'luxury-leather': {
+                title: 'Luxury Leather Watches',
+                description: 'Timeless elegance with premium straps'
+            },
+            'sport': {
+                title: 'Smart & Sport Watches',
+                description: 'Technology meets sophistication - includes both smart and sport watches'
+            },
+            'smart': {
+                title: 'Smart & Sport Watches',
+                description: 'Technology meets sophistication - includes both smart and sport watches'
+            }
+        };
+
+        // Update page title and description
+        if (category && categoryInfo[category]) {
+            document.getElementById('categoryTitle').textContent = categoryInfo[category].title;
+            document.getElementById('categoryDescription').textContent = categoryInfo[category].description;
+            document.title = categoryInfo[category].title + ' - TM WATCH';
+        }
+
+        // Filter and display products
         window.addEventListener('load', function () {
+            let filteredProducts = products;
+
+            if (category) {
+                // For sport category, show both sport AND smart watches
+                if (category === 'sport' || category === 'smart') {
+                    filteredProducts = products.filter(p => p.category === 'sport' || p.category === 'smart');
+                } else {
+                    filteredProducts = products.filter(p => p.category === category);
+                }
+            }
+
+            // Render the filtered products
+            renderProducts(filteredProducts);
+
+            // Update cart and wishlist counts
             updateCartCount();
             updateWishlistCount();
         });

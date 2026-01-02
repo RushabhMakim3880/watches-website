@@ -57,7 +57,9 @@
   <header class="header" id="header">
     <div class="container">
       <!-- Logo -->
-      <a href="index.html" class="logo">TM WATCH</a>
+      <a href="index.html" class="logo">
+        <img src="images/brands/tm-watch.svg" alt="TM WATCH" class="logo-image">
+      </a>
 
       <!-- Navigation Menu -->
       <nav class="nav-menu" id="navMenu">
@@ -135,8 +137,7 @@
           </div>
         </div>
 
-        <a href="new-arrivals.html">New Arrivals</a>
-        <a href="best-sellers.html">Best Sellers</a>
+        <a href="welcome.html">Welcome</a>
         <a href="brands.html">Brands</a>
         <a href="blog.html">Blog</a>
         <a href="#contact">Contact</a>
@@ -184,23 +185,11 @@
                 <i class="fas fa-heart"></i>
                 <span>My Wishlist</span>
               </a>
+
               <a href="profile.html#addresses" class="user-dropdown-item">
                 <i class="fas fa-map-marker-alt"></i>
                 <span>Saved Addresses</span>
               </a>
-
-              <div class="user-dropdown-divider"></div>
-
-              <div class="theme-toggle user-dropdown-item">
-                <div class="theme-toggle-label">
-                  <i class="fas fa-moon"></i>
-                  <span>Dark Mode</span>
-                </div>
-                <label class="theme-switch">
-                  <input type="checkbox" id="darkModeToggle">
-                  <span class="theme-switch-slider"></span>
-                </label>
-              </div>
 
               <div class="user-dropdown-divider"></div>
 
@@ -341,7 +330,7 @@
 
       <div class="collections-grid">
         <!-- Collection Card 1 -->
-        <div class="collection-card" onclick="filterProducts('automatic')">
+        <div class="collection-card" onclick="window.location.href='collections.html?category=automatic'">
           <img src="images/collections/automatic.jpg" alt="Automatic Watches" loading="lazy">
           <div class="collection-overlay">
             <h3>Automatic Watches</h3>
@@ -350,7 +339,7 @@
         </div>
 
         <!-- Collection Card 2 -->
-        <div class="collection-card" onclick="filterProducts('chronograph')">
+        <div class="collection-card" onclick="window.location.href='collections.html?category=chronograph'">
           <img src="images/collections/chronograph.jpg" alt="Chronograph Collection" loading="lazy">
           <div class="collection-overlay">
             <h3>Chronograph</h3>
@@ -359,7 +348,7 @@
         </div>
 
         <!-- Collection Card 3 -->
-        <div class="collection-card" onclick="filterProducts('luxury-leather')">
+        <div class="collection-card" onclick="window.location.href='collections.html?category=luxury-leather'">
           <img src="images/collections/luxury-leather.jpg" alt="Luxury Leather Watches" loading="lazy">
           <div class="collection-overlay">
             <h3>Luxury Leather</h3>
@@ -368,8 +357,8 @@
         </div>
 
         <!-- Collection Card 4 -->
-        <div class="collection-card" onclick="filterProducts('smart')">
-          <img src="images/collections/smart.jpg" alt="Smart Watches" loading="lazy">
+        <div class="collection-card" onclick="window.location.href='collections.html?category=sport'">
+          <img src="images/collections/smart.jpg" alt="Smart & Sport Watches" loading="lazy">
           <div class="collection-overlay">
             <h3>Smart & Sport</h3>
             <p>Technology meets sophistication</p>
@@ -379,80 +368,7 @@
     </div>
   </section>
 
-  <!-- ============================================
-       PRODUCTS SECTION WITH FILTERS
-       ============================================ -->
-  <section class="section products-section" id="products">
-    <div class="container">
-      <div class="section-header">
-        <h2>Premium Timepieces</h2>
-        <p>Handpicked selection of our finest watches</p>
-      </div>
-
-      <!-- Filters -->
-      <div class="filters-container">
-        <div class="filter-group">
-          <label for="priceFilter">Price Range</label>
-          <select id="priceFilter" onchange="applyFilters()">
-            <option value="all">All Prices</option>
-            <option value="0-1000">Under ?1,000</option>
-            <option value="1000-2000">?1,000 - ?2,000</option>
-            <option value="2000-3000">?2,000 - ?3,000</option>
-            <option value="3000+">?3,000+</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="categoryFilter">Category</label>
-          <select id="categoryFilter" onchange="applyFilters()">
-            <option value="all">All Categories</option>
-            <option value="automatic">Automatic</option>
-            <option value="chronograph">Chronograph</option>
-            <option value="luxury-leather">Luxury Leather</option>
-            <option value="sport">Sport</option>
-            <option value="smart">Smart</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="strapFilter">Strap Type</label>
-          <select id="strapFilter" onchange="applyFilters()">
-            <option value="all">All Straps</option>
-            <option value="leather">Leather</option>
-            <option value="metal">Metal</option>
-            <option value="rubber">Rubber</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="dialFilter">Dial Color</label>
-          <select id="dialFilter" onchange="applyFilters()">
-            <option value="all">All Colors</option>
-            <option value="black">Black</option>
-            <option value="white">White</option>
-            <option value="blue">Blue</option>
-            <option value="gold">Gold</option>
-            <option value="brown">Brown</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="movementFilter">Movement</label>
-          <select id="movementFilter" onchange="applyFilters()">
-            <option value="all">All Movements</option>
-            <option value="automatic">Automatic</option>
-            <option value="quartz">Quartz</option>
-            <option value="smart">Smart</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Products Grid -->
-      <div class="products-grid" id="productsGrid">
-        <!-- Products will be dynamically inserted here by JavaScript -->
-      </div>
-    </div>
-  </section>
+  <!-- Products section removed - now shown on collections.html page -->
 
   <!-- ============================================
        TRENDING SECTION (DARK)
